@@ -1,0 +1,42 @@
+server:
+  port: 8080
+  tomcat:
+    threads:
+      max: 400
+      min-spare: 40
+    accept-count: 1000
+    max-connections: 10000
+
+spring:
+  application:
+    name: taller-security
+  datasource:
+    url: jdbc:mysql://localhost:3306/taller_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    username: taller_app
+    password: TallerApp87!
+    hikari:
+      maximum-pool-size: 80
+      minimum-idle: 10
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+  sql:
+    init:
+      mode: never
+
+app:
+  jwt:
+    # Cambiar en produccion por una variable de entorno larga y secreta.
+    secret: "cambiar-este-secreto-minimo-256-bits-taller-paradox-87"
+    expiration-minutes: 240
+  cors:
+    allowed-origins:
+      - "http://localhost:5173"
+      - "http://127.0.0.1:5173"
