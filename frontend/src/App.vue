@@ -165,7 +165,7 @@ const notice = ref('')
 const resetToken = ref('')
 const user = ref(JSON.parse(localStorage.getItem('user') || 'null'))
 
-const loginForm = reactive({ email: 'gerente@taller.local', password: 'Paradox87!' })
+const loginForm = reactive({ email: '', password: '' })
 const registerForm = reactive({ name: '', email: '', password: '' })
 const forgotForm = reactive({ email: '' })
 const resetForm = reactive({ token: '', newPassword: '' })
