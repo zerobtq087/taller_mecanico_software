@@ -204,7 +204,7 @@ const notice = ref('')
 const resetToken = ref('')
 const photoInput = ref(null)
 const photoPreview = ref('')
-const user = ref(JSON.parse(localStorage.getItem('user') || 'null'))
+const user = ref(getStoredUser())
 
 const loginForm = reactive({ email: '', password: '' })
 const forgotForm = reactive({ email: '' })
@@ -265,6 +265,11 @@ async function run(action, fallback) {
   try {
     await action()
   } catch (error) {
+    if (error.status === 401 || error.status === 403) {
+      clearSession()
+      workspaceMode.value = 'dashboard'
+      notice.value = 'Sesion expirada o sin autorizacion. Inicia sesion nuevamente.'
+    }
     fallback?.(error)
   } finally {
     loading.value = false
@@ -279,6 +284,31 @@ function setSession(payload) {
   localStorage.setItem('token', payload.token)
   localStorage.setItem('user', JSON.stringify(payload.user))
   user.value = payload.user
+}
+
+function clearSession() {
+  clearStoredSession()
+  user.value = null
+}
+
+function clearStoredSession() {
+  localStorage.removeItem('token')
+  localStorage.removeItem('user')
+}
+
+function getStoredUser() {
+  const token = localStorage.getItem('token')
+  const storedUser = localStorage.getItem('user')
+  if (!token || !storedUser) {
+    clearStoredSession()
+    return null
+  }
+  try {
+    return JSON.parse(storedUser)
+  } catch {
+    clearStoredSession()
+    return null
+  }
 }
 
 function login() {
@@ -324,7 +354,12 @@ function resetPassword() {
 function createUser() {
   run(
     async () => {
-      const created = await api.createUser(newUserForm)
+      validateUserForm()
+      const payload = {
+        ...newUserForm,
+        email: newUserForm.email.trim().toLowerCase(),
+      }
+      const created = await api.createUser(payload)
       await Swal.fire('Usuario registrado', `${created.name} fue dado de alta correctamente.`, 'success')
       Object.assign(newUserForm, { name: '', email: '', password: '', roles: ['AUXILIAR'] })
     },
@@ -337,6 +372,7 @@ function createUser() {
 function createCustomer() {
   run(
     async () => {
+      validateCustomerForm()
       await validateDuplicateCustomer()
       const payload = normalizeCustomerPayload()
       const created = await api.createCustomer(payload)
@@ -351,17 +387,50 @@ function createCustomer() {
 }
 
 async function validateDuplicateCustomer() {
-  try {
-    const customers = await api.listCustomers()
-    const email = customerForm.email.trim().toLowerCase()
-    const phone = customerForm.personalPhone.trim()
-    const duplicated = customers.find((customer) => customer.email === email || customer.personalPhone === phone)
-    if (duplicated) {
-      throw new Error('Los datos ya existen. No se creara un doble registro.')
-    }
-  } catch (error) {
-    if (error.message.includes('doble registro')) throw error
+  const customers = await api.listCustomers()
+  const email = customerForm.email.trim().toLowerCase()
+  const phone = customerForm.personalPhone.trim()
+  const duplicated = customers.find((customer) => customer.email === email || customer.personalPhone === phone)
+  if (duplicated) {
+    throw new Error('Los datos ya existen. No se creara un doble registro.')
   }
+}
+
+function validateUserForm() {
+  if (!newUserForm.name.trim()) throw new Error('El nombre completo es obligatorio.')
+  if (!isValidEmail(newUserForm.email)) throw new Error('El correo del usuario no tiene un formato valido.')
+  if (!newUserForm.password || newUserForm.password.length < 8) {
+    throw new Error('La contrasena temporal debe tener al menos 8 caracteres.')
+  }
+  if (!newUserForm.roles?.length) throw new Error('Selecciona al menos un rol.')
+}
+
+function validateCustomerForm() {
+  const requiredFields = [
+    [customerForm.fullName, 'Nombre completo'],
+    [customerForm.alternateContactName, 'Contacto alternativo'],
+    [customerForm.birthDate, 'Fecha de nacimiento'],
+    [customerForm.personalPhone, 'Telefono personal'],
+    [customerForm.workPhone, 'Telefono del trabajo'],
+    [customerForm.street, 'Calle'],
+    [customerForm.neighborhood, 'Colonia'],
+    [customerForm.municipality, 'Municipio'],
+    [customerForm.state, 'Estado'],
+    [customerForm.postalCode, 'Codigo postal'],
+  ]
+  const missing = requiredFields.find(([value]) => !String(value || '').trim())
+  if (missing) throw new Error(`${missing[1]} es obligatorio.`)
+  if (!customerForm.age || customerForm.age < 18 || customerForm.age > 120) {
+    throw new Error('La edad debe estar entre 18 y 120 anos.')
+  }
+  if (!isValidEmail(customerForm.email)) throw new Error('El email del cliente no tiene un formato valido.')
+  if (customerForm.workEmail && !isValidEmail(customerForm.workEmail)) {
+    throw new Error('El email del trabajo no tiene un formato valido.')
+  }
+}
+
+function isValidEmail(value) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(value || '').trim())
 }
 
 function normalizeCustomerPayload() {
@@ -407,9 +476,7 @@ function changePassword() {
 }
 
 function logout() {
-  localStorage.removeItem('token')
-  localStorage.removeItem('user')
-  user.value = null
+  clearSession()
   workspaceMode.value = 'dashboard'
   notice.value = 'Sesion cerrada.'
 }

@@ -18,7 +18,9 @@ async function request(path, options = {}) {
     const body = contentType.includes('application/json')
       ? await response.json().catch(() => ({}))
       : { error: await response.text().catch(() => '') }
-    throw new Error(body.error || `Servicio no disponible (${response.status})`)
+    const error = new Error(body.error || `Servicio no disponible (${response.status})`)
+    error.status = response.status
+    throw error
   }
 
   return response.json()
