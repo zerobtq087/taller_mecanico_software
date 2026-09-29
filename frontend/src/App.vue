@@ -88,11 +88,6 @@
                 </v-form>
               </v-window-item>
             </v-window>
-
-            <v-divider class="my-6" />
-            <v-btn block variant="tonal" color="secondary" prepend-icon="mdi-account-hard-hat" @click="demoLogin">
-              Ver demo como gerente
-            </v-btn>
           </template>
 
           <template v-else>
@@ -146,7 +141,6 @@
                     <v-text-field v-model="customerForm.municipality" label="Municipio" />
                     <v-text-field v-model="customerForm.state" label="Estado" />
                     <v-text-field v-model="customerForm.postalCode" label="Codigo postal" />
-                    <v-text-field v-model.number="customerForm.workshopId" label="Taller futuro ID opcional" type="number" />
                   </div>
 
                   <div class="photo-uploader">
@@ -287,27 +281,14 @@ function setSession(payload) {
   user.value = payload.user
 }
 
-function demoLogin() {
-  setSession({
-    token: 'demo-token',
-    user: {
-      id: 1,
-      name: 'Gerente Demo',
-      email: 'gerente@taller.local',
-      roles: ['GERENTE', 'SECRETARIO', 'AUXILIAR', 'MECANICO'],
-    },
-  })
-  notice.value = 'Modo demo activo para revisar el diseno sin backend.'
-}
-
 function login() {
   run(
     async () => {
       setSession(await api.login(loginForm))
       notice.value = 'Sesion iniciada con JWT.'
     },
-    () => {
-      demoLogin()
+    (error) => {
+      notice.value = error.message
     },
   )
 }
@@ -320,10 +301,8 @@ function forgotPassword() {
       resetForm.token = response.demoResetToken
       notice.value = response.message
     },
-    () => {
-      resetToken.value = 'demo-reset-token'
-      resetForm.token = resetToken.value
-      notice.value = 'Modo demo: token generado localmente.'
+    (error) => {
+      notice.value = error.message
     },
   )
 }
@@ -336,9 +315,8 @@ function resetPassword() {
       resetToken.value = ''
       notice.value = 'Contrasena actualizada. Inicia sesion.'
     },
-    () => {
-      mode.value = 'login'
-      notice.value = 'Modo demo: contrasena cambiada visualmente.'
+    (error) => {
+      notice.value = error.message
     },
   )
 }
@@ -422,8 +400,8 @@ function changePassword() {
       await api.changePassword(passwordForm)
       notice.value = 'Contrasena actualizada.'
     },
-    () => {
-      notice.value = 'Modo demo: cambio simulado.'
+    (error) => {
+      notice.value = error.message
     },
   )
 }

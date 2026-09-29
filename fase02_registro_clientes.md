@@ -22,6 +22,7 @@ En esta fase se implemento el modulo de registro de clientes con flujo Vue -> RE
 | --- | --- | --- | --- | --- |
 | Autenticacion con facade | `AuthFacade.java`, `AuthController.java`, `AuthService.java` | Login, recuperacion, cambio de contrasena, JWT, usuario autenticado | Terminado | Se agrego `AuthFacade` para estandarizar el patron facade entre controlador y servicio sin cambiar el flujo de login. |
 | Alta protegida de usuarios | `UserRegistrationController.java`, `UserDtos.java`, `AuthService.java` | Nombre, email, password temporal, roles | Terminado | El registro de usuarios ya no es publico. Solo `GERENTE` o `SECRETARIO` pueden crear usuarios; solo `GERENTE` puede asignar rol `GERENTE`. |
+| Administrador inicial | `InitialAdminSeeder.java`, `InitialAdminProperties.java`, `application.yml`, `.env.example` | Correo, nombre y contrasena inicial por variables de entorno | Terminado | El backend crea el primer usuario `GERENTE` si no existe, para permitir login real sin usar modo demo. |
 | Clientes backend | `CustomerController.java`, `CustomerFacade.java`, `CustomerService.java`, `CustomerRepository.java`, `Customer.java`, `CustomerDtos.java` | Datos personales, contacto alternativo, telefonos, emails, foto, direccion, `workshopId` | Terminado | Registro y consulta de clientes con facade, validaciones, normalizacion y proteccion contra duplicados. |
 | Base de datos | `database/schema.sql` | Tabla `customers`, llaves unicas, relacion con `users` | Terminado | Se agrego tabla de clientes con indices para email, telefono personal, usuario creador y futuro taller. |
 | Frontend clientes | `frontend/src/App.vue`, `frontend/src/services/api.js`, `frontend/src/style.css` | Formulario de cliente, foto, vista previa, validacion de duplicados, alertas | Terminado | El panel muestra clientes y usuarios solo a roles autorizados. Usa SweetAlert2 para exito/error. |
@@ -51,6 +52,7 @@ En esta fase se implemento el modulo de registro de clientes con flujo Vue -> RE
 | `CustomerService.java` | `validatePhotoDataUrl` | Verifica que la foto enviada sea una imagen en formato data URL. |
 | `AuthService.java` | `createUser` | Crea usuarios con BCrypt y roles autorizados. |
 | `AuthService.java` | `resolveAllowedRoles` | Impide que recepcion cree usuarios con rol `GERENTE`. |
+| `InitialAdminSeeder.java` | `seedInitialAdmin` | Crea el primer administrador real al arrancar la API si el correo configurado no existe. |
 | `RestExceptionHandler.java` | `duplicate` | Devuelve error controlado cuando MySQL detecta datos duplicados. |
 | `frontend/src/services/api.js` | `createUser` | Consume el endpoint protegido de alta de usuarios. |
 | `frontend/src/services/api.js` | `listCustomers` | Consulta clientes para detectar duplicados antes del alta. |

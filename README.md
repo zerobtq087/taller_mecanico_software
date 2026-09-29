@@ -40,14 +40,27 @@ mvn spring-boot:run
 
 Endpoints principales:
 
-- `POST /api/auth/register`
 - `POST /api/auth/login`
 - `POST /api/auth/forgot-password`
 - `POST /api/auth/reset-password`
 - `POST /api/auth/change-password`
+- `POST /api/secretaria/users`
+- `GET /api/secretaria/clientes`
+- `POST /api/secretaria/clientes`
 - `GET /api/taller/ordenes`
 - `GET /api/secretaria/citas`
 - `GET /api/admin/users`
+
+### Usuario administrador inicial
+
+En el primer arranque, el backend crea un usuario administrador real si no existe el correo configurado en `.env`.
+
+Valores de desarrollo incluidos en `.env.example`:
+
+- Correo: `admin@taller.local`
+- Contrasena: `Admin12345!`
+
+Cambia `ADMIN_INITIAL_PASSWORD` antes de un despliegue real y cambia la contrasena despues del primer login.
 
 ## 4. Seguridad
 
@@ -65,4 +78,4 @@ yarn install
 yarn dev --host 0.0.0.0
 ```
 
-El frontend intenta usar el backend en `http://localhost:8080`, y si no esta disponible entra en modo demo para revisar el diseno. Configura `VITE_API_URL` para un despliegue remoto.
+El frontend usa el backend en `http://localhost:8080`. Configura `VITE_API_URL` para un despliegue remoto.

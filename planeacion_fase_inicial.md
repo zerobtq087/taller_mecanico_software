@@ -44,7 +44,6 @@ Roles declarados en `backend/src/main/java/com/taller/security/model/Role.java`:
 
 | Ruta | Autorizacion | Resultado |
 | --- | --- | --- |
-| `POST /api/auth/register` | Publica | Crea auxiliar y devuelve JWT. |
 | `POST /api/auth/login` | Publica | Valida credenciales y devuelve JWT. |
 | `POST /api/auth/forgot-password` | Publica | Genera token con vigencia de 30 minutos. |
 | `POST /api/auth/reset-password` | Publica con token | Actualiza el hash y anula el token. |
@@ -73,7 +72,7 @@ Pendientes necesarios para produccion: el token de recuperacion se devuelve en l
 
 | Archivo | Funcion |
 | --- | --- |
-| `frontend/src/App.vue` | Login, registro, recuperacion, reset, cambio de contrasena, cierre y panel visual por roles; incluye modo demo sin API. |
+| `frontend/src/App.vue` | Login, recuperacion, reset, cambio de contrasena, cierre y panel visual por roles. |
 | `frontend/src/services/api.js` | Cliente `fetch`, JWT desde `localStorage` y `VITE_API_URL`. |
 | `frontend/src/plugins/vuetify.js` | Inicializacion de Vuetify, componentes, directivas y tema oscuro morado. |
 | `frontend/src/style.css` | Estilos negro/morado y rejillas adaptables a movil, tableta y escritorio. |
