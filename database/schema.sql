@@ -23,5 +23,34 @@ CREATE TABLE IF NOT EXISTS user_roles (
     ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
+CREATE TABLE IF NOT EXISTS customers (
+  id BIGINT NOT NULL AUTO_INCREMENT,
+  full_name VARCHAR(160) NOT NULL,
+  alternate_contact_name VARCHAR(160) NOT NULL,
+  age INT NOT NULL,
+  birth_date DATE NOT NULL,
+  personal_phone VARCHAR(25) NOT NULL,
+  work_phone VARCHAR(25) NOT NULL,
+  email VARCHAR(180) NOT NULL,
+  work_email VARCHAR(180) NULL,
+  photo_data_url LONGTEXT NULL,
+  street VARCHAR(160) NOT NULL,
+  neighborhood VARCHAR(120) NOT NULL,
+  municipality VARCHAR(120) NOT NULL,
+  state VARCHAR(120) NOT NULL,
+  postal_code VARCHAR(12) NOT NULL,
+  workshop_id BIGINT NULL,
+  created_by_user_id BIGINT NOT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  UNIQUE KEY uk_customers_email (email),
+  UNIQUE KEY uk_customers_personal_phone (personal_phone),
+  KEY idx_customers_workshop_id (workshop_id),
+  KEY idx_customers_created_by_user_id (created_by_user_id),
+  CONSTRAINT fk_customers_created_by_user
+    FOREIGN KEY (created_by_user_id) REFERENCES users (id)
+    ON DELETE RESTRICT
+) ENGINE=InnoDB;
+
 -- Las contrasenas se guardan con BCrypt: hash + salt unico por password.
 -- El contenedor crea la base de datos y el usuario de aplicacion desde .env.

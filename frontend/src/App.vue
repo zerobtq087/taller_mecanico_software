@@ -10,8 +10,8 @@
           <p class="eyebrow">Taller Paradox</p>
           <h1>Operacion segura para un taller moderno.</h1>
           <p>
-            Login, registro, recuperacion de contrasena y permisos por rol para gerente,
-            secretario/a, auxiliar y mecanico.
+            Login, recuperacion de contrasena, alta protegida de usuarios y registro de clientes
+            con validaciones, roles y flujo REST con facade.
           </p>
         </div>
 
@@ -48,7 +48,6 @@
           <template v-if="!user">
             <v-tabs v-model="mode" color="primary" grow>
               <v-tab value="login">Login</v-tab>
-              <v-tab value="register">Registro</v-tab>
               <v-tab value="forgot">Reset</v-tab>
             </v-tabs>
 
@@ -64,22 +63,6 @@
                   />
                   <v-btn block size="large" color="primary" type="submit" :loading="loading">
                     Entrar al taller
-                  </v-btn>
-                </v-form>
-              </v-window-item>
-
-              <v-window-item value="register">
-                <v-form @submit.prevent="register">
-                  <v-text-field v-model="registerForm.name" label="Nombre completo" prepend-inner-icon="mdi-account" />
-                  <v-text-field v-model="registerForm.email" label="Correo" type="email" prepend-inner-icon="mdi-email" />
-                  <v-text-field
-                    v-model="registerForm.password"
-                    label="Contrasena segura"
-                    type="password"
-                    prepend-inner-icon="mdi-lock-check"
-                  />
-                  <v-btn block size="large" color="primary" type="submit" :loading="loading">
-                    Crear usuario
                   </v-btn>
                 </v-form>
               </v-window-item>
@@ -129,25 +112,83 @@
               </v-chip>
             </div>
 
-            <div class="dashboard-grid">
-              <v-card v-for="item in rolePanels" :key="item.title" class="panel-card" elevation="0">
-                <v-icon :icon="item.icon" size="30" color="primary" />
-                <strong>{{ item.title }}</strong>
-                <span>{{ item.text }}</span>
-              </v-card>
-            </div>
+            <v-tabs v-model="workspaceMode" color="primary" grow>
+              <v-tab value="dashboard">Panel</v-tab>
+              <v-tab v-if="canManageCustomers" value="customers">Clientes</v-tab>
+              <v-tab v-if="canManageCustomers" value="users">Usuarios</v-tab>
+              <v-tab value="password">Clave</v-tab>
+            </v-tabs>
 
-            <v-expansion-panels class="mt-5" variant="accordion">
-              <v-expansion-panel title="Cambio de contrasena">
-                <v-expansion-panel-text>
-                  <v-form @submit.prevent="changePassword">
-                    <v-text-field v-model="passwordForm.currentPassword" label="Actual" type="password" />
-                    <v-text-field v-model="passwordForm.newPassword" label="Nueva" type="password" />
-                    <v-btn color="primary" type="submit" :loading="loading">Actualizar</v-btn>
-                  </v-form>
-                </v-expansion-panel-text>
-              </v-expansion-panel>
-            </v-expansion-panels>
+            <v-window v-model="workspaceMode" class="mt-5">
+              <v-window-item value="dashboard">
+                <div class="dashboard-grid">
+                  <v-card v-for="item in rolePanels" :key="item.title" class="panel-card" elevation="0">
+                    <v-icon :icon="item.icon" size="30" color="primary" />
+                    <strong>{{ item.title }}</strong>
+                    <span>{{ item.text }}</span>
+                  </v-card>
+                </div>
+              </v-window-item>
+
+              <v-window-item value="customers">
+                <v-form class="data-form" @submit.prevent="createCustomer">
+                  <div class="form-grid">
+                    <v-text-field v-model="customerForm.fullName" label="Nombre completo" />
+                    <v-text-field v-model="customerForm.alternateContactName" label="Contacto alternativo" />
+                    <v-text-field v-model.number="customerForm.age" label="Edad" type="number" min="18" max="120" />
+                    <v-text-field v-model="customerForm.birthDate" label="Fecha de nacimiento" type="date" />
+                    <v-text-field v-model="customerForm.personalPhone" label="Telefono personal" />
+                    <v-text-field v-model="customerForm.workPhone" label="Telefono del trabajo" />
+                    <v-text-field v-model="customerForm.email" label="Email" type="email" />
+                    <v-text-field v-model="customerForm.workEmail" label="Email del trabajo opcional" type="email" />
+                    <v-text-field v-model="customerForm.street" label="Calle" />
+                    <v-text-field v-model="customerForm.neighborhood" label="Colonia" />
+                    <v-text-field v-model="customerForm.municipality" label="Municipio" />
+                    <v-text-field v-model="customerForm.state" label="Estado" />
+                    <v-text-field v-model="customerForm.postalCode" label="Codigo postal" />
+                    <v-text-field v-model.number="customerForm.workshopId" label="Taller futuro ID opcional" type="number" />
+                  </div>
+
+                  <div class="photo-uploader">
+                    <input ref="photoInput" class="hidden-input" type="file" accept="image/*" @change="handlePhotoUpload" />
+                    <v-btn color="secondary" variant="tonal" prepend-icon="mdi-camera-plus" @click="photoInput?.click()">
+                      Subir foto
+                    </v-btn>
+                    <span>Maximo 20 MB, solo imagenes.</span>
+                    <img v-if="photoPreview" :src="photoPreview" alt="Vista previa del cliente" />
+                  </div>
+
+                  <v-btn block size="large" color="primary" type="submit" :loading="loading">
+                    Registrar cliente
+                  </v-btn>
+                </v-form>
+              </v-window-item>
+
+              <v-window-item value="users">
+                <v-form class="data-form" @submit.prevent="createUser">
+                  <v-text-field v-model="newUserForm.name" label="Nombre completo" prepend-inner-icon="mdi-account" />
+                  <v-text-field v-model="newUserForm.email" label="Correo" type="email" prepend-inner-icon="mdi-email" />
+                  <v-text-field
+                    v-model="newUserForm.password"
+                    label="Contrasena temporal"
+                    type="password"
+                    prepend-inner-icon="mdi-lock-check"
+                  />
+                  <v-select v-model="newUserForm.roles" :items="availableRoles" label="Roles" multiple chips />
+                  <v-btn block size="large" color="primary" type="submit" :loading="loading">
+                    Crear usuario
+                  </v-btn>
+                </v-form>
+              </v-window-item>
+
+              <v-window-item value="password">
+                <v-form class="data-form" @submit.prevent="changePassword">
+                  <v-text-field v-model="passwordForm.currentPassword" label="Actual" type="password" />
+                  <v-text-field v-model="passwordForm.newPassword" label="Nueva" type="password" />
+                  <v-btn color="primary" type="submit" :loading="loading">Actualizar</v-btn>
+                </v-form>
+              </v-window-item>
+            </v-window>
           </template>
         </v-card>
       </section>
@@ -156,25 +197,32 @@
 </template>
 
 <script setup>
+import Swal from 'sweetalert2'
 import { computed, reactive, ref } from 'vue'
 import { api } from './services/api'
 
+const PHOTO_MAX_BYTES = 20 * 1024 * 1024
+
 const mode = ref('login')
+const workspaceMode = ref('dashboard')
 const loading = ref(false)
 const notice = ref('')
 const resetToken = ref('')
+const photoInput = ref(null)
+const photoPreview = ref('')
 const user = ref(JSON.parse(localStorage.getItem('user') || 'null'))
 
 const loginForm = reactive({ email: '', password: '' })
-const registerForm = reactive({ name: '', email: '', password: '' })
 const forgotForm = reactive({ email: '' })
 const resetForm = reactive({ token: '', newPassword: '' })
 const passwordForm = reactive({ currentPassword: '', newPassword: '' })
+const newUserForm = reactive({ name: '', email: '', password: '', roles: ['AUXILIAR'] })
+const customerForm = reactive(emptyCustomer())
 
 const metrics = [
-  { icon: 'mdi-car-cog', value: '18', label: 'ordenes activas' },
+  { icon: 'mdi-car-cog', value: 'REST', label: 'servicios protegidos' },
   { icon: 'mdi-account-lock', value: '4', label: 'roles operativos' },
-  { icon: 'mdi-database-lock', value: 'BCrypt', label: 'hash + salt' },
+  { icon: 'mdi-database-lock', value: 'Facade', label: 'vista a repository' },
 ]
 
 const rolePanels = computed(() => [
@@ -184,10 +232,38 @@ const rolePanels = computed(() => [
   { icon: 'mdi-account-wrench', title: 'Auxiliares', text: 'Apoyo operativo con permisos limitados.' },
 ])
 
+const availableRoles = computed(() => {
+  const roles = ['SECRETARIO', 'AUXILIAR', 'MECANICO']
+  if (hasRole('GERENTE')) roles.unshift('GERENTE')
+  return roles
+})
+
+const canManageCustomers = computed(() => hasRole('GERENTE') || hasRole('SECRETARIO'))
+
 const title = computed(() => {
   if (user.value) return 'Panel operativo'
-  return mode.value === 'login' ? 'Inicio de sesion' : mode.value === 'register' ? 'Nuevo usuario' : 'Recuperar acceso'
+  return mode.value === 'login' ? 'Inicio de sesion' : 'Recuperar acceso'
 })
+
+function emptyCustomer() {
+  return {
+    fullName: '',
+    alternateContactName: '',
+    age: null,
+    birthDate: '',
+    personalPhone: '',
+    workPhone: '',
+    email: '',
+    workEmail: '',
+    photoDataUrl: '',
+    street: '',
+    neighborhood: '',
+    municipality: '',
+    state: '',
+    postalCode: '',
+    workshopId: null,
+  }
+}
 
 async function run(action, fallback) {
   loading.value = true
@@ -199,6 +275,10 @@ async function run(action, fallback) {
   } finally {
     loading.value = false
   }
+}
+
+function hasRole(role) {
+  return user.value?.roles?.includes(role) ?? false
 }
 
 function setSession(payload) {
@@ -228,22 +308,6 @@ function login() {
     },
     () => {
       demoLogin()
-    },
-  )
-}
-
-function register() {
-  run(
-    async () => {
-      setSession(await api.register(registerForm))
-      notice.value = 'Usuario registrado como AUXILIAR.'
-    },
-    (error) => {
-      notice.value = `${error.message}. Backend apagado: mostrando registro demo.`
-      setSession({
-        token: 'demo-token',
-        user: { id: 2, name: registerForm.name || 'Usuario Nuevo', email: registerForm.email, roles: ['AUXILIAR'] },
-      })
     },
   )
 }
@@ -279,6 +343,79 @@ function resetPassword() {
   )
 }
 
+function createUser() {
+  run(
+    async () => {
+      const created = await api.createUser(newUserForm)
+      await Swal.fire('Usuario registrado', `${created.name} fue dado de alta correctamente.`, 'success')
+      Object.assign(newUserForm, { name: '', email: '', password: '', roles: ['AUXILIAR'] })
+    },
+    async (error) => {
+      await Swal.fire('No se pudo registrar', error.message, 'error')
+    },
+  )
+}
+
+function createCustomer() {
+  run(
+    async () => {
+      await validateDuplicateCustomer()
+      const payload = normalizeCustomerPayload()
+      const created = await api.createCustomer(payload)
+      await Swal.fire('Cliente registrado', `${created.fullName} fue registrado correctamente.`, 'success')
+      Object.assign(customerForm, emptyCustomer())
+      photoPreview.value = ''
+    },
+    async (error) => {
+      await Swal.fire('Registro detenido', error.message, 'warning')
+    },
+  )
+}
+
+async function validateDuplicateCustomer() {
+  try {
+    const customers = await api.listCustomers()
+    const email = customerForm.email.trim().toLowerCase()
+    const phone = customerForm.personalPhone.trim()
+    const duplicated = customers.find((customer) => customer.email === email || customer.personalPhone === phone)
+    if (duplicated) {
+      throw new Error('Los datos ya existen. No se creara un doble registro.')
+    }
+  } catch (error) {
+    if (error.message.includes('doble registro')) throw error
+  }
+}
+
+function normalizeCustomerPayload() {
+  return {
+    ...customerForm,
+    email: customerForm.email.trim().toLowerCase(),
+    workEmail: customerForm.workEmail ? customerForm.workEmail.trim().toLowerCase() : null,
+    workshopId: customerForm.workshopId || null,
+  }
+}
+
+function handlePhotoUpload(event) {
+  const file = event.target.files?.[0]
+  if (!file) return
+  if (!file.type.startsWith('image/')) {
+    Swal.fire('Archivo invalido', 'Solo se permiten imagenes o fotografias.', 'error')
+    event.target.value = ''
+    return
+  }
+  if (file.size > PHOTO_MAX_BYTES) {
+    Swal.fire('Archivo demasiado grande', 'La foto no debe superar 20 MB.', 'error')
+    event.target.value = ''
+    return
+  }
+  const reader = new FileReader()
+  reader.onload = () => {
+    customerForm.photoDataUrl = reader.result
+    photoPreview.value = reader.result
+  }
+  reader.readAsDataURL(file)
+}
+
 function changePassword() {
   run(
     async () => {
@@ -295,6 +432,7 @@ function logout() {
   localStorage.removeItem('token')
   localStorage.removeItem('user')
   user.value = null
+  workspaceMode.value = 'dashboard'
   notice.value = 'Sesion cerrada.'
 }
 </script>

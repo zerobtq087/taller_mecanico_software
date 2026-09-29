@@ -9,9 +9,12 @@ import com.taller.security.security.JwtService;
 import java.security.SecureRandom;
 import java.time.Instant;
 import java.util.Base64;
+import java.util.EnumSet;
+import java.util.Set;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,7 +40,7 @@ public class AuthService {
     }
 
     @Transactional
-    public AuthDtos.AuthResponse register(AuthDtos.RegisterRequest request) {
+    public UserResponse createUser(AuthDtos.RegisterRequest request, Set<Role> roles, Authentication actor) {
         String email = request.email().trim().toLowerCase();
         if (userRepository.existsByEmail(email)) {
             throw new IllegalArgumentException("El correo ya esta registrado");
@@ -47,9 +50,9 @@ public class AuthService {
         user.setName(request.name().trim());
         user.setEmail(email);
         user.setPasswordHash(passwordEncoder.encode(request.password()));
-        user.setRoles(java.util.EnumSet.of(Role.AUXILIAR));
+        user.setRoles(resolveAllowedRoles(roles, actor));
         userRepository.save(user);
-        return new AuthDtos.AuthResponse(jwtService.generate(user), toResponse(user));
+        return toResponse(user);
     }
 
     public AuthDtos.AuthResponse login(AuthDtos.LoginRequest request) {
@@ -99,5 +102,18 @@ public class AuthService {
         byte[] bytes = new byte[48];
         secureRandom.nextBytes(bytes);
         return Base64.getUrlEncoder().withoutPadding().encodeToString(bytes);
+    }
+
+    private Set<Role> resolveAllowedRoles(Set<Role> requestedRoles, Authentication actor) {
+        EnumSet<Role> roles = requestedRoles == null || requestedRoles.isEmpty()
+                ? EnumSet.of(Role.AUXILIAR)
+                : EnumSet.copyOf(requestedRoles);
+        boolean isManager = actor.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .anyMatch("ROLE_GERENTE"::equals);
+        if (!isManager && roles.contains(Role.GERENTE)) {
+            throw new IllegalArgumentException("Solo gerencia puede crear usuarios con rol GERENTE");
+        }
+        return roles;
     }
 }

@@ -25,9 +25,6 @@ export const api = {
   login(payload) {
     return request('/auth/login', { method: 'POST', body: JSON.stringify(payload) })
   },
-  register(payload) {
-    return request('/auth/register', { method: 'POST', body: JSON.stringify(payload) })
-  },
   forgotPassword(payload) {
     return request('/auth/forgot-password', { method: 'POST', body: JSON.stringify(payload) })
   },
@@ -36,5 +33,14 @@ export const api = {
   },
   changePassword(payload) {
     return request('/auth/change-password', { method: 'POST', body: JSON.stringify(payload) })
+  },
+  createUser(payload) {
+    return request('/secretaria/users', { method: 'POST', body: JSON.stringify(payload) })
+  },
+  listCustomers() {
+    return request('/secretaria/clientes')
+  },
+  createCustomer(payload) {
+    return request('/secretaria/clientes', { method: 'POST', body: JSON.stringify(payload) })
   },
 }
