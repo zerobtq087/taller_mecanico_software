@@ -64,13 +64,21 @@ public class CustomerService {
      */
     @Transactional(readOnly = true)
     public List<CustomerResponse> listCustomers() {
-        return customerRepository.findAll().stream().map(this::toResponse).toList();
+        return customerRepository.findAll().stream().map(this::toListResponse).toList();
     }
 
     /**
      * Convierte la entidad JPA a un DTO seguro para la vista.
      */
     public CustomerResponse toResponse(Customer customer) {
+        return toResponse(customer, true);
+    }
+
+    private CustomerResponse toListResponse(Customer customer) {
+        return toResponse(customer, false);
+    }
+
+    private CustomerResponse toResponse(Customer customer, boolean includePhoto) {
         return new CustomerResponse(
                 customer.getId(),
                 customer.getFullName(),
@@ -81,7 +89,7 @@ public class CustomerService {
                 customer.getWorkPhone(),
                 customer.getEmail(),
                 customer.getWorkEmail(),
-                customer.getPhotoDataUrl(),
+                includePhoto ? customer.getPhotoDataUrl() : null,
                 customer.getStreet(),
                 customer.getNeighborhood(),
                 customer.getMunicipality(),

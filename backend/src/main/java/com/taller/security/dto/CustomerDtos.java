@@ -24,7 +24,7 @@ public final class CustomerDtos {
             @NotBlank @Pattern(regexp = "^[0-9+()\\-\\s]{8,25}$") String workPhone,
             @NotBlank @Email @Size(max = 180) String email,
             @Email @Size(max = 180) String workEmail,
-            @Size(max = 28000000) String photoDataUrl,
+            @Size(max = 7000000) String photoDataUrl,
             @NotBlank @Size(max = 160) String street,
             @NotBlank @Size(max = 120) String neighborhood,
             @NotBlank @Size(max = 120) String municipality,

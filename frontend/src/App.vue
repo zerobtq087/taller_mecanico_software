@@ -128,19 +128,19 @@
               <v-window-item value="customers">
                 <v-form class="data-form" @submit.prevent="createCustomer">
                   <div class="form-grid">
-                    <v-text-field v-model="customerForm.fullName" label="Nombre completo" />
-                    <v-text-field v-model="customerForm.alternateContactName" label="Contacto alternativo" />
-                    <v-text-field v-model.number="customerForm.age" label="Edad" type="number" min="18" max="120" />
-                    <v-text-field v-model="customerForm.birthDate" label="Fecha de nacimiento" type="date" />
-                    <v-text-field v-model="customerForm.personalPhone" label="Telefono personal" />
-                    <v-text-field v-model="customerForm.workPhone" label="Telefono del trabajo" />
-                    <v-text-field v-model="customerForm.email" label="Email" type="email" />
-                    <v-text-field v-model="customerForm.workEmail" label="Email del trabajo opcional" type="email" />
-                    <v-text-field v-model="customerForm.street" label="Calle" />
-                    <v-text-field v-model="customerForm.neighborhood" label="Colonia" />
-                    <v-text-field v-model="customerForm.municipality" label="Municipio" />
-                    <v-text-field v-model="customerForm.state" label="Estado" />
-                    <v-text-field v-model="customerForm.postalCode" label="Codigo postal" />
+                    <v-text-field v-model="customerForm.fullName" label="Nombre completo *" hint="Obligatorio" persistent-hint />
+                    <v-text-field v-model="customerForm.alternateContactName" label="Contacto alternativo *" hint="Obligatorio" persistent-hint />
+                    <v-text-field v-model.number="customerForm.age" label="Edad *" type="number" min="18" max="120" hint="18 a 120 anos" persistent-hint />
+                    <v-text-field v-model="customerForm.birthDate" label="Fecha de nacimiento *" type="date" hint="Obligatorio" persistent-hint />
+                    <v-text-field v-model="customerForm.personalPhone" label="Telefono personal *" hint="Obligatorio y unico" persistent-hint />
+                    <v-text-field v-model="customerForm.workPhone" label="Telefono del trabajo *" hint="Obligatorio" persistent-hint />
+                    <v-text-field v-model="customerForm.email" label="Email *" type="email" hint="Obligatorio y unico" persistent-hint />
+                    <v-text-field v-model="customerForm.workEmail" label="Email del trabajo opcional" type="email" hint="Opcional" persistent-hint />
+                    <v-text-field v-model="customerForm.street" label="Calle *" hint="Obligatorio" persistent-hint />
+                    <v-text-field v-model="customerForm.neighborhood" label="Colonia *" hint="Obligatorio" persistent-hint />
+                    <v-text-field v-model="customerForm.municipality" label="Municipio *" hint="Obligatorio" persistent-hint />
+                    <v-text-field v-model="customerForm.state" label="Estado *" hint="Obligatorio" persistent-hint />
+                    <v-text-field v-model="customerForm.postalCode" label="Codigo postal *" hint="Obligatorio" persistent-hint />
                   </div>
 
                   <div class="photo-uploader">
@@ -148,7 +148,7 @@
                     <v-btn color="secondary" variant="tonal" prepend-icon="mdi-camera-plus" @click="photoInput?.click()">
                       Subir foto
                     </v-btn>
-                    <span>Maximo 20 MB, solo imagenes.</span>
+                    <span>Maximo 5 MB, solo imagenes.</span>
                     <img v-if="photoPreview" :src="photoPreview" alt="Vista previa del cliente" />
                   </div>
 
@@ -160,15 +160,17 @@
 
               <v-window-item value="users">
                 <v-form class="data-form" @submit.prevent="createUser">
-                  <v-text-field v-model="newUserForm.name" label="Nombre completo" prepend-inner-icon="mdi-account" />
-                  <v-text-field v-model="newUserForm.email" label="Correo" type="email" prepend-inner-icon="mdi-email" />
+                  <v-text-field v-model="newUserForm.name" label="Nombre completo *" hint="Obligatorio" persistent-hint prepend-inner-icon="mdi-account" />
+                  <v-text-field v-model="newUserForm.email" label="Correo *" type="email" hint="Obligatorio y unico" persistent-hint prepend-inner-icon="mdi-email" />
                   <v-text-field
                     v-model="newUserForm.password"
-                    label="Contrasena temporal"
+                    label="Contrasena temporal *"
                     type="password"
+                    hint="Minimo 8 caracteres"
+                    persistent-hint
                     prepend-inner-icon="mdi-lock-check"
                   />
-                  <v-select v-model="newUserForm.roles" :items="availableRoles" label="Roles" multiple chips />
+                  <v-select v-model="newUserForm.roles" :items="availableRoles" label="Roles *" hint="Selecciona al menos uno" persistent-hint multiple chips />
                   <v-btn block size="large" color="primary" type="submit" :loading="loading">
                     Crear usuario
                   </v-btn>
@@ -195,7 +197,7 @@ import Swal from 'sweetalert2'
 import { computed, reactive, ref } from 'vue'
 import { api } from './services/api'
 
-const PHOTO_MAX_BYTES = 20 * 1024 * 1024
+const PHOTO_MAX_BYTES = 5 * 1024 * 1024
 
 const mode = ref('login')
 const workspaceMode = ref('dashboard')
@@ -373,7 +375,6 @@ function createCustomer() {
   run(
     async () => {
       validateCustomerForm()
-      await validateDuplicateCustomer()
       const payload = normalizeCustomerPayload()
       const created = await api.createCustomer(payload)
       await Swal.fire('Cliente registrado', `${created.fullName} fue registrado correctamente.`, 'success')
@@ -384,16 +385,6 @@ function createCustomer() {
       await Swal.fire('Registro detenido', error.message, 'warning')
     },
   )
-}
-
-async function validateDuplicateCustomer() {
-  const customers = await api.listCustomers()
-  const email = customerForm.email.trim().toLowerCase()
-  const phone = customerForm.personalPhone.trim()
-  const duplicated = customers.find((customer) => customer.email === email || customer.personalPhone === phone)
-  if (duplicated) {
-    throw new Error('Los datos ya existen. No se creara un doble registro.')
-  }
 }
 
 function validateUserForm() {
@@ -451,7 +442,7 @@ function handlePhotoUpload(event) {
     return
   }
   if (file.size > PHOTO_MAX_BYTES) {
-    Swal.fire('Archivo demasiado grande', 'La foto no debe superar 20 MB.', 'error')
+    Swal.fire('Archivo demasiado grande', 'La foto no debe superar 5 MB.', 'error')
     event.target.value = ''
     return
   }
