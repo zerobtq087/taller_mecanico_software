@@ -1,5 +1,13 @@
 # Diagrama de componentes - Fase 02
 
+## Version interactiva Archify
+
+El diagrama HTML interactivo generado con Archify queda en:
+
+`/.archify/architecture-taller-fase02-20260928-182517/taller-fase02.html`
+
+Archify valido el artefacto con `validate`, `deliver` y `check`. El `browser-check` quedo omitido porque el equipo no tiene Chrome/Chromium disponible para ese gate automatizado.
+
 ```mermaid
 flowchart LR
     Usuario[Gerente o recepcionista autenticado]
@@ -44,10 +52,10 @@ flowchart LR
 
 ## Nota sobre archify
 
-Se intento ejecutar el comando solicitado:
+La skill `archify` quedo disponible localmente y se ejecuto directamente con:
 
 ```bash
-npx skills add tt-a1i/archify -g
+node /home/david/.agents/skills/archify/bin/archify.mjs finalize architecture .archify/architecture-taller-fase02-20260928-182517/candidate.json .archify/architecture-taller-fase02-20260928-182517/taller-fase02.html --repo-root /home/david/Documentos/ChatGPT/taller --quality showcase --json
 ```
 
-El equipo no tiene `npx` ni `npm` disponibles en el PATH, por lo que no fue posible instalar la skill `archify` desde esta maquina. El diagrama queda guardado como artefacto versionable en Markdown con Mermaid.
+El comando solicitado originalmente con `npx` no se pudo ejecutar porque el equipo no tiene `npx` ni `npm` en el PATH, pero el HTML de Archify si fue generado desde la instalacion local de la skill.

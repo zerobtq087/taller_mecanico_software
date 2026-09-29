@@ -1,0 +1,355 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Taller mecanico - arquitectura fase 02",
+    "output": ".archify/architecture-taller-fase02-20260928-182517/taller-fase02.html",
+    "quality_profile": "showcase",
+    "repository": {
+      "url": "https://github.com/zerobtq087/taller_mecanico_software.git",
+      "provider": "github",
+      "link_mode": "local-only",
+      "revision": "10ccce12a6c794bc60410d407ec083e4f4304445"
+    }
+  },
+  "components": [
+    {
+      "id": "actor",
+      "type": "external",
+      "label": "Gerente / recepcionista",
+      "sublabel": "Usuario autenticado",
+      "pos": [40, 250],
+      "size": [170, 70],
+      "sources": [
+        { "path": "backend/src/main/java/com/taller/security/config/SecurityConfig.java", "line": 51, "end_line": 56, "label": "roles" }
+      ]
+    },
+    {
+      "id": "vue",
+      "type": "frontend",
+      "label": "Vista Vue",
+      "sublabel": "Vuetify + SweetAlert2 + foto 20 MB",
+      "pos": [330, 250],
+      "size": [190, 82],
+      "sources": [
+        { "path": "frontend/src/App.vue", "line": 115, "end_line": 164, "label": "form cliente" },
+        { "path": "frontend/src/App.vue", "line": 398, "end_line": 417, "label": "foto" }
+      ]
+    },
+    {
+      "id": "api-client",
+      "type": "frontend",
+      "label": "Cliente REST",
+      "sublabel": "JWT en Authorization",
+      "pos": [610, 250],
+      "size": [170, 70],
+      "sources": [
+        { "path": "frontend/src/services/api.js", "line": 3, "end_line": 14, "label": "headers" },
+        { "path": "frontend/src/services/api.js", "line": 37, "end_line": 45, "label": "endpoints" }
+      ]
+    },
+    {
+      "id": "security",
+      "type": "security",
+      "label": "Spring Security",
+      "sublabel": "JWT + roles GERENTE/SECRETARIO",
+      "pos": [610, 40],
+      "size": [190, 72],
+      "sources": [
+        { "path": "backend/src/main/java/com/taller/security/config/SecurityConfig.java", "line": 44, "end_line": 59, "label": "filtro" }
+      ]
+    },
+    {
+      "id": "auth-controller",
+      "type": "backend",
+      "label": "AuthController",
+      "sublabel": "login, reset y cambio clave",
+      "pos": [900, 40],
+      "size": [180, 72],
+      "sources": [
+        { "path": "backend/src/main/java/com/taller/security/controller/AuthController.java", "line": 16, "end_line": 44, "label": "auth rest" }
+      ]
+    },
+    {
+      "id": "user-registration-controller",
+      "type": "backend",
+      "label": "UserRegistrationController",
+      "sublabel": "POST /api/secretaria/users",
+      "pos": [900, 190],
+      "size": [210, 72],
+      "sources": [
+        { "path": "backend/src/main/java/com/taller/security/controller/UserRegistrationController.java", "line": 14, "end_line": 33, "label": "alta usuarios" }
+      ]
+    },
+    {
+      "id": "customer-controller",
+      "type": "backend",
+      "label": "CustomerController",
+      "sublabel": "GET/POST /api/secretaria/clientes",
+      "pos": [900, 340],
+      "size": [210, 72],
+      "sources": [
+        { "path": "backend/src/main/java/com/taller/security/controller/CustomerController.java", "line": 17, "end_line": 44, "label": "clientes rest" }
+      ]
+    },
+    {
+      "id": "auth-facade",
+      "type": "backend",
+      "label": "AuthFacade",
+      "sublabel": "orquesta login y alta usuarios",
+      "pos": [1190, 120],
+      "size": [190, 72],
+      "sources": [
+        { "path": "backend/src/main/java/com/taller/security/facade/AuthFacade.java", "line": 11, "end_line": 52, "label": "facade auth" }
+      ]
+    },
+    {
+      "id": "customer-facade",
+      "type": "backend",
+      "label": "CustomerFacade",
+      "sublabel": "vista hacia dominio sin repository",
+      "pos": [1190, 340],
+      "size": [190, 72],
+      "sources": [
+        { "path": "backend/src/main/java/com/taller/security/facade/CustomerFacade.java", "line": 9, "end_line": 29, "label": "facade clientes" }
+      ]
+    },
+    {
+      "id": "auth-service",
+      "type": "backend",
+      "label": "AuthService",
+      "sublabel": "BCrypt, JWT y reglas de roles",
+      "pos": [1450, 120],
+      "size": [190, 72],
+      "sources": [
+        { "path": "backend/src/main/java/com/taller/security/service/AuthService.java", "line": 35, "end_line": 57, "label": "crear usuario" },
+        { "path": "backend/src/main/java/com/taller/security/service/AuthService.java", "line": 101, "end_line": 112, "label": "roles" }
+      ]
+    },
+    {
+      "id": "customer-service",
+      "type": "backend",
+      "label": "CustomerService",
+      "sublabel": "validaciones, duplicados y normalizacion",
+      "pos": [1450, 340],
+      "size": [210, 80],
+      "sources": [
+        { "path": "backend/src/main/java/com/taller/security/service/CustomerService.java", "line": 28, "end_line": 60, "label": "alta cliente" },
+        { "path": "backend/src/main/java/com/taller/security/service/CustomerService.java", "line": 96, "end_line": 118, "label": "normaliza" }
+      ]
+    },
+    {
+      "id": "user-repository",
+      "type": "database",
+      "label": "UserRepository",
+      "sublabel": "usuarios y roles",
+      "pos": [1450, 540],
+      "size": [170, 70],
+      "sources": [
+        { "path": "database/schema.sql", "line": 3, "end_line": 24, "label": "users" }
+      ]
+    },
+    {
+      "id": "customer-repository",
+      "type": "database",
+      "label": "CustomerRepository",
+      "sublabel": "existsByEmail / existsByPersonalPhone",
+      "pos": [1450, 650],
+      "size": [210, 76],
+      "sources": [
+        { "path": "backend/src/main/java/com/taller/security/repository/CustomerRepository.java", "line": 7, "end_line": 12, "label": "repository" }
+      ]
+    },
+    {
+      "id": "mysql",
+      "type": "database",
+      "label": "MySQL Docker",
+      "sublabel": "customers con unicos y workshopId futuro",
+      "pos": [1190, 600],
+      "size": [210, 84],
+      "sources": [
+        { "path": "database/schema.sql", "line": 26, "end_line": 53, "label": "customers" }
+      ]
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "Frontend Vue",
+      "wraps": ["vue", "api-client"],
+      "pad": 28
+    },
+    {
+      "kind": "security-group",
+      "label": "API Spring Boot protegida por JWT",
+      "wraps": ["security", "auth-controller", "user-registration-controller", "customer-controller", "auth-facade", "customer-facade", "auth-service", "customer-service"],
+      "pad": 34
+    },
+    {
+      "kind": "region",
+      "label": "Persistencia MySQL",
+      "wraps": ["user-repository", "customer-repository", "mysql"],
+      "pad": 28
+    }
+  ],
+  "connections": [
+    {
+      "id": "actor-to-vue",
+      "from": "actor",
+      "to": "vue",
+      "label": "usa panel",
+      "variant": "emphasis"
+    },
+    {
+      "id": "vue-to-api-client",
+      "from": "vue",
+      "to": "api-client",
+      "label": "fetch REST",
+      "variant": "emphasis"
+    },
+    {
+      "id": "api-to-security",
+      "from": "api-client",
+      "to": "security",
+      "label": "Bearer JWT",
+      "variant": "security",
+      "fromSide": "top",
+      "toSide": "left"
+    },
+    {
+      "id": "api-to-auth-controller",
+      "from": "api-client",
+      "to": "auth-controller",
+      "label": "/auth",
+      "fromSide": "right",
+      "toSide": "left",
+      "labelAt": [820, 126]
+    },
+    {
+      "id": "api-to-user-registration",
+      "from": "api-client",
+      "to": "user-registration-controller",
+      "label": "usuarios",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "api-to-customer-controller",
+      "from": "api-client",
+      "to": "customer-controller",
+      "label": "clientes",
+      "variant": "emphasis",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "security-protects-users",
+      "from": "security",
+      "to": "user-registration-controller",
+      "label": "rol valido",
+      "variant": "security",
+      "labelAt": [770, 178]
+    },
+    {
+      "id": "security-protects-customers",
+      "from": "security",
+      "to": "customer-controller",
+      "label": "rol valido",
+      "variant": "security",
+      "labelAt": [770, 330]
+    },
+    {
+      "id": "auth-controller-to-facade",
+      "from": "auth-controller",
+      "to": "auth-facade",
+      "label": "facade"
+    },
+    {
+      "id": "users-controller-to-auth-facade",
+      "from": "user-registration-controller",
+      "to": "auth-facade",
+      "label": "facade"
+    },
+    {
+      "id": "customer-controller-to-facade",
+      "from": "customer-controller",
+      "to": "customer-facade",
+      "label": "facade"
+    },
+    {
+      "id": "auth-facade-to-service",
+      "from": "auth-facade",
+      "to": "auth-service",
+      "label": "servicio"
+    },
+    {
+      "id": "customer-facade-to-service",
+      "from": "customer-facade",
+      "to": "customer-service",
+      "label": "servicio"
+    },
+    {
+      "id": "auth-service-to-users",
+      "from": "auth-service",
+      "to": "user-repository",
+      "label": "usuarios"
+    },
+    {
+      "id": "customer-service-to-customers",
+      "from": "customer-service",
+      "to": "customer-repository",
+      "label": "clientes"
+    },
+    {
+      "id": "customer-service-to-users",
+      "from": "customer-service",
+      "to": "user-repository",
+      "label": "createdBy",
+      "variant": "dashed",
+      "fromSide": "top",
+      "toSide": "bottom"
+    },
+    {
+      "id": "users-to-mysql",
+      "from": "user-repository",
+      "to": "mysql",
+      "label": "users / user_roles"
+    },
+    {
+      "id": "customers-to-mysql",
+      "from": "customer-repository",
+      "to": "mysql",
+      "label": "customers unicos",
+      "variant": "emphasis"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "violet",
+      "title": "Patron aplicado",
+      "items": [
+        "Vue consume solo endpoints REST mediante services/api.js.",
+        "Los controladores delegan a Facade antes de llegar a Service y Repository.",
+        "El repository no queda expuesto a la vista ni al controlador."
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Reglas de cliente",
+      "items": [
+        "El alta valida duplicados por email y telefono personal.",
+        "La foto se acepta como data URL de imagen y la vista limita el archivo a 20 MB.",
+        "workshopId queda listo para asociacion futura con varios talleres."
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Seguridad",
+      "items": [
+        "Spring Security permite /api/auth y protege /api/secretaria con GERENTE o SECRETARIO.",
+        "El alta publica de usuarios fue reemplazada por POST /api/secretaria/users.",
+        "AuthService conserva BCrypt y reglas de asignacion de roles."
+      ]
+    }
+  ]
+}

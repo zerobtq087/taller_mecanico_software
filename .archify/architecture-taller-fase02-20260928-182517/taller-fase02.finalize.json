@@ -1,0 +1,553 @@
+{
+  "schemaVersion": 1,
+  "ok": false,
+  "command": "finalize",
+  "status": "skipped",
+  "type": "architecture",
+  "quality": "showcase",
+  "startedAt": "2026-09-29T00:30:20.850Z",
+  "specification": {
+    "path": "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase02-20260928-182517/candidate.json",
+    "sha256": "c4b5dd635e21e38c9ba662671ebabf7bb235b5047ac5eb95bbe47cb8affc5c55",
+    "bytes": 10741
+  },
+  "artifact": {
+    "path": "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase02-20260928-182517/taller-fase02.html",
+    "sha256": "0d24f6fefd59bbb90c688dc5f73d576d02af5d44dc8be599d420a9ff0793a7f8",
+    "bytes": 785237
+  },
+  "stages": {
+    "validate": {
+      "status": "pass",
+      "exitCode": 0,
+      "durationMs": null,
+      "execution": "embedded-in-deliver",
+      "command": [
+        "/usr/bin/node",
+        "/home/david/.agents/skills/archify/bin/archify.mjs",
+        "deliver",
+        "architecture",
+        "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase02-20260928-182517/candidate.json",
+        "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase02-20260928-182517/taller-fase02.html",
+        "--quality",
+        "showcase",
+        "--repo-root",
+        "/home/david/Documentos/ChatGPT/taller",
+        "--json"
+      ],
+      "receipt": {
+        "schemaVersion": 1,
+        "ok": true,
+        "command": "validate",
+        "specification": {
+          "sha256": "c4b5dd635e21e38c9ba662671ebabf7bb235b5047ac5eb95bbe47cb8affc5c55",
+          "bytes": 10741
+        },
+        "validation": {
+          "checksPassed": 9,
+          "checkCount": 9,
+          "compositionProfile": "showcase",
+          "compositionStatus": "pass",
+          "errors": 0,
+          "warnings": 0
+        }
+      }
+    },
+    "deliver": {
+      "status": "pass",
+      "exitCode": 0,
+      "durationMs": 316,
+      "command": [
+        "/usr/bin/node",
+        "/home/david/.agents/skills/archify/bin/archify.mjs",
+        "deliver",
+        "architecture",
+        "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase02-20260928-182517/candidate.json",
+        "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase02-20260928-182517/taller-fase02.html",
+        "--quality",
+        "showcase",
+        "--repo-root",
+        "/home/david/Documentos/ChatGPT/taller",
+        "--json"
+      ],
+      "receipt": {
+        "schemaVersion": 1,
+        "receiptId": "50c29179-70a0-41ce-801b-b08b28ddd5f2",
+        "ok": true,
+        "command": "deliver",
+        "type": "architecture",
+        "input": "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase02-20260928-182517/candidate.json",
+        "output": "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase02-20260928-182517/taller-fase02.html",
+        "specification": {
+          "sha256": "c4b5dd635e21e38c9ba662671ebabf7bb235b5047ac5eb95bbe47cb8affc5c55",
+          "bytes": 10741
+        },
+        "artifact": {
+          "sha256": "0d24f6fefd59bbb90c688dc5f73d576d02af5d44dc8be599d420a9ff0793a7f8",
+          "bytes": 785237
+        },
+        "validation": {
+          "checksPassed": 9,
+          "checkCount": 9,
+          "compositionProfile": "showcase",
+          "compositionStatus": "pass",
+          "errors": 0,
+          "warnings": 0
+        },
+        "evidence": {
+          "verified": true,
+          "repository": "https://github.com/zerobtq087/taller_mecanico_software",
+          "revision": "10ccce12a6c794bc60410d407ec083e4f4304445",
+          "references": 18,
+          "linkMode": "local-only"
+        },
+        "update": {
+          "status": "unavailable",
+          "installedVersion": null,
+          "availableVersion": null,
+          "releaseNotes": null,
+          "checkedAt": null,
+          "source": null,
+          "noticeRequired": false,
+          "noticeText": null,
+          "reason": "disabled"
+        }
+      }
+    },
+    "check": {
+      "status": "pass",
+      "exitCode": 0,
+      "durationMs": 102,
+      "command": [
+        "/usr/bin/node",
+        "/home/david/.agents/skills/archify/bin/archify.mjs",
+        "check",
+        "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase02-20260928-182517/taller-fase02.html",
+        "--require-provenance"
+      ],
+      "receipt": {
+        "ok": true,
+        "file": "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase02-20260928-182517/taller-fase02.html",
+        "artifact": {
+          "sha256": "0d24f6fefd59bbb90c688dc5f73d576d02af5d44dc8be599d420a9ff0793a7f8",
+          "bytes": 785237
+        },
+        "checks": [
+          {
+            "name": "single_svg",
+            "ok": true,
+            "details": [
+              "found 1 <svg> block(s)"
+            ]
+          },
+          {
+            "name": "finite_svg",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "orthogonal_arrows",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "label_route_clearance",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "relationship_crossings",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "relationship_corridors",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "container_border_runs",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "route_rhythm",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "legend_clearance",
+            "ok": true,
+            "details": []
+          }
+        ],
+        "composition": {
+          "schemaVersion": 1,
+          "profile": "showcase",
+          "status": "pass",
+          "summary": {
+            "errors": 0,
+            "warnings": 0
+          },
+          "metrics": {
+            "properCrossings": 0,
+            "resolvedCrossovers": 6,
+            "ambiguousCorridors": 0,
+            "arrowheadCollisions": 0,
+            "containerBorderRuns": 0,
+            "labelRouteClearanceIssues": 0,
+            "labelCanvasOverflowIssues": 0,
+            "minLabelRouteClearance": 4,
+            "desktopReadabilityIssues": 0,
+            "viewportHeightIssues": 0,
+            "minProjectedNodeTextPx": 6.156660949113779,
+            "maxBends": 4,
+            "routesOverSuggestedBends": 3,
+            "maxStretch": 1.938,
+            "routesOverSuggestedStretch": 2,
+            "minSegmentPx": 24,
+            "minInteriorSegmentPx": 38,
+            "shortSegmentCount": 0,
+            "shortEndpointSegmentCount": 0,
+            "shortInteriorSegmentCount": 0,
+            "microSegmentCount": 0
+          },
+          "suggestedLimits": {
+            "bendsPerRelationship": 2,
+            "stretch": 1.35,
+            "segmentPx": 16,
+            "microSegmentPx": 8
+          },
+          "routeReview": {
+            "crossings": [
+              {
+                "left": {
+                  "id": "api-to-auth-controller",
+                  "from": "api-client",
+                  "to": "auth-controller",
+                  "label": "/auth",
+                  "collectionIndex": 3,
+                  "artifactIndex": 4
+                },
+                "right": {
+                  "id": "security-protects-users",
+                  "from": "security",
+                  "to": "user-registration-controller",
+                  "label": "rol valido",
+                  "collectionIndex": 6,
+                  "artifactIndex": 7
+                },
+                "point": [
+                  876,
+                  226
+                ]
+              },
+              {
+                "left": {
+                  "id": "api-to-auth-controller",
+                  "from": "api-client",
+                  "to": "auth-controller",
+                  "label": "/auth",
+                  "collectionIndex": 3,
+                  "artifactIndex": 4
+                },
+                "right": {
+                  "id": "security-protects-customers",
+                  "from": "security",
+                  "to": "customer-controller",
+                  "label": "rol valido",
+                  "collectionIndex": 7,
+                  "artifactIndex": 8
+                },
+                "point": [
+                  850,
+                  285
+                ]
+              },
+              {
+                "left": {
+                  "id": "api-to-user-registration",
+                  "from": "api-client",
+                  "to": "user-registration-controller",
+                  "label": "usuarios",
+                  "collectionIndex": 4,
+                  "artifactIndex": 5
+                },
+                "right": {
+                  "id": "security-protects-customers",
+                  "from": "security",
+                  "to": "customer-controller",
+                  "label": "rol valido",
+                  "collectionIndex": 7,
+                  "artifactIndex": 8
+                },
+                "point": [
+                  850,
+                  226
+                ]
+              },
+              {
+                "left": {
+                  "id": "customer-facade-to-service",
+                  "from": "customer-facade",
+                  "to": "customer-service",
+                  "label": "servicio",
+                  "collectionIndex": 12,
+                  "artifactIndex": 13
+                },
+                "right": {
+                  "id": "customer-service-to-users",
+                  "from": "customer-service",
+                  "to": "user-repository",
+                  "label": "createdBy",
+                  "collectionIndex": 15,
+                  "artifactIndex": 16
+                },
+                "point": [
+                  1447,
+                  376
+                ],
+                "sharedNode": "customer-service"
+              },
+              {
+                "left": {
+                  "id": "auth-service-to-users",
+                  "from": "auth-service",
+                  "to": "user-repository",
+                  "label": "usuarios",
+                  "collectionIndex": 13,
+                  "artifactIndex": 14
+                },
+                "right": {
+                  "id": "customer-service-to-customers",
+                  "from": "customer-service",
+                  "to": "customer-repository",
+                  "label": "clientes",
+                  "collectionIndex": 14,
+                  "artifactIndex": 15
+                },
+                "point": [
+                  1663,
+                  380
+                ]
+              },
+              {
+                "left": {
+                  "id": "customer-service-to-users",
+                  "from": "customer-service",
+                  "to": "user-repository",
+                  "label": "createdBy",
+                  "collectionIndex": 15,
+                  "artifactIndex": 16
+                },
+                "right": {
+                  "id": "users-to-mysql",
+                  "from": "user-repository",
+                  "to": "mysql",
+                  "label": "users / user_roles",
+                  "collectionIndex": 16,
+                  "artifactIndex": 17
+                },
+                "point": [
+                  1447,
+                  575
+                ],
+                "sharedNode": "user-repository"
+              }
+            ],
+            "detours": [
+              {
+                "relationship": {
+                  "id": "api-to-security",
+                  "from": "api-client",
+                  "to": "security",
+                  "label": "Bearer JWT",
+                  "collectionIndex": 2,
+                  "artifactIndex": 3
+                },
+                "bends": 3,
+                "stretch": 1.185
+              },
+              {
+                "relationship": {
+                  "id": "auth-service-to-users",
+                  "from": "auth-service",
+                  "to": "user-repository",
+                  "label": "usuarios",
+                  "collectionIndex": 13,
+                  "artifactIndex": 14
+                },
+                "bends": 4,
+                "stretch": 1.659
+              },
+              {
+                "relationship": {
+                  "id": "customer-service-to-users",
+                  "from": "customer-service",
+                  "to": "user-repository",
+                  "label": "createdBy",
+                  "collectionIndex": 15,
+                  "artifactIndex": 16
+                },
+                "bends": 4,
+                "stretch": 1.938
+              }
+            ]
+          },
+          "leadingSpace": {
+            "measured": true,
+            "emptyTopPx": 6,
+            "emptyTopRatio": 0.007,
+            "occupiedTop": 6,
+            "viewBoxTop": 0,
+            "canvasHeight": 814,
+            "typicalNodeHeight": 72,
+            "reviewSuggested": false
+          },
+          "desktopReadability": {
+            "budgetBasis": "recognized-declared-wide",
+            "readerContract": "declared-wide-v1",
+            "availableDiagramWidth": 1346,
+            "actualBudgetPx": 1346,
+            "actualReaderWidth": 1376,
+            "desiredReaderWidth": 1669.6875,
+            "viewportCap": 1376,
+            "limit": "viewport-cap",
+            "requestedTargetPx": 7.5,
+            "requestedTargetMet": false,
+            "hardFloorPx": 6,
+            "hardFloorMet": true,
+            "minimumOwner": {
+              "kind": "edge",
+              "id": "actor-to-vue",
+              "from": "actor",
+              "to": "vue"
+            },
+            "minimumSourceTextPx": 8,
+            "minimumProjectedTextPx": 6.156660949113779,
+            "semanticTextCount": 49
+          },
+          "issues": []
+        },
+        "provenance": "current",
+        "deliveryReceiptId": "50c29179-70a0-41ce-801b-b08b28ddd5f2"
+      }
+    },
+    "browser-check": {
+      "status": "skipped",
+      "exitCode": 2,
+      "durationMs": 11,
+      "command": [
+        "/usr/bin/node",
+        "/home/david/.agents/skills/archify/bin/archify.mjs",
+        "browser-check",
+        "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase02-20260928-182517/taller-fase02.html",
+        "--json",
+        "--require-provenance"
+      ],
+      "execution": "in-process",
+      "receipt": {
+        "schemaVersion": 1,
+        "ok": false,
+        "command": "browser-check",
+        "evidenceKind": "automated-browser",
+        "status": "skipped",
+        "visualReview": "not-requested",
+        "provenance": "current",
+        "deliveryReceiptId": "50c29179-70a0-41ce-801b-b08b28ddd5f2",
+        "artifact": {
+          "path": "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase02-20260928-182517/taller-fase02.html",
+          "sha256": "0d24f6fefd59bbb90c688dc5f73d576d02af5d44dc8be599d420a9ff0793a7f8",
+          "bytes": 785237
+        },
+        "state": {
+          "detail": "read",
+          "motion": "still"
+        },
+        "chrome": {
+          "status": "unavailable",
+          "executable": null
+        },
+        "diagnostics": [
+          {
+            "code": "viewer/chrome-unavailable",
+            "severity": "warning",
+            "message": "Chrome or Chromium is unavailable. Set ARCHIFY_CHROME to its executable path.",
+            "subject": {
+              "artifact": "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase02-20260928-182517/taller-fase02.html"
+            },
+            "evidence": {
+              "executable": null
+            },
+            "supportedFixes": [
+              "set ARCHIFY_CHROME to a Chrome or Chromium executable and rerun browser-check"
+            ]
+          }
+        ],
+        "containment": {
+          "status": "skipped",
+          "policy": "fit-or-reader-declared-readable-vertical-scroll",
+          "viewports": []
+        },
+        "themeStates": {
+          "status": "skipped",
+          "viewports": []
+        },
+        "readability": {
+          "status": "skipped",
+          "minimumProjectedNodeTextPx": 6,
+          "viewports": []
+        },
+        "viewerChrome": {
+          "status": "skipped",
+          "viewports": []
+        },
+        "captures": {
+          "status": "not-requested",
+          "screenshots": [],
+          "contactSheet": null
+        },
+        "sidecars": {
+          "receipt": "taller-fase02.browser-check.json",
+          "files": []
+        },
+        "error": "Chrome or Chromium is unavailable. Set ARCHIFY_CHROME to its executable path."
+      }
+    }
+  },
+  "diagnostics": [
+    {
+      "code": "viewer/chrome-unavailable",
+      "severity": "warning",
+      "message": "Chrome or Chromium is unavailable. Set ARCHIFY_CHROME to its executable path.",
+      "subject": {
+        "artifact": "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase02-20260928-182517/taller-fase02.html"
+      },
+      "evidence": {
+        "executable": null
+      },
+      "supportedFixes": [
+        "set ARCHIFY_CHROME to a Chrome or Chromium executable and rerun browser-check"
+      ]
+    }
+  ],
+  "evidence": {
+    "receipt": "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase02-20260928-182517/taller-fase02.finalize.json",
+    "summaryReceipt": "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase02-20260928-182517/taller-fase02.finalize-summary.json",
+    "browserCheckReceipt": "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase02-20260928-182517/taller-fase02.browser-check.json"
+  },
+  "visualReview": "not-requested",
+  "failedStage": "browser-check",
+  "finishedAt": "2026-09-29T00:30:21.392Z",
+  "durationMs": 541,
+  "update": {
+    "status": "current",
+    "installedVersion": "3.0.1",
+    "availableVersion": "3.0.1",
+    "releaseNotes": null,
+    "checkedAt": "2026-09-29T00:26:57.460Z",
+    "source": "cache",
+    "noticeRequired": false,
+    "noticeText": null
+  }
+}

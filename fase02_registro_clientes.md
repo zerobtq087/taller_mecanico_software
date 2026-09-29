@@ -25,7 +25,7 @@ En esta fase se implemento el modulo de registro de clientes con flujo Vue -> RE
 | Clientes backend | `CustomerController.java`, `CustomerFacade.java`, `CustomerService.java`, `CustomerRepository.java`, `Customer.java`, `CustomerDtos.java` | Datos personales, contacto alternativo, telefonos, emails, foto, direccion, `workshopId` | Terminado | Registro y consulta de clientes con facade, validaciones, normalizacion y proteccion contra duplicados. |
 | Base de datos | `database/schema.sql` | Tabla `customers`, llaves unicas, relacion con `users` | Terminado | Se agrego tabla de clientes con indices para email, telefono personal, usuario creador y futuro taller. |
 | Frontend clientes | `frontend/src/App.vue`, `frontend/src/services/api.js`, `frontend/src/style.css` | Formulario de cliente, foto, vista previa, validacion de duplicados, alertas | Terminado | El panel muestra clientes y usuarios solo a roles autorizados. Usa SweetAlert2 para exito/error. |
-| Diagrama de componentes | `docs/diagrama_componentes_fase02.md` | Arquitectura Vue, REST, facade, service, repository, MySQL | Terminado con bloqueo de herramienta | Se guardo diagrama Mermaid. `archify` no pudo instalarse porque no existe `npx` en el equipo. |
+| Diagrama de componentes | `docs/diagrama_componentes_fase02.md`, `.archify/architecture-taller-fase02-20260928-182517/taller-fase02.html` | Arquitectura Vue, REST, facade, service, repository, MySQL | Terminado | Se guardo diagrama Mermaid y HTML interactivo generado con Archify. |
 
 ## Metodos y funciones creadas o modificadas
 
@@ -99,5 +99,5 @@ En esta fase se implemento el modulo de registro de clientes con flujo Vue -> RE
 | Verificacion | Resultado |
 | --- | --- |
 | SweetAlert2 | Instalado con Yarn: `sweetalert2@11.26.25`. |
-| Archify | No instalado: el equipo no tiene `npx` ni `npm` en PATH. |
-| Diagrama | Guardado en `docs/diagrama_componentes_fase02.md`. |
+| Archify | HTML generado con la skill local. `npx` no existe en PATH, por eso se uso `node /home/david/.agents/skills/archify/bin/archify.mjs`. |
+| Diagrama | Guardado en `docs/diagrama_componentes_fase02.md` y `.archify/architecture-taller-fase02-20260928-182517/taller-fase02.html`. |
