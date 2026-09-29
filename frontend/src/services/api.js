@@ -14,8 +14,11 @@ async function request(path, options = {}) {
   })
 
   if (!response.ok) {
-    const body = await response.json().catch(() => ({}))
-    throw new Error(body.error || 'Servicio no disponible')
+    const contentType = response.headers.get('content-type') || ''
+    const body = contentType.includes('application/json')
+      ? await response.json().catch(() => ({}))
+      : { error: await response.text().catch(() => '') }
+    throw new Error(body.error || `Servicio no disponible (${response.status})`)
   }
 
   return response.json()
