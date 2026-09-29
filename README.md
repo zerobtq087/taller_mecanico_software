@@ -1,4 +1,4 @@
-# Taller Paradox Security
+# Taller Mecanico
 
 Proyecto fullstack para un taller de reparacion de autos con autenticacion, autorizacion y roles.
 
