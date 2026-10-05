@@ -10,6 +10,7 @@ import java.security.SecureRandom;
 import java.time.Instant;
 import java.util.Base64;
 import java.util.EnumSet;
+import java.util.List;
 import java.util.Set;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -61,6 +62,18 @@ public class AuthService {
         );
         User user = userRepository.findByEmail(auth.getName()).orElseThrow();
         return new AuthDtos.AuthResponse(jwtService.generate(user), toResponse(user));
+    }
+
+    @Transactional(readOnly = true)
+    public List<UserResponse> listUsers() {
+        return userRepository.findAll().stream().map(this::toResponse).toList();
+    }
+
+    @Transactional
+    public UserResponse updateRoles(Long id, Set<Role> roles) {
+        User user = userRepository.findById(id).orElseThrow();
+        user.setRoles(roles == null || roles.isEmpty() ? EnumSet.of(Role.AUXILIAR) : EnumSet.copyOf(roles));
+        return toResponse(userRepository.save(user));
     }
 
     @Transactional

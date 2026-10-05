@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -25,15 +26,33 @@ public class RestExceptionHandler {
     public ResponseEntity<Map<String, String>> validation(MethodArgumentNotValidException exception) {
         String message = exception.getBindingResult().getFieldErrors().stream()
                 .findFirst()
-                .map(error -> error.getField() + ": " + error.getDefaultMessage())
+                .map(error -> friendlyValidationMessage(error.getField(), error.getDefaultMessage()))
                 .orElse("Datos invalidos");
         return ResponseEntity.badRequest().body(Map.of("error", message));
+    }
+
+    private String friendlyValidationMessage(String field, String defaultMessage) {
+        return switch (field) {
+            case "personalPhone" -> "El telefono personal debe contener 10 digitos.";
+            case "workPhone" -> "El telefono del trabajo debe contener 10 digitos.";
+            case "email" -> "El email debe tener un formato valido.";
+            case "workEmail" -> "El email del trabajo debe tener un formato valido.";
+            case "postalCode" -> "El codigo postal no tiene un formato valido.";
+            case "photoDataUrl" -> "La foto no debe superar 20 MB.";
+            default -> "Dato invalido: " + defaultMessage;
+        };
     }
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<Map<String, String>> unreadable(HttpMessageNotReadableException exception) {
         log.warn("JSON invalido en la peticion", exception);
         return ResponseEntity.badRequest().body(Map.of("error", "La peticion contiene JSON invalido o datos no soportados"));
+    }
+
+    @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
+    public ResponseEntity<Map<String, String>> methodNotSupported(HttpRequestMethodNotSupportedException exception) {
+        return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED)
+                .body(Map.of("error", "Metodo HTTP no permitido para este endpoint"));
     }
 
     @ExceptionHandler(DataIntegrityViolationException.class)

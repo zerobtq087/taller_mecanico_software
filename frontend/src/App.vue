@@ -7,7 +7,7 @@
         </v-chip>
 
         <div class="brand-copy">
-          <p class="eyebrow">Taller Paradox</p>
+          <p class="eyebrow">Taller mecanico</p>
           <h1>Operacion segura para un taller moderno.</h1>
           <p>
             Login, recuperacion de contrasena, alta protegida de usuarios y registro de clientes
@@ -130,17 +130,34 @@
                   <div class="form-grid">
                     <v-text-field v-model="customerForm.fullName" label="Nombre completo *" hint="Obligatorio" persistent-hint />
                     <v-text-field v-model="customerForm.alternateContactName" label="Contacto alternativo *" hint="Obligatorio" persistent-hint />
-                    <v-text-field v-model.number="customerForm.age" label="Edad *" type="number" min="18" max="120" hint="18 a 120 anos" persistent-hint />
+                    <v-text-field v-model.number="customerForm.age" label="Edad *" type="number" />
                     <v-text-field v-model="customerForm.birthDate" label="Fecha de nacimiento *" type="date" hint="Obligatorio" persistent-hint />
-                    <v-text-field v-model="customerForm.personalPhone" label="Telefono personal *" hint="Obligatorio y unico" persistent-hint />
-                    <v-text-field v-model="customerForm.workPhone" label="Telefono del trabajo *" hint="Obligatorio" persistent-hint />
+                    <v-text-field v-model="customerForm.personalPhone" label="Telefono personal *" hint="10 digitos, obligatorio y unico" persistent-hint />
+                    <v-text-field v-model="customerForm.workPhone" label="Telefono del trabajo *" hint="10 digitos obligatorios" persistent-hint />
                     <v-text-field v-model="customerForm.email" label="Email *" type="email" hint="Obligatorio y unico" persistent-hint />
                     <v-text-field v-model="customerForm.workEmail" label="Email del trabajo opcional" type="email" hint="Opcional" persistent-hint />
-                    <v-text-field v-model="customerForm.street" label="Calle *" hint="Obligatorio" persistent-hint />
-                    <v-text-field v-model="customerForm.neighborhood" label="Colonia *" hint="Obligatorio" persistent-hint />
-                    <v-text-field v-model="customerForm.municipality" label="Municipio *" hint="Obligatorio" persistent-hint />
-                    <v-text-field v-model="customerForm.state" label="Estado *" hint="Obligatorio" persistent-hint />
-                    <v-text-field v-model="customerForm.postalCode" label="Codigo postal *" hint="Obligatorio" persistent-hint />
+                    <v-text-field
+                      v-model="customerForm.postalCode"
+                      label="Codigo postal *"
+                      hint="Al escribir 5 digitos se cargan colonia, municipio y estado"
+                      persistent-hint
+                      maxlength="5"
+                      append-inner-icon="mdi-map-search"
+                      :loading="postalLookupLoading"
+                      @blur="lookupPostalCode"
+                      @click:append-inner="lookupPostalCode"
+                    />
+                    <v-combobox
+                      v-model="customerForm.neighborhood"
+                      :items="postalSettlementItems"
+                      label="Colonia *"
+                      hint="Selecciona una colonia o escribe una correccion"
+                      persistent-hint
+                      clearable
+                    />
+                    <v-text-field v-model="customerForm.municipality" label="Municipio *" hint="Se llena por codigo postal, editable si hace falta" persistent-hint />
+                    <v-text-field v-model="customerForm.state" label="Estado *" hint="Se llena por codigo postal, editable si hace falta" persistent-hint />
+                    <v-text-field v-model="customerForm.street" label="Calle *" hint="Captura manual obligatoria" persistent-hint />
                   </div>
 
                   <div class="photo-uploader">
@@ -148,7 +165,7 @@
                     <v-btn color="secondary" variant="tonal" prepend-icon="mdi-camera-plus" @click="photoInput?.click()">
                       Subir foto
                     </v-btn>
-                    <span>Maximo 5 MB, solo imagenes.</span>
+                    <span>Maximo 20 MB, solo imagenes.</span>
                     <img v-if="photoPreview" :src="photoPreview" alt="Vista previa del cliente" />
                   </div>
 
@@ -194,10 +211,10 @@
 
 <script setup>
 import Swal from 'sweetalert2'
-import { computed, reactive, ref } from 'vue'
-import { api } from './services/api'
+import { computed, reactive, ref, watch } from 'vue'
+import { workshopFacade } from './facades/workshopFacade'
 
-const PHOTO_MAX_BYTES = 5 * 1024 * 1024
+const PHOTO_MAX_BYTES = 20 * 1024 * 1024
 
 const mode = ref('login')
 const workspaceMode = ref('dashboard')
@@ -207,6 +224,9 @@ const resetToken = ref('')
 const photoInput = ref(null)
 const photoPreview = ref('')
 const user = ref(getStoredUser())
+const postalLookupLoading = ref(false)
+const postalSettlements = ref([])
+const lastPostalLookup = ref('')
 
 const loginForm = reactive({ email: '', password: '' })
 const forgotForm = reactive({ email: '' })
@@ -235,11 +255,34 @@ const availableRoles = computed(() => {
 })
 
 const canManageCustomers = computed(() => hasRole('GERENTE') || hasRole('SECRETARIO'))
+const postalSettlementItems = computed(() => postalSettlements.value.map((settlement) => settlement.name))
 
 const title = computed(() => {
   if (user.value) return 'Panel operativo'
   return mode.value === 'login' ? 'Inicio de sesion' : 'Recuperar acceso'
 })
+
+watch(
+  () => customerForm.postalCode,
+  (postalCode) => {
+    const normalized = String(postalCode || '').replace(/\D/g, '').slice(0, 5)
+    if (postalCode !== normalized) {
+      customerForm.postalCode = normalized
+      return
+    }
+    if (normalized.length < 5) {
+      lastPostalLookup.value = ''
+      postalSettlements.value = []
+      customerForm.neighborhood = ''
+      customerForm.municipality = ''
+      customerForm.state = ''
+      return
+    }
+    if (normalized !== lastPostalLookup.value) {
+      lookupPostalCode({ silent: true })
+    }
+  },
+)
 
 function emptyCustomer() {
   return {
@@ -316,7 +359,7 @@ function getStoredUser() {
 function login() {
   run(
     async () => {
-      setSession(await api.login(loginForm))
+      setSession(await workshopFacade.auth.login(loginForm))
       notice.value = 'Sesion iniciada con JWT.'
     },
     (error) => {
@@ -328,7 +371,7 @@ function login() {
 function forgotPassword() {
   run(
     async () => {
-      const response = await api.forgotPassword(forgotForm)
+      const response = await workshopFacade.auth.forgotPassword(forgotForm)
       resetToken.value = response.demoResetToken
       resetForm.token = response.demoResetToken
       notice.value = response.message
@@ -342,7 +385,7 @@ function forgotPassword() {
 function resetPassword() {
   run(
     async () => {
-      await api.resetPassword(resetForm)
+      await workshopFacade.auth.resetPassword(resetForm)
       mode.value = 'login'
       resetToken.value = ''
       notice.value = 'Contrasena actualizada. Inicia sesion.'
@@ -361,7 +404,7 @@ function createUser() {
         ...newUserForm,
         email: newUserForm.email.trim().toLowerCase(),
       }
-      const created = await api.createUser(payload)
+      const created = await workshopFacade.users.create(payload)
       await Swal.fire('Usuario registrado', `${created.name} fue dado de alta correctamente.`, 'success')
       Object.assign(newUserForm, { name: '', email: '', password: '', roles: ['AUXILIAR'] })
     },
@@ -376,7 +419,7 @@ function createCustomer() {
     async () => {
       validateCustomerForm()
       const payload = normalizeCustomerPayload()
-      const created = await api.createCustomer(payload)
+      const created = await workshopFacade.customers.register(payload)
       await Swal.fire('Cliente registrado', `${created.fullName} fue registrado correctamente.`, 'success')
       Object.assign(customerForm, emptyCustomer())
       photoPreview.value = ''
@@ -385,6 +428,54 @@ function createCustomer() {
       await Swal.fire('Registro detenido', error.message, 'warning')
     },
   )
+}
+
+async function lookupPostalCode(options = {}) {
+  const postalCode = String(customerForm.postalCode || '').trim()
+  if (!postalCode) return
+  if (!/^[0-9]{5}$/.test(postalCode)) {
+    if (!options.silent) {
+      await Swal.fire('Codigo postal invalido', 'El codigo postal debe contener 5 digitos.', 'warning')
+    }
+    return
+  }
+
+  postalLookupLoading.value = true
+  try {
+    const response = await workshopFacade.postalCatalog.lookup(postalCode)
+    if (postalCode !== String(customerForm.postalCode || '').trim()) return
+    lastPostalLookup.value = postalCode
+    postalSettlements.value = response.settlements || []
+    customerForm.state = response.state || ''
+    customerForm.municipality = response.municipality || ''
+    if (postalSettlements.value.length === 1) {
+      customerForm.neighborhood = postalSettlements.value[0].name
+    } else if (!postalSettlements.value.some((settlement) => settlement.name === customerForm.neighborhood)) {
+      customerForm.neighborhood = ''
+    }
+  } catch (error) {
+    lastPostalLookup.value = ''
+    postalSettlements.value = []
+    customerForm.neighborhood = ''
+    customerForm.municipality = ''
+    customerForm.state = ''
+    if (error.status === 401 || error.status === 403) {
+      clearSession()
+      workspaceMode.value = 'dashboard'
+      notice.value = 'Sesion expirada o sin autorizacion. Inicia sesion nuevamente.'
+      if (!options.silent) {
+        await Swal.fire('Sesion requerida', 'Inicia sesion nuevamente para consultar el codigo postal.', 'warning')
+      }
+      return
+    }
+    if (!options.silent) {
+      await Swal.fire('Codigo postal no encontrado', error.message, 'warning')
+    } else {
+      notice.value = error.message
+    }
+  } finally {
+    postalLookupLoading.value = false
+  }
 }
 
 function validateUserForm() {
@@ -411,8 +502,17 @@ function validateCustomerForm() {
   ]
   const missing = requiredFields.find(([value]) => !String(value || '').trim())
   if (missing) throw new Error(`${missing[1]} es obligatorio.`)
-  if (!customerForm.age || customerForm.age < 18 || customerForm.age > 120) {
-    throw new Error('La edad debe estar entre 18 y 120 anos.')
+  if (!customerForm.age || Number(customerForm.age) <= 0) {
+    throw new Error('La edad es obligatoria.')
+  }
+  if (!/^[0-9]{5}$/.test(String(customerForm.postalCode || '').trim())) {
+    throw new Error('El codigo postal debe contener 5 digitos.')
+  }
+  if (!isTenDigitPhone(customerForm.personalPhone)) {
+    throw new Error('El telefono personal debe contener 10 digitos.')
+  }
+  if (!isTenDigitPhone(customerForm.workPhone)) {
+    throw new Error('El telefono del trabajo debe contener 10 digitos.')
   }
   if (!isValidEmail(customerForm.email)) throw new Error('El email del cliente no tiene un formato valido.')
   if (customerForm.workEmail && !isValidEmail(customerForm.workEmail)) {
@@ -424,11 +524,16 @@ function isValidEmail(value) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(value || '').trim())
 }
 
+function isTenDigitPhone(value) {
+  return /^[0-9]{10}$/.test(String(value || '').trim())
+}
+
 function normalizeCustomerPayload() {
   return {
     ...customerForm,
     email: customerForm.email.trim().toLowerCase(),
     workEmail: customerForm.workEmail ? customerForm.workEmail.trim().toLowerCase() : null,
+    postalCode: customerForm.postalCode.trim(),
     workshopId: customerForm.workshopId || null,
   }
 }
@@ -442,7 +547,7 @@ function handlePhotoUpload(event) {
     return
   }
   if (file.size > PHOTO_MAX_BYTES) {
-    Swal.fire('Archivo demasiado grande', 'La foto no debe superar 5 MB.', 'error')
+    Swal.fire('Archivo demasiado grande', 'La foto no debe superar 20 MB.', 'error')
     event.target.value = ''
     return
   }
@@ -457,7 +562,7 @@ function handlePhotoUpload(event) {
 function changePassword() {
   run(
     async () => {
-      await api.changePassword(passwordForm)
+      await workshopFacade.auth.changePassword(passwordForm)
       notice.value = 'Contrasena actualizada.'
     },
     (error) => {

@@ -8,10 +8,15 @@ async function request(path, options = {}) {
     ...options.headers,
   }
 
-  const response = await fetch(`${API_URL}${path}`, {
-    ...options,
-    headers,
-  })
+  let response
+  try {
+    response = await fetch(`${API_URL}${path}`, {
+      ...options,
+      headers,
+    })
+  } catch (cause) {
+    throw new Error(`No se pudo conectar con el backend en ${API_URL}. Verifica que Spring Boot este activo.`)
+  }
 
   if (!response.ok) {
     const contentType = response.headers.get('content-type') || ''
@@ -47,5 +52,8 @@ export const api = {
   },
   createCustomer(payload) {
     return request('/secretaria/clientes', { method: 'POST', body: JSON.stringify(payload) })
+  },
+  lookupPostalCode(postalCode) {
+    return request(`/catalogos/codigos-postales/${encodeURIComponent(postalCode)}`)
   },
 }

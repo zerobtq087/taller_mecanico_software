@@ -4,6 +4,7 @@ import com.taller.security.dto.AuthDtos;
 import com.taller.security.dto.AuthDtos.UserResponse;
 import com.taller.security.model.Role;
 import com.taller.security.service.AuthService;
+import java.util.List;
 import java.util.Set;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
@@ -28,6 +29,20 @@ public class AuthFacade {
      */
     public UserResponse createUser(AuthDtos.RegisterRequest request, Set<Role> roles, Authentication actor) {
         return authService.createUser(request, roles, actor);
+    }
+
+    /**
+     * Lista usuarios para administracion sin exponer el repository a la capa REST.
+     */
+    public List<UserResponse> listUsers() {
+        return authService.listUsers();
+    }
+
+    /**
+     * Actualiza roles desde el facade para mantener la orquestacion fuera del controller.
+     */
+    public UserResponse updateRoles(Long id, Set<Role> roles) {
+        return authService.updateRoles(id, roles);
     }
 
     /**

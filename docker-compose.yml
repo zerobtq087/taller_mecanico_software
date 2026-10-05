@@ -12,10 +12,13 @@ services:
     volumes:
       - mysql-data:/var/lib/mysql
       - ./database/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+      - ./database/sepomex_data.sql:/docker-entrypoint-initdb.d/02-sepomex-data.sql:ro
     restart: unless-stopped
     command:
       - --max-connections=10000
       - --innodb-buffer-pool-size=512M
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
 
 volumes:
   mysql-data:

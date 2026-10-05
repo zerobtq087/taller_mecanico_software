@@ -1,0 +1,441 @@
+{
+  "schemaVersion": 1,
+  "ok": false,
+  "command": "finalize",
+  "status": "skipped",
+  "type": "architecture",
+  "quality": "showcase",
+  "startedAt": "2026-10-05T05:32:58.207Z",
+  "specification": {
+    "path": "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase02-postal-editable-20261004-001500/candidate.json",
+    "sha256": "c3a54d7ff2e92f23db63062e4549157d860c54cbb21e490238e2f7b99522d8be",
+    "bytes": 6456
+  },
+  "artifact": {
+    "path": "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase02-postal-editable-20261004-001500/taller-fase02-postal-editable.html",
+    "sha256": "c4ed1e6f05e77981d5b8f0d53356f4b0cae1c933788d14149d66ca967e6d878b",
+    "bytes": 776973
+  },
+  "stages": {
+    "validate": {
+      "status": "pass",
+      "exitCode": 0,
+      "durationMs": null,
+      "execution": "embedded-in-deliver",
+      "command": [
+        "/usr/bin/node",
+        "/home/david/.agents/skills/archify/bin/archify.mjs",
+        "deliver",
+        "architecture",
+        "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase02-postal-editable-20261004-001500/candidate.json",
+        "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase02-postal-editable-20261004-001500/taller-fase02-postal-editable.html",
+        "--quality",
+        "showcase",
+        "--repo-root",
+        "/home/david/Documentos/ChatGPT/taller",
+        "--json"
+      ],
+      "receipt": {
+        "schemaVersion": 1,
+        "ok": true,
+        "command": "validate",
+        "specification": {
+          "sha256": "c3a54d7ff2e92f23db63062e4549157d860c54cbb21e490238e2f7b99522d8be",
+          "bytes": 6456
+        },
+        "validation": {
+          "checksPassed": 9,
+          "checkCount": 9,
+          "compositionProfile": "showcase",
+          "compositionStatus": "pass",
+          "errors": 0,
+          "warnings": 0
+        }
+      }
+    },
+    "deliver": {
+      "status": "pass",
+      "exitCode": 0,
+      "durationMs": 495,
+      "command": [
+        "/usr/bin/node",
+        "/home/david/.agents/skills/archify/bin/archify.mjs",
+        "deliver",
+        "architecture",
+        "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase02-postal-editable-20261004-001500/candidate.json",
+        "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase02-postal-editable-20261004-001500/taller-fase02-postal-editable.html",
+        "--quality",
+        "showcase",
+        "--repo-root",
+        "/home/david/Documentos/ChatGPT/taller",
+        "--json"
+      ],
+      "receipt": {
+        "schemaVersion": 1,
+        "receiptId": "4b7fc5d0-4a9b-4327-95b4-a89cf292bb0e",
+        "ok": true,
+        "command": "deliver",
+        "type": "architecture",
+        "input": "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase02-postal-editable-20261004-001500/candidate.json",
+        "output": "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase02-postal-editable-20261004-001500/taller-fase02-postal-editable.html",
+        "specification": {
+          "sha256": "c3a54d7ff2e92f23db63062e4549157d860c54cbb21e490238e2f7b99522d8be",
+          "bytes": 6456
+        },
+        "artifact": {
+          "sha256": "c4ed1e6f05e77981d5b8f0d53356f4b0cae1c933788d14149d66ca967e6d878b",
+          "bytes": 776973
+        },
+        "validation": {
+          "checksPassed": 9,
+          "checkCount": 9,
+          "compositionProfile": "showcase",
+          "compositionStatus": "pass",
+          "errors": 0,
+          "warnings": 0
+        },
+        "update": {
+          "status": "unavailable",
+          "installedVersion": null,
+          "availableVersion": null,
+          "releaseNotes": null,
+          "checkedAt": null,
+          "source": null,
+          "noticeRequired": false,
+          "noticeText": null,
+          "reason": "disabled"
+        }
+      }
+    },
+    "check": {
+      "status": "pass",
+      "exitCode": 0,
+      "durationMs": 238,
+      "command": [
+        "/usr/bin/node",
+        "/home/david/.agents/skills/archify/bin/archify.mjs",
+        "check",
+        "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase02-postal-editable-20261004-001500/taller-fase02-postal-editable.html",
+        "--require-provenance"
+      ],
+      "receipt": {
+        "ok": true,
+        "file": "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase02-postal-editable-20261004-001500/taller-fase02-postal-editable.html",
+        "artifact": {
+          "sha256": "c4ed1e6f05e77981d5b8f0d53356f4b0cae1c933788d14149d66ca967e6d878b",
+          "bytes": 776973
+        },
+        "checks": [
+          {
+            "name": "single_svg",
+            "ok": true,
+            "details": [
+              "found 1 <svg> block(s)"
+            ]
+          },
+          {
+            "name": "finite_svg",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "orthogonal_arrows",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "label_route_clearance",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "relationship_crossings",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "relationship_corridors",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "container_border_runs",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "route_rhythm",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "legend_clearance",
+            "ok": true,
+            "details": []
+          }
+        ],
+        "composition": {
+          "schemaVersion": 1,
+          "profile": "showcase",
+          "status": "pass",
+          "summary": {
+            "errors": 0,
+            "warnings": 0
+          },
+          "metrics": {
+            "properCrossings": 0,
+            "resolvedCrossovers": 1,
+            "ambiguousCorridors": 0,
+            "arrowheadCollisions": 0,
+            "containerBorderRuns": 0,
+            "labelRouteClearanceIssues": 0,
+            "labelCanvasOverflowIssues": 0,
+            "minLabelRouteClearance": 26.6,
+            "desktopReadabilityIssues": 0,
+            "viewportHeightIssues": 0,
+            "minProjectedNodeTextPx": 6.031015037593986,
+            "maxBends": 3,
+            "routesOverSuggestedBends": 4,
+            "maxStretch": 1.106,
+            "routesOverSuggestedStretch": 0,
+            "minSegmentPx": 24,
+            "minInteriorSegmentPx": 81,
+            "shortSegmentCount": 0,
+            "shortEndpointSegmentCount": 0,
+            "shortInteriorSegmentCount": 0,
+            "microSegmentCount": 0
+          },
+          "suggestedLimits": {
+            "bendsPerRelationship": 2,
+            "stretch": 1.35,
+            "segmentPx": 16,
+            "microSegmentPx": 8
+          },
+          "routeReview": {
+            "crossings": [
+              {
+                "left": {
+                  "id": "facade-to-service",
+                  "from": "postal-facade",
+                  "to": "postal-service",
+                  "label": "orquesta",
+                  "collectionIndex": 7,
+                  "artifactIndex": 8
+                },
+                "right": {
+                  "id": "customer-to-mysql",
+                  "from": "customer-flow",
+                  "to": "mysql",
+                  "label": "customers",
+                  "collectionIndex": 14,
+                  "artifactIndex": 15
+                },
+                "point": [
+                  895,
+                  756
+                ]
+              }
+            ],
+            "detours": [
+              {
+                "relationship": {
+                  "id": "api-to-security",
+                  "from": "api-client",
+                  "to": "security",
+                  "label": "JWT",
+                  "collectionIndex": 3,
+                  "artifactIndex": 4
+                },
+                "bends": 3,
+                "stretch": 1
+              },
+              {
+                "relationship": {
+                  "id": "mysql-to-service",
+                  "from": "mysql",
+                  "to": "postal-service",
+                  "label": "estado, municipio, colonias",
+                  "collectionIndex": 10,
+                  "artifactIndex": 11
+                },
+                "bends": 3,
+                "stretch": 1.095
+              },
+              {
+                "relationship": {
+                  "id": "vue-to-customer",
+                  "from": "vue-view",
+                  "to": "customer-flow",
+                  "label": "registra cliente con direccion validada",
+                  "collectionIndex": 13,
+                  "artifactIndex": 14
+                },
+                "bends": 3,
+                "stretch": 1
+              },
+              {
+                "relationship": {
+                  "id": "customer-to-mysql",
+                  "from": "customer-flow",
+                  "to": "mysql",
+                  "label": "customers",
+                  "collectionIndex": 14,
+                  "artifactIndex": 15
+                },
+                "bends": 3,
+                "stretch": 1.106
+              }
+            ]
+          },
+          "leadingSpace": {
+            "measured": true,
+            "emptyTopPx": 76,
+            "emptyTopRatio": 0.054,
+            "occupiedTop": 76,
+            "viewBoxTop": 0,
+            "canvasHeight": 1420,
+            "typicalNodeHeight": 88,
+            "reviewSuggested": false
+          },
+          "desktopReadability": {
+            "budgetBasis": "legacy-930",
+            "readerContract": "declared-wide-v1",
+            "availableDiagramWidth": 930,
+            "actualBudgetPx": 930,
+            "limit": "legacy",
+            "requestedTargetPx": 7.5,
+            "requestedTargetMet": false,
+            "hardFloorPx": 6,
+            "hardFloorMet": true,
+            "minimumOwner": {
+              "kind": "node",
+              "id": "vue-view"
+            },
+            "minimumSourceTextPx": 6.9,
+            "minimumProjectedTextPx": 6.031015037593986,
+            "semanticTextCount": 44
+          },
+          "issues": []
+        },
+        "provenance": "current",
+        "deliveryReceiptId": "4b7fc5d0-4a9b-4327-95b4-a89cf292bb0e"
+      }
+    },
+    "browser-check": {
+      "status": "skipped",
+      "exitCode": 2,
+      "durationMs": 33,
+      "command": [
+        "/usr/bin/node",
+        "/home/david/.agents/skills/archify/bin/archify.mjs",
+        "browser-check",
+        "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase02-postal-editable-20261004-001500/taller-fase02-postal-editable.html",
+        "--json",
+        "--require-provenance"
+      ],
+      "execution": "in-process",
+      "receipt": {
+        "schemaVersion": 1,
+        "ok": false,
+        "command": "browser-check",
+        "evidenceKind": "automated-browser",
+        "status": "skipped",
+        "visualReview": "not-requested",
+        "provenance": "current",
+        "deliveryReceiptId": "4b7fc5d0-4a9b-4327-95b4-a89cf292bb0e",
+        "artifact": {
+          "path": "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase02-postal-editable-20261004-001500/taller-fase02-postal-editable.html",
+          "sha256": "c4ed1e6f05e77981d5b8f0d53356f4b0cae1c933788d14149d66ca967e6d878b",
+          "bytes": 776973
+        },
+        "state": {
+          "detail": "read",
+          "motion": "still"
+        },
+        "chrome": {
+          "status": "unavailable",
+          "executable": null
+        },
+        "diagnostics": [
+          {
+            "code": "viewer/chrome-unavailable",
+            "severity": "warning",
+            "message": "Chrome or Chromium is unavailable. Set ARCHIFY_CHROME to its executable path.",
+            "subject": {
+              "artifact": "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase02-postal-editable-20261004-001500/taller-fase02-postal-editable.html"
+            },
+            "evidence": {
+              "executable": null
+            },
+            "supportedFixes": [
+              "set ARCHIFY_CHROME to a Chrome or Chromium executable and rerun browser-check"
+            ]
+          }
+        ],
+        "containment": {
+          "status": "skipped",
+          "policy": "fit-or-reader-declared-readable-vertical-scroll",
+          "viewports": []
+        },
+        "themeStates": {
+          "status": "skipped",
+          "viewports": []
+        },
+        "readability": {
+          "status": "skipped",
+          "minimumProjectedNodeTextPx": 6,
+          "viewports": []
+        },
+        "viewerChrome": {
+          "status": "skipped",
+          "viewports": []
+        },
+        "captures": {
+          "status": "not-requested",
+          "screenshots": [],
+          "contactSheet": null
+        },
+        "sidecars": {
+          "receipt": "taller-fase02-postal-editable.browser-check.json",
+          "files": []
+        },
+        "error": "Chrome or Chromium is unavailable. Set ARCHIFY_CHROME to its executable path."
+      }
+    }
+  },
+  "diagnostics": [
+    {
+      "code": "viewer/chrome-unavailable",
+      "severity": "warning",
+      "message": "Chrome or Chromium is unavailable. Set ARCHIFY_CHROME to its executable path.",
+      "subject": {
+        "artifact": "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase02-postal-editable-20261004-001500/taller-fase02-postal-editable.html"
+      },
+      "evidence": {
+        "executable": null
+      },
+      "supportedFixes": [
+        "set ARCHIFY_CHROME to a Chrome or Chromium executable and rerun browser-check"
+      ]
+    }
+  ],
+  "evidence": {
+    "receipt": "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase02-postal-editable-20261004-001500/taller-fase02-postal-editable.finalize.json",
+    "summaryReceipt": "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase02-postal-editable-20261004-001500/taller-fase02-postal-editable.finalize-summary.json",
+    "browserCheckReceipt": "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase02-postal-editable-20261004-001500/taller-fase02-postal-editable.browser-check.json"
+  },
+  "visualReview": "not-requested",
+  "failedStage": "browser-check",
+  "finishedAt": "2026-10-05T05:32:59.101Z",
+  "durationMs": 894,
+  "update": {
+    "status": "current",
+    "installedVersion": "3.0.1",
+    "availableVersion": "3.0.1",
+    "releaseNotes": null,
+    "checkedAt": "2026-10-04T05:00:00.793Z",
+    "source": "cache",
+    "noticeRequired": false,
+    "noticeText": null
+  }
+}

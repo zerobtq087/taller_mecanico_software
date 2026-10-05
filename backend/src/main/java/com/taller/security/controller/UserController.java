@@ -2,8 +2,7 @@ package com.taller.security.controller;
 
 import com.taller.security.dto.AuthDtos.UserResponse;
 import com.taller.security.dto.UserDtos.UpdateRolesRequest;
-import com.taller.security.repository.UserRepository;
-import com.taller.security.service.AuthService;
+import com.taller.security.facade.AuthFacade;
 import jakarta.validation.Valid;
 import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,23 +15,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/admin/users")
 public class UserController {
-    private final UserRepository userRepository;
-    private final AuthService authService;
+    private final AuthFacade authFacade;
 
-    public UserController(UserRepository userRepository, AuthService authService) {
-        this.userRepository = userRepository;
-        this.authService = authService;
+    public UserController(AuthFacade authFacade) {
+        this.authFacade = authFacade;
     }
 
     @GetMapping
     public List<UserResponse> listUsers() {
-        return userRepository.findAll().stream().map(authService::toResponse).toList();
+        return authFacade.listUsers();
     }
 
     @PatchMapping("/{id}/roles")
     public UserResponse updateRoles(@PathVariable Long id, @Valid @RequestBody UpdateRolesRequest request) {
-        var user = userRepository.findById(id).orElseThrow();
-        user.setRoles(java.util.EnumSet.copyOf(request.roles()));
-        return authService.toResponse(userRepository.save(user));
+        return authFacade.updateRoles(id, request.roles());
     }
 }

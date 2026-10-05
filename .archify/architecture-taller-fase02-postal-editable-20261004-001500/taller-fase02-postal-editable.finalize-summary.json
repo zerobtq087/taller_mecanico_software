@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "ok": false,
+  "command": "finalize",
+  "status": "skipped",
+  "type": "architecture",
+  "quality": "showcase",
+  "specification": {
+    "path": "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase02-postal-editable-20261004-001500/candidate.json",
+    "sha256": "c3a54d7ff2e92f23db63062e4549157d860c54cbb21e490238e2f7b99522d8be",
+    "bytes": 6456
+  },
+  "artifact": {
+    "path": "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase02-postal-editable-20261004-001500/taller-fase02-postal-editable.html",
+    "sha256": "c4ed1e6f05e77981d5b8f0d53356f4b0cae1c933788d14149d66ca967e6d878b",
+    "bytes": 776973
+  },
+  "gates": {
+    "validate": "pass",
+    "deliver": "pass",
+    "check": "pass",
+    "browser-check": "skipped"
+  },
+  "failedStage": "browser-check",
+  "diagnostics": [
+    {
+      "code": "viewer/chrome-unavailable",
+      "severity": "warning",
+      "message": "Chrome or Chromium is unavailable. Set ARCHIFY_CHROME to its executable path.",
+      "subject": {
+        "artifact": "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase02-postal-editable-20261004-001500/taller-fase02-postal-editable.html"
+      },
+      "evidence": {
+        "executable": null
+      },
+      "supportedFixes": [
+        "set ARCHIFY_CHROME to a Chrome or Chromium executable and rerun browser-check"
+      ]
+    }
+  ],
+  "diagnosticSummary": {
+    "total": 1,
+    "shown": 1,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase02-postal-editable-20261004-001500/taller-fase02-postal-editable.finalize.json",
+    "summaryReceipt": "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase02-postal-editable-20261004-001500/taller-fase02-postal-editable.finalize-summary.json",
+    "browserCheckReceipt": "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase02-postal-editable-20261004-001500/taller-fase02-postal-editable.browser-check.json"
+  },
+  "update": {
+    "status": "current",
+    "installedVersion": "3.0.1",
+    "availableVersion": "3.0.1",
+    "releaseNotes": null,
+    "checkedAt": "2026-10-04T05:00:00.793Z",
+    "source": "cache",
+    "noticeRequired": false,
+    "noticeText": null
+  },
+  "visualReview": "not-requested",
+  "durationMs": 894
+}
