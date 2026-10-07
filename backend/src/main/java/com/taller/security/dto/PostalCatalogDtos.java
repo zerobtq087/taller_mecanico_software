@@ -18,7 +18,16 @@ public final class PostalCatalogDtos {
     public record SettlementOption(
             Long id,
             String name,
-            String type
+            String type,
+            String postalCode
+    ) {
+    }
+
+    public record PostalSelectionResponse(
+            String state,
+            String municipality,
+            String settlement,
+            String postalCode
     ) {
     }
 }

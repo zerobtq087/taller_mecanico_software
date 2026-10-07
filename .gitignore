@@ -5,6 +5,7 @@
 frontend/node_modules/
 frontend/dist/
 backend/target/
+storage/uploads/
 
 .idea/
 .vscode/

@@ -1,157 +1,165 @@
-# Fase 02 - Registro de clientes y alta protegida de usuarios
+# Fase 02 - Registro y administracion de clientes
 
-## Resumen ejecutivo
+## 1. Resumen ejecutivo
 
-En esta fase se implemento el modulo de registro de clientes con flujo Vue -> Frontend Facade -> REST -> Backend Facade -> Service -> Repository -> MySQL. Tambien se analizo el login y el registro de usuarios: el login conserva el contrato visual, pasa por facade en frontend y backend, y el alta de usuarios queda protegida para usuarios con rol `GERENTE` o `SECRETARIO`.
+En esta fase se consolido el modulo de clientes para operar con autenticacion JWT, roles, patron facade y persistencia en MySQL. El flujo principal queda separado por capas: Vue 3 + Vuetify -> `workshopFacade.js` -> cliente REST -> controladores Spring Boot -> facade backend -> servicios -> repositories -> MySQL.
 
-## Reglas funcionales
+El registro de clientes ya no depende de una sola sucursal. La informacion maestra del cliente se guarda una vez en `customers` y su relacion con talleres se guarda en `customer_workshop`, lo que permite asociar un mismo cliente a varias sucursales sin duplicar datos.
+
+## 2. Alcance funcional terminado
+
+| Modulo | Estado | Descripcion |
+| --- | --- | --- |
+| Login y autorizacion | Terminado | Login JWT con roles `GERENTE`, `SECRETARIO`, `AUXILIAR` y otros perfiles operativos. Las rutas administrativas se protegen con Spring Security. |
+| Registro de clientes | Terminado | Alta de clientes desde usuario autenticado, con datos personales, contacto, direccion, foto y taller actual obligatorio. |
+| Administracion de clientes | Terminado | Tabla con paginacion de servidor, filtro por taller, ordenamiento, edicion, historial de talleres y suspension logica. |
+| Relacion cliente-taller | Terminado | Tabla `customer_workshop` para relacionar clientes con varias sucursales y registrar primera visita, ultima visita y usuario que registro. |
+| Talleres | Terminado | Entidad `Workshop`, alta/edicion por `GERENTE`, validacion de RFC unico, foto opcional y datos semilla para Tula, Tepeji y Queretaro. |
+| Catalogo SEPOMEX local | Terminado | Tabla `postal_settlements` en MySQL y endpoints para CP, estados, municipios, colonias y busqueda inversa. No depende de internet en ejecucion. |
+| Fotos | Terminado | Carga multipart con limite de 15 MB, solo imagenes, guardadas en disco o volumen mediante `UPLOAD_DIR`; no se guardan en base64. |
+| Frontend modular | Terminado | Clientes, talleres y usuarios estan separados en componentes propios fuera de `App.vue`. |
+| Patron facade | Terminado | La vista Vue consume `workshopFacade.js`; el backend usa facades para clientes, talleres, catalogo postal y autenticacion. |
+
+## 3. Reglas de negocio implementadas
 
 | Regla | Implementacion | Estado |
 | --- | --- | --- |
-| El usuario que da de alta clientes debe estar registrado y autorizado. | Endpoints bajo `/api/secretaria/**`, protegidos por Spring Security para `GERENTE` y `SECRETARIO`. | Terminado |
-| No crear doble registro de cliente. | Validacion por email y telefono personal antes de guardar, mas llaves unicas en MySQL. | Terminado |
-| Alertar datos duplicados. | Backend devuelve error; frontend muestra SweetAlert2 con mensaje de registro detenido. | Terminado |
-| Validar formatos. | Bean Validation en DTO: email, telefonos de 10 digitos, edad obligatoria, fecha pasada, codigo postal y tamanos maximos. | Terminado |
-| Mensajes legibles. | Los errores de telefono muestran “debe contener 10 digitos”, no expresiones regulares internas ni nombres tecnicos como `personalPhone`. | Terminado |
-| Foto del cliente. | Boton de carga, solo imagenes, maximo 20 MB, vista previa y envio como `photoDataUrl`; Jackson y MySQL soportan el payload. | Terminado |
-| Codigo postal local. | Al capturar 5 digitos, el formulario consulta `/api/catalogos/codigos-postales/{cp}` y llena colonia, municipio y estado desde MySQL local. Los campos quedan editables para correccion manual. | Terminado |
-| Asociacion futura a varios talleres. | Campo opcional `workshopId` en cliente e indice SQL para futura relacion formal. | Preparado para fase futura |
-| Resultado esperado. | Cliente registrado y respuesta `CustomerResponse`. | Terminado |
+| Solo usuarios autorizados pueden registrar clientes. | Endpoint bajo `/api/secretaria/clientes`; requiere usuario autenticado con rol permitido por configuracion de seguridad. | Terminado |
+| El cliente no debe duplicarse. | Busqueda por CURP, RFC o email antes de crear. Si existe, se reutiliza y solo se registra la visita al taller. | Terminado |
+| CURP, RFC y email son identidad del cliente. | Indices unicos en `customers` para `curp`, `rfc` y `email`. | Terminado |
+| El cliente puede asistir a varios talleres. | `customer_workshop` mantiene el historial por sucursal. | Terminado |
+| Taller actual obligatorio al crear cliente. | `currentWorkshopId` obligatorio en `CustomerRequest`. | Terminado |
+| Edad calculada, no capturada. | Se calcula desde `birthDate` en `CustomerService.toResponse`. | Terminado |
+| Suspension global del cliente. | `PATCH /api/secretaria/clientes/{id}/suspender` cambia `status` a `SUSPENDIDO`; solo `GERENTE`. | Terminado |
+| Datos normalizados. | Textos a minusculas; CURP y RFC a mayusculas; telefonos solo digitos; emails a minusculas. | Terminado |
+| Foto obligatoria al crear cliente. | Frontend y backend validan que exista foto al crear; al editar es opcional. | Terminado |
+| CP local y editable. | Al capturar 5 digitos se autocompletan estado, municipio y colonias; los campos se pueden cambiar manualmente. | Terminado |
 
-## Modulos desarrollados
-
-| Modulo | Archivos principales | Datos que maneja | Estado | Descripcion |
-| --- | --- | --- | --- | --- |
-| Autenticacion con facade | `AuthFacade.java`, `AuthController.java`, `AuthService.java` | Login, recuperacion, cambio de contrasena, JWT, usuario autenticado | Terminado | Se agrego `AuthFacade` para estandarizar el patron facade entre controlador y servicio sin cambiar el flujo de login. |
-| Alta protegida de usuarios | `UserRegistrationController.java`, `UserDtos.java`, `AuthService.java` | Nombre, email, password temporal, roles | Terminado | El registro de usuarios ya no es publico. Solo `GERENTE` o `SECRETARIO` pueden crear usuarios; solo `GERENTE` puede asignar rol `GERENTE`. |
-| Administrador inicial | `InitialAdminSeeder.java`, `InitialAdminProperties.java`, `application.yml`, `.env.example` | Correo, nombre y contrasena inicial por variables de entorno | Terminado | El backend crea el primer usuario `GERENTE` si no existe, para permitir login real sin usar modo demo. |
-| Clientes backend | `CustomerController.java`, `CustomerFacade.java`, `CustomerService.java`, `CustomerRepository.java`, `Customer.java`, `CustomerDtos.java` | Datos personales, contacto alternativo, telefonos, emails, foto, direccion, `workshopId` | Terminado | Registro y consulta de clientes con facade, validaciones, normalizacion y proteccion contra duplicados. |
-| Base de datos | `database/schema.sql` | Tabla `customers`, llaves unicas, relacion con `users` | Terminado | Se agrego tabla de clientes con indices para email, telefono personal, usuario creador y futuro taller. |
-| Frontend facade | `frontend/src/facades/workshopFacade.js`, `frontend/src/services/api.js` | Login, recuperacion, usuarios, clientes, errores de conexion | Terminado | La vista Vue consume un facade local y no queda acoplada directamente al cliente REST. |
-| Frontend clientes | `frontend/src/App.vue`, `frontend/src/services/api.js`, `frontend/src/style.css` | Formulario de cliente, foto, vista previa, validaciones, alertas | Terminado | El panel muestra clientes y usuarios solo a roles autorizados. Usa SweetAlert2 para exito/error. |
-| Catalogo postal local | `PostalCatalogController.java`, `PostalCatalogFacade.java`, `PostalCatalogService.java`, `PostalSettlementRepository.java`, `database/sepomex_data.sql` | Codigo postal, colonia, tipo de asentamiento, municipio, estado y ciudad | Terminado | Permite resolver direccion sin depender de internet durante el registro de clientes. |
-| Diagrama de componentes | `docs/diagrama_componentes_fase02.md`, `.archify/architecture-taller-fase02-postal-editable-20261004-001500/taller-fase02-postal-editable.html` | Arquitectura Vue, frontend facade, REST, backend facade, service, repository, MySQL, catalogo postal y direccion editable | Actualizado | Se guardo diagrama Mermaid y HTML interactivo generado con Archify. |
-
-## Metodos y funciones creadas o modificadas
-
-| Archivo | Metodo o funcion | Proposito |
-| --- | --- | --- |
-| `AuthFacade.java` | `login` | Recibe credenciales desde REST y delega el inicio de sesion a `AuthService`. |
-| `AuthFacade.java` | `createUser` | Orquesta el alta protegida de usuarios desde gerencia o recepcion. |
-| `AuthFacade.java` | `forgotPassword` | Inicia recuperacion de contrasena sin exponer servicio directo al controlador. |
-| `AuthFacade.java` | `resetPassword` | Completa cambio de contrasena por token. |
-| `AuthFacade.java` | `changePassword` | Cambia contrasena de usuario autenticado. |
-| `AuthFacade.java` | `listUsers` | Lista usuarios administrativos sin exponer `UserRepository` al controlador. |
-| `AuthFacade.java` | `updateRoles` | Actualiza roles desde facade y mantiene el patron controller -> facade -> service -> repository. |
-| `AuthService.java` | `listUsers` | Consulta usuarios y los convierte a `UserResponse`. |
-| `AuthService.java` | `updateRoles` | Actualiza roles con valor por defecto `AUXILIAR` cuando no se recibe una lista valida. |
-| `UserController.java` | `listUsers` | Delega en `AuthFacade` la consulta de usuarios. |
-| `UserController.java` | `updateRoles` | Delega en `AuthFacade` el cambio de roles. |
-| `UserRegistrationController.java` | `createUser` | Expone `POST /api/secretaria/users` para alta de usuarios autorizados. |
-| `CustomerController.java` | `registerCustomer` | Expone `POST /api/secretaria/clientes` y registra cliente con el usuario autenticado como creador. |
-| `CustomerController.java` | `listCustomers` | Expone `GET /api/secretaria/clientes` para consulta y validacion previa desde la vista. |
-| `CustomerFacade.java` | `registerCustomer` | Aplica el patron facade entre controlador y servicio de clientes. |
-| `CustomerFacade.java` | `listCustomers` | Entrega clientes normalizados para Vue y futuras integraciones. |
-| `CustomerService.java` | `createCustomer` | Valida duplicados, normaliza datos y persiste el cliente. |
-| `CustomerService.java` | `listCustomers` | Consulta clientes desde repository. |
-| `CustomerService.java` | `toResponse` | Convierte entidad JPA a DTO seguro para la vista. |
-| `CustomerService.java` | `normalizeEmail` | Normaliza emails a minusculas. |
-| `CustomerService.java` | `normalizeOptionalEmail` | Normaliza email laboral opcional. |
-| `CustomerService.java` | `normalizeOptional` | Limpia campos opcionales vacios. |
-| `CustomerService.java` | `normalizePhone` | Estandariza espacios en telefonos. |
-| `CustomerService.java` | `validatePhotoDataUrl` | Verifica que la foto enviada sea una imagen en formato data URL. |
-| `PostalCatalogController.java` | `lookupByPostalCode` | Expone la consulta REST autenticada de datos SEPOMEX por codigo postal. |
-| `PostalCatalogFacade.java` | `lookupByPostalCode` | Mantiene el patron facade entre controlador y servicio del catalogo postal. |
-| `PostalCatalogService.java` | `lookupByPostalCode` | Valida que el codigo postal tenga 5 digitos y construye la respuesta con estado, municipio, ciudad y colonias. |
-| `PostalSettlementRepository.java` | `findByPostalCodeOrderBySettlementNameAsc` | Consulta asentamientos locales desde MySQL por codigo postal. |
-| `AuthService.java` | `createUser` | Crea usuarios con BCrypt y roles autorizados. |
-| `AuthService.java` | `resolveAllowedRoles` | Impide que recepcion cree usuarios con rol `GERENTE`. |
-| `InitialAdminSeeder.java` | `seedInitialAdmin` | Crea el primer administrador real al arrancar la API si el correo configurado no existe. |
-| `RestExceptionHandler.java` | `integrity` | Devuelve error controlado cuando MySQL detecta datos duplicados o restricciones de datos. |
-| `RestExceptionHandler.java` | `methodNotSupported` | Devuelve `405` con mensaje claro cuando se usa un metodo HTTP incorrecto. |
-| `JacksonConfig.java` | `jacksonReadConstraints` | Amplia el limite de lectura JSON para permitir imagenes de hasta 20 MB en `photoDataUrl`. |
-| `workshopFacade.js` | `auth.login` | Expone login a la vista sin acoplarla al cliente REST. |
-| `workshopFacade.js` | `users.create` | Orquesta alta de usuarios desde el frontend. |
-| `workshopFacade.js` | `customers.register` | Orquesta registro de clientes desde el frontend. |
-| `frontend/src/services/api.js` | `createUser` | Consume el endpoint protegido de alta de usuarios. |
-| `frontend/src/services/api.js` | `listCustomers` | Consulta clientes autorizados sin incluir fotos en listados pesados. |
-| `frontend/src/services/api.js` | `createCustomer` | Consume el endpoint de registro de clientes. |
-| `frontend/src/services/api.js` | `lookupPostalCode` | Consulta el catalogo postal local mediante el backend autenticado. |
-| `frontend/src/services/api.js` | `request` | Muestra mensaje claro cuando Spring Boot no esta activo y ocurre `failed to fetch`. |
-| `App.vue` | `emptyCustomer` | Genera el estado inicial del formulario de cliente. |
-| `App.vue` | `watch(customerForm.postalCode)` | Detecta automaticamente cuando el codigo postal tiene 5 digitos y dispara la busqueda local. |
-| `App.vue` | `run` | Centraliza estado de carga y manejo de errores visuales. |
-| `App.vue` | `hasRole` | Evalua permisos de UI segun roles del usuario autenticado. |
-| `App.vue` | `createUser` | Envia el alta de usuario y confirma con SweetAlert2. |
-| `App.vue` | `createCustomer` | Valida formato local, registra cliente y confirma con SweetAlert2. |
-| `App.vue` | `validateCustomerForm` | Verifica campos requeridos, edad, correo y telefonos de 10 digitos. |
-| `App.vue` | `isTenDigitPhone` | Valida telefonos con un mensaje comprensible para el usuario. |
-| `App.vue` | `normalizeCustomerPayload` | Limpia email y campos opcionales antes de enviar al backend. |
-| `App.vue` | `handlePhotoUpload` | Valida imagen, peso maximo de 20 MB, genera vista previa y data URL. |
-| `App.vue` | `lookupPostalCode` | Busca el codigo postal en MySQL local, llena colonia, municipio y estado, y conserva esos campos editables. |
-
-## Orden operativo del formulario de direccion
-
-| Paso | Campo | Comportamiento |
-| --- | --- | --- |
-| 1 | `email` | Captura y valida email principal del cliente. |
-| 2 | `workEmail` | Captura email laboral opcional. |
-| 3 | `postalCode` | Al tener 5 digitos consulta MySQL local por medio del backend autenticado. |
-| 4 | `neighborhood` | Se llena con la primera colonia encontrada y permite seleccionar o escribir una correccion. |
-| 5 | `municipality` | Se autocompleta y queda editable. |
-| 6 | `state` | Se autocompleta y queda editable. |
-| 7 | `street` | Se captura manualmente porque no viene en el catalogo postal. |
-
-## Datos capturados del cliente
+## 4. Datos capturados del cliente
 
 | Categoria | Campos |
 | --- | --- |
-| Identidad | `fullName`, `alternateContactName`, `age`, `birthDate` |
-| Contacto | `personalPhone`, `workPhone`, `email`, `workEmail` |
-| Foto | `photoDataUrl` |
-| Direccion | `street`, `neighborhood`, `municipality`, `state`, `postalCode` |
-| Catalogo postal | `postal_code`, `settlement_name`, `settlement_type`, `municipality_name`, `state_name`, `city_name` |
-| Escalabilidad | `workshopId` opcional para asociacion futura a varios talleres |
-| Auditoria | `createdByUserId`, `createdAt` |
+| Identidad | `firstName`, `lastName`, `secondLastName`, `curp`, `rfc`, `birthDate`, edad calculada |
+| Contacto | `alternateContactName`, `contactPhone`, `workPhone`, `email`, `workEmail` |
+| Direccion | `postalCode`, `state`, `municipality`, `neighborhood`, `street` |
+| Foto | `photoPath`, archivo multipart guardado en almacenamiento local/volumen |
+| Operacion | `status`, `createdByUserId`, `createdAt`, `existingCustomer` |
+| Talleres | `currentWorkshopId` en alta; `workshopIds` en edicion; historial en `customer_workshop` |
 
-## Endpoints REST
+## 5. Base de datos
 
-| Metodo | Ruta | Roles | Resultado |
+| Tabla | Proposito | Datos principales | Estado |
 | --- | --- | --- | --- |
-| `POST` | `/api/auth/login` | Publico | JWT y usuario autenticado |
-| `POST` | `/api/secretaria/users` | `GERENTE`, `SECRETARIO` | Usuario registrado |
-| `GET` | `/api/secretaria/clientes` | `GERENTE`, `SECRETARIO` | Lista de clientes |
-| `POST` | `/api/secretaria/clientes` | `GERENTE`, `SECRETARIO` | Cliente registrado |
-| `GET` | `/api/catalogos/codigos-postales/{postalCode}` | Usuario autenticado | Estado, municipio, ciudad y colonias del CP |
+| `users` | Usuarios del sistema | Nombre, email, hash BCrypt, estatus, token de recuperacion | Terminado |
+| `user_roles` | Roles por usuario | `GERENTE`, `SECRETARIO`, `AUXILIAR`, etc. | Terminado |
+| `workshops` | Sucursales o talleres | Nombre, razon social, RFC, telefono, email, direccion, foto | Terminado |
+| `customers` | Datos maestros del cliente | Nombre separado, CURP, RFC, telefonos, emails, direccion, foto, estatus | Terminado |
+| `customer_workshop` | Historial cliente-taller | Cliente, taller, primera visita, ultima visita, usuario que registro | Terminado |
+| `postal_settlements` | Catalogo SEPOMEX local | CP, colonia, tipo, municipio, estado, ciudad | Terminado |
 
-## Validaciones principales
+El archivo principal del esquema es `database/schema.sql`. Incluye creacion de tablas, semillas de talleres y un procedimiento de migracion para instalaciones que aun tengan columnas antiguas como `full_name`, `personal_phone`, `photo_data_url` o `workshop_id`.
 
-| Campo | Regla | Mensaje esperado |
+## 6. Validaciones
+
+| Campo | Regla | Capa |
 | --- | --- | --- |
-| `personalPhone` | 10 digitos numericos. | `El telefono personal debe contener 10 digitos.` |
-| `workPhone` | 10 digitos numericos. | `El telefono del trabajo debe contener 10 digitos.` |
-| `email` | Formato email valido y unico. | `El email del cliente no tiene un formato valido.` o duplicado controlado por backend. |
-| `photoDataUrl` | Imagen permitida, maximo 20 MB en la vista y payload soportado por backend. | `La foto no debe superar 20 MB.` |
-| `postalCode` | 5 digitos numericos, busqueda local en MySQL y campos de direccion editables. | `El codigo postal debe contener 5 digitos.` |
+| Nombre y apellidos | Solo letras, acentos, `ñ` y espacios | Frontend y backend |
+| CURP | Regex oficial en mayusculas | Frontend y backend |
+| RFC | Regex fiscal en mayusculas | Frontend y backend |
+| Telefonos | Exactamente 10 digitos | Frontend y backend |
+| Codigo postal | Exactamente 5 digitos | Frontend y backend |
+| Email | Formato valido y unico | Frontend, backend y MySQL |
+| Fecha de nacimiento | No futura | Frontend y backend |
+| Foto cliente | Obligatoria al crear, imagen valida, maximo 15 MB | Frontend y backend |
+| Foto taller | Opcional, imagen valida, maximo 15 MB | Backend |
 
-## Pendientes recomendados
+## 7. Endpoints REST
+
+| Metodo | Ruta | Rol requerido | Descripcion |
+| --- | --- | --- | --- |
+| `POST` | `/api/auth/login` | Publico | Inicia sesion y devuelve JWT. |
+| `POST` | `/api/secretaria/users` | `GERENTE`, `SECRETARIO` | Alta protegida de usuarios. |
+| `GET` | `/api/secretaria/users` | `GERENTE`, `SECRETARIO` | Lista usuarios administrativos. |
+| `PUT` | `/api/secretaria/users/{id}/roles` | `GERENTE` | Actualiza roles. |
+| `GET` | `/api/talleres` | Autenticado | Lista talleres. |
+| `POST` | `/api/talleres` | `GERENTE` | Crea taller con multipart opcional para foto. |
+| `PUT` | `/api/talleres/{id}` | `GERENTE` | Edita taller y puede reemplazar foto. |
+| `GET` | `/api/secretaria/clientes` | `GERENTE`, `SECRETARIO` | Lista clientes con paginacion, filtro y ordenamiento. |
+| `POST` | `/api/secretaria/clientes` | `GERENTE`, `SECRETARIO` | Registra cliente con multipart obligatorio para foto. |
+| `PUT` | `/api/secretaria/clientes/{id}` | `GERENTE`, `SECRETARIO` | Edita cliente y talleres asociados; foto opcional. |
+| `PATCH` | `/api/secretaria/clientes/{id}/suspender` | `GERENTE` | Suspension logica global del cliente. |
+| `GET` | `/api/catalogos/codigos-postales/{postalCode}` | Autenticado | Busca estado, municipio y colonias por CP. |
+| `GET` | `/api/catalogos/codigos-postales/estados` | Autenticado | Lista estados del catalogo local. |
+| `GET` | `/api/catalogos/codigos-postales/municipios?state=` | Autenticado | Lista municipios por estado. |
+| `GET` | `/api/catalogos/codigos-postales/colonias?state=&municipality=` | Autenticado | Lista colonias por estado y municipio. |
+| `GET` | `/api/catalogos/codigos-postales/buscar?state=&municipality=&settlement=` | Autenticado | Obtiene CP desde estado, municipio y colonia. |
+
+## 8. Archivos principales
+
+| Archivo | Descripcion |
+| --- | --- |
+| `backend/src/main/java/com/taller/security/controller/CustomerController.java` | Endpoints REST de clientes, multipart, paginacion, edicion y suspension. |
+| `backend/src/main/java/com/taller/security/service/CustomerService.java` | Reglas de negocio: duplicados, normalizacion, edad, historial y suspension. |
+| `backend/src/main/java/com/taller/security/dto/CustomerDtos.java` | DTOs y validaciones de cliente. |
+| `backend/src/main/java/com/taller/security/repository/CustomerRepository.java` | Consultas por identidad, paginacion y filtro por taller. |
+| `backend/src/main/java/com/taller/security/model/Customer.java` | Entidad JPA de cliente. |
+| `backend/src/main/java/com/taller/security/model/CustomerWorkshop.java` | Relacion historica cliente-taller. |
+| `backend/src/main/java/com/taller/security/controller/WorkshopController.java` | Endpoints REST de talleres. |
+| `backend/src/main/java/com/taller/security/service/WorkshopService.java` | Reglas de alta/edicion de talleres y duplicado por RFC. |
+| `backend/src/main/java/com/taller/security/service/FileStorageService.java` | Validacion y persistencia de fotos en disco/volumen. |
+| `backend/src/main/java/com/taller/security/controller/PostalCatalogController.java` | Endpoints del catalogo SEPOMEX local. |
+| `frontend/src/components/CustomersModule.vue` | Tabla, formulario, foto, historial, filtros y validaciones de clientes. |
+| `frontend/src/components/WorkshopsModule.vue` | Administracion de talleres. |
+| `frontend/src/components/UsersModule.vue` | Vista administrativa de usuarios. |
+| `frontend/src/facades/workshopFacade.js` | Facade frontend para auth, usuarios, clientes, talleres y catalogo postal. |
+| `frontend/src/services/api.js` | Cliente REST con JWT, JSON, multipart y manejo de errores. |
+| `database/schema.sql` | Esquema MySQL, semillas y migracion de columnas antiguas. |
+| `database/sepomex_data.sql` | Carga local del catalogo postal. |
+
+## 9. Metodos y funciones relevantes
+
+| Archivo | Metodo o funcion | Proposito |
+| --- | --- | --- |
+| `CustomerController.java` | `registerCustomer` | Recibe `request` y `photo` multipart para crear cliente. |
+| `CustomerController.java` | `listCustomers` | Entrega pagina de clientes con filtro por taller y ordenamiento. |
+| `CustomerController.java` | `updateCustomer` | Edita datos maestros y talleres asociados. |
+| `CustomerController.java` | `suspendCustomer` | Suspende globalmente al cliente; solo `GERENTE`. |
+| `CustomerService.java` | `createCustomer` | Crea o reutiliza cliente existente y registra visita al taller. |
+| `CustomerService.java` | `listCustomers` | Consulta clientes para administracion. |
+| `CustomerService.java` | `updateCustomer` | Actualiza datos y sincroniza talleres. |
+| `CustomerService.java` | `registerVisit` | Crea o actualiza relacion en `customer_workshop`. |
+| `CustomerService.java` | `syncWorkshops` | Mantiene lista de talleres asociados en edicion. |
+| `CustomerService.java` | `normalize` | Normaliza textos, CURP, RFC, telefonos, emails y CP. |
+| `CustomerService.java` | `calculateAge` | Calcula edad desde fecha de nacimiento. |
+| `FileStorageService.java` | `saveRequiredCustomerPhoto` | Exige foto al crear cliente. |
+| `FileStorageService.java` | `saveOptionalCustomerPhoto` | Guarda foto nueva cuando se edita. |
+| `FileStorageService.java` | `validateImage` | Bloquea archivos que no sean imagen o superen 15 MB. |
+| `WorkshopController.java` | `createWorkshop` | Crea taller; solo `GERENTE`. |
+| `PostalCatalogController.java` | `lookupPostalCode` | Resuelve CP desde MySQL local. |
+| `CustomersModule.vue` | `loadCustomers` | Carga tabla paginada desde backend. |
+| `CustomersModule.vue` | `saveCustomer` | Valida, arma payload y registra/edita cliente. |
+| `CustomersModule.vue` | `lookupPostalCode` | Autocompleta direccion por CP. |
+| `CustomersModule.vue` | `lookupPostalSelection` | Obtiene CP desde estado, municipio y colonia. |
+| `CustomersModule.vue` | `handlePhoto` | Valida tipo y peso de foto, y genera vista previa. |
+| `workshopFacade.js` | `customers.register`, `customers.update`, `customers.suspend`, `customers.list` | Fachada frontend para operaciones de clientes. |
+
+## 10. Pendientes recomendados
 
 | Pendiente | Motivo |
 | --- | --- |
-| Migraciones con Flyway o Liquibase | Versionar cambios de base de datos para produccion. |
-| Actualizacion periodica SEPOMEX | Definir proceso controlado para refrescar `database/sepomex_data.sql` cuando Correos de Mexico publique cambios. |
-| Almacenamiento externo de fotos | Evitar guardar imagenes grandes como base64 en MySQL cuando haya volumen alto. |
-| Pruebas backend | Agregar pruebas de seguridad, duplicados y validacion de DTO. |
-| Pruebas frontend | Validar carga de imagen, permisos de tabs y alertas SweetAlert2. |
-| Modelo formal de talleres | Crear entidad `Workshop` y relacion cliente-taller cuando inicie la fase multi-sucursal. |
+| Flyway o Liquibase | Versionar migraciones de base de datos en ambientes productivos. |
+| Pruebas automatizadas backend | Cubrir permisos, duplicados, multipart, paginacion y suspension. |
+| Pruebas automatizadas frontend | Cubrir validaciones, carga de foto, CP local y acciones de tabla. |
+| Control de archivos huerfanos | Eliminar fotos reemplazadas si ya no estan referenciadas. |
+| Auditoria extendida | Guardar usuario y fecha de cada edicion, no solo alta/visita. |
+| Optimizacion de bundle frontend | Separar modulos con carga dinamica si el bundle crece en produccion. |
 
-## Verificacion tecnica
+## 11. Verificacion tecnica
 
 | Verificacion | Resultado |
 | --- | --- |
-| SweetAlert2 | Instalado con Yarn: `sweetalert2@11.26.25`. |
-| Archify | HTML generado con la skill local mediante `node /home/david/.agents/skills/archify/bin/archify.mjs`. |
-| Diagrama | Guardado en `docs/diagrama_componentes_fase02.md` y `.archify/architecture-taller-fase02-postal-editable-20261004-001500/taller-fase02-postal-editable.html`. |
-| Archify gates | `validate`, `deliver` y `check` pasaron. `browser-check` quedo omitido porque no hay Chrome/Chromium disponible. |
-| Base de datos | Login, registro REST y registro desde UI fueron verificados contra MySQL Docker. Los clientes de prueba fueron eliminados. |
-| Catalogo postal local | `database/sepomex_data.sql` contiene 145,420 asentamientos, pesa aproximadamente 15 MB y se consulta sin internet. |
+| Frontend | `yarn build` compila correctamente. |
+| Backend | Spring Boot levanta contra MySQL Docker cuando `taller_db` esta disponible. |
+| MySQL | `database/schema.sql` crea tablas, semillas y migracion de fase anterior. |
+| SEPOMEX local | El catalogo se consulta desde MySQL sin depender de internet. |
+| Diagrama Archify | Archivo HTML actualizado en `.archify/architecture-taller-fase02-postal-editable-20261004-001500/taller-fase02-postal-editable.html`. |

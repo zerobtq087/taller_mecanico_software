@@ -4,6 +4,7 @@ import com.taller.security.model.Role;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import java.time.Instant;
 import java.util.Set;
 
 public final class AuthDtos {
@@ -41,7 +42,7 @@ public final class AuthDtos {
     public record AuthResponse(String token, UserResponse user) {
     }
 
-    public record UserResponse(Long id, String name, String email, Set<Role> roles) {
+    public record UserResponse(Long id, String name, String email, Set<Role> roles, boolean enabled, Instant createdAt) {
     }
 
     public record ResetTokenResponse(String message, String demoResetToken) {

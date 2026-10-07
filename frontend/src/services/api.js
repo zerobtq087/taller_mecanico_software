@@ -2,8 +2,9 @@ const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080/api'
 
 async function request(path, options = {}) {
   const token = localStorage.getItem('token')
+  const isFormData = options.body instanceof FormData
   const headers = {
-    'Content-Type': 'application/json',
+    ...(isFormData ? {} : { 'Content-Type': 'application/json' }),
     ...(token ? { Authorization: `Bearer ${token}` } : {}),
     ...options.headers,
   }
@@ -47,13 +48,64 @@ export const api = {
   createUser(payload) {
     return request('/secretaria/users', { method: 'POST', body: JSON.stringify(payload) })
   },
-  listCustomers() {
-    return request('/secretaria/clientes')
+  listUsers() {
+    return request('/admin/users')
   },
-  createCustomer(payload) {
-    return request('/secretaria/clientes', { method: 'POST', body: JSON.stringify(payload) })
+  updateUserRoles(id, roles) {
+    return request(`/admin/users/${id}/roles`, { method: 'PATCH', body: JSON.stringify({ roles }) })
+  },
+  listCustomers(params = {}) {
+    return request(`/secretaria/clientes${toQuery(params)}`)
+  },
+  createCustomer(payload, photo) {
+    return request('/secretaria/clientes', { method: 'POST', body: toJsonPhotoFormData(payload, photo) })
+  },
+  updateCustomer(id, payload, photo) {
+    return request(`/secretaria/clientes/${id}`, { method: 'PUT', body: toJsonPhotoFormData(payload, photo) })
+  },
+  suspendCustomer(id) {
+    return request(`/secretaria/clientes/${id}/suspender`, { method: 'PATCH' })
+  },
+  listWorkshops() {
+    return request('/talleres')
+  },
+  createWorkshop(payload, photo) {
+    return request('/talleres', { method: 'POST', body: toJsonPhotoFormData(payload, photo) })
+  },
+  updateWorkshop(id, payload, photo) {
+    return request(`/talleres/${id}`, { method: 'PUT', body: toJsonPhotoFormData(payload, photo) })
   },
   lookupPostalCode(postalCode) {
     return request(`/catalogos/codigos-postales/${encodeURIComponent(postalCode)}`)
   },
+  listPostalStates() {
+    return request('/catalogos/codigos-postales/estados')
+  },
+  listPostalMunicipalities(state) {
+    return request(`/catalogos/codigos-postales/municipios${toQuery({ state })}`)
+  },
+  listPostalSettlements(state, municipality) {
+    return request(`/catalogos/codigos-postales/colonias${toQuery({ state, municipality })}`)
+  },
+  lookupPostalSelection(state, municipality, settlement) {
+    return request(`/catalogos/codigos-postales/buscar${toQuery({ state, municipality, settlement })}`)
+  },
+}
+
+function toQuery(params) {
+  const query = new URLSearchParams()
+  Object.entries(params).forEach(([key, value]) => {
+    if (value !== undefined && value !== null && value !== '') {
+      query.set(key, value)
+    }
+  })
+  const text = query.toString()
+  return text ? `?${text}` : ''
+}
+
+function toJsonPhotoFormData(payload, photo) {
+  const formData = new FormData()
+  formData.append('request', new Blob([JSON.stringify(payload)], { type: 'application/json' }))
+  if (photo) formData.append('photo', photo)
+  return formData
 }

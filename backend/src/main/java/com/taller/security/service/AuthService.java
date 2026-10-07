@@ -108,7 +108,7 @@ public class AuthService {
     }
 
     public UserResponse toResponse(User user) {
-        return new UserResponse(user.getId(), user.getName(), user.getEmail(), user.getRoles());
+        return new UserResponse(user.getId(), user.getName(), user.getEmail(), user.getRoles(), user.isEnabled(), user.getCreatedAt());
     }
 
     private String randomToken() {

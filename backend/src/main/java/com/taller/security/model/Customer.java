@@ -2,12 +2,13 @@ package com.taller.security.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
@@ -17,29 +18,39 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "customers", uniqueConstraints = {
         @UniqueConstraint(name = "uk_customers_email", columnNames = "email"),
-        @UniqueConstraint(name = "uk_customers_personal_phone", columnNames = "personal_phone")
+        @UniqueConstraint(name = "uk_customers_curp", columnNames = "curp"),
+        @UniqueConstraint(name = "uk_customers_rfc", columnNames = "rfc")
 })
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 160)
-    private String fullName;
+    @Column(nullable = false, length = 80)
+    private String firstName;
+
+    @Column(nullable = false, length = 80)
+    private String lastName;
+
+    @Column(nullable = false, length = 80)
+    private String secondLastName;
 
     @Column(nullable = false, length = 160)
     private String alternateContactName;
 
     @Column(nullable = false)
-    private Integer age;
-
-    @Column(nullable = false)
     private LocalDate birthDate;
 
-    @Column(nullable = false, length = 25)
-    private String personalPhone;
+    @Column(nullable = false, length = 18)
+    private String curp;
 
-    @Column(nullable = false, length = 25)
+    @Column(nullable = false, length = 13)
+    private String rfc;
+
+    @Column(nullable = false, length = 10)
+    private String contactPhone;
+
+    @Column(nullable = false, length = 10)
     private String workPhone;
 
     @Column(nullable = false, length = 180)
@@ -47,10 +58,6 @@ public class Customer {
 
     @Column(length = 180)
     private String workEmail;
-
-    @Lob
-    @Column(name = "photo_data_url", columnDefinition = "LONGTEXT")
-    private String photoDataUrl;
 
     @Column(nullable = false, length = 160)
     private String street;
@@ -64,11 +71,15 @@ public class Customer {
     @Column(nullable = false, length = 120)
     private String state;
 
-    @Column(nullable = false, length = 12)
+    @Column(nullable = false, length = 5)
     private String postalCode;
 
-    @Column(name = "workshop_id")
-    private Long workshopId;
+    @Column(length = 260)
+    private String photoPath;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 20)
+    private CustomerStatus status = CustomerStatus.ACTIVO;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "created_by_user_id", nullable = false)
@@ -81,12 +92,28 @@ public class Customer {
         return id;
     }
 
-    public String getFullName() {
-        return fullName;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getSecondLastName() {
+        return secondLastName;
+    }
+
+    public void setSecondLastName(String secondLastName) {
+        this.secondLastName = secondLastName;
     }
 
     public String getAlternateContactName() {
@@ -97,14 +124,6 @@ public class Customer {
         this.alternateContactName = alternateContactName;
     }
 
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
-    }
-
     public LocalDate getBirthDate() {
         return birthDate;
     }
@@ -113,12 +132,28 @@ public class Customer {
         this.birthDate = birthDate;
     }
 
-    public String getPersonalPhone() {
-        return personalPhone;
+    public String getCurp() {
+        return curp;
     }
 
-    public void setPersonalPhone(String personalPhone) {
-        this.personalPhone = personalPhone;
+    public void setCurp(String curp) {
+        this.curp = curp;
+    }
+
+    public String getRfc() {
+        return rfc;
+    }
+
+    public void setRfc(String rfc) {
+        this.rfc = rfc;
+    }
+
+    public String getContactPhone() {
+        return contactPhone;
+    }
+
+    public void setContactPhone(String contactPhone) {
+        this.contactPhone = contactPhone;
     }
 
     public String getWorkPhone() {
@@ -143,14 +178,6 @@ public class Customer {
 
     public void setWorkEmail(String workEmail) {
         this.workEmail = workEmail;
-    }
-
-    public String getPhotoDataUrl() {
-        return photoDataUrl;
-    }
-
-    public void setPhotoDataUrl(String photoDataUrl) {
-        this.photoDataUrl = photoDataUrl;
     }
 
     public String getStreet() {
@@ -193,12 +220,20 @@ public class Customer {
         this.postalCode = postalCode;
     }
 
-    public Long getWorkshopId() {
-        return workshopId;
+    public String getPhotoPath() {
+        return photoPath;
     }
 
-    public void setWorkshopId(Long workshopId) {
-        this.workshopId = workshopId;
+    public void setPhotoPath(String photoPath) {
+        this.photoPath = photoPath;
+    }
+
+    public CustomerStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(CustomerStatus status) {
+        this.status = status;
     }
 
     public User getCreatedBy() {

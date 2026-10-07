@@ -19,18 +19,53 @@ export const workshopFacade = {
     create(payload) {
       return api.createUser(payload)
     },
+    list() {
+      return api.listUsers()
+    },
+    updateRoles(id, roles) {
+      return api.updateUserRoles(id, roles)
+    },
   },
   customers: {
-    register(payload) {
-      return api.createCustomer(payload)
+    register(payload, photo) {
+      return api.createCustomer(payload, photo)
     },
+    update(id, payload, photo) {
+      return api.updateCustomer(id, payload, photo)
+    },
+    suspend(id) {
+      return api.suspendCustomer(id)
+    },
+    list(params) {
+      return api.listCustomers(params)
+    },
+  },
+  workshops: {
     list() {
-      return api.listCustomers()
+      return api.listWorkshops()
+    },
+    create(payload, photo) {
+      return api.createWorkshop(payload, photo)
+    },
+    update(id, payload, photo) {
+      return api.updateWorkshop(id, payload, photo)
     },
   },
   postalCatalog: {
     lookup(postalCode) {
       return api.lookupPostalCode(postalCode)
+    },
+    states() {
+      return api.listPostalStates()
+    },
+    municipalities(state) {
+      return api.listPostalMunicipalities(state)
+    },
+    settlements(state, municipality) {
+      return api.listPostalSettlements(state, municipality)
+    },
+    lookupSelection(state, municipality, settlement) {
+      return api.lookupPostalSelection(state, municipality, settlement)
     },
   },
 }

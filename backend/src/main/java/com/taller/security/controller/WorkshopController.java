@@ -1,37 +1,63 @@
 package com.taller.security.controller;
 
+import com.taller.security.dto.WorkshopDtos.WorkshopRequest;
+import com.taller.security.dto.WorkshopDtos.WorkshopResponse;
+import com.taller.security.facade.WorkshopFacade;
+import jakarta.validation.Valid;
 import java.util.List;
-import java.util.Map;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
+@RequestMapping("/api/talleres")
 public class WorkshopController {
-    @GetMapping("/api/me")
-    public Map<String, String> me(java.security.Principal principal) {
-        return Map.of("email", principal.getName());
+    private final WorkshopFacade workshopFacade;
+
+    public WorkshopController(WorkshopFacade workshopFacade) {
+        this.workshopFacade = workshopFacade;
     }
 
-    @GetMapping("/api/taller/ordenes")
-    public List<Map<String, Object>> workOrders() {
-        return List.of(
-                Map.of("folio", "OT-1042", "vehiculo", "Nissan Versa", "estado", "Diagnostico"),
-                Map.of("folio", "OT-1043", "vehiculo", "VW Jetta", "estado", "En reparacion"),
-                Map.of("folio", "OT-1044", "vehiculo", "Toyota Hilux", "estado", "Listo para entrega")
-        );
+    /**
+     * Lista talleres disponibles para asociar clientes e historial operativo.
+     */
+    @GetMapping
+    public List<WorkshopResponse> listWorkshops() {
+        return workshopFacade.listWorkshops();
     }
 
-    @GetMapping("/api/secretaria/citas")
-    public List<Map<String, Object>> appointments() {
-        return List.of(
-                Map.of("cliente", "Ana Lopez", "hora", "09:30", "servicio", "Afinacion"),
-                Map.of("cliente", "Marco Ruiz", "hora", "11:00", "servicio", "Frenos")
-        );
+    /**
+     * Crea una sucursal con foto opcional; solo GERENTE administra talleres.
+     */
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @ResponseStatus(HttpStatus.CREATED)
+    @PreAuthorize("hasRole('GERENTE')")
+    public WorkshopResponse createWorkshop(
+            @Valid @RequestPart("request") WorkshopRequest request,
+            @RequestPart(value = "photo", required = false) MultipartFile photo
+    ) {
+        return workshopFacade.createWorkshop(request, photo);
     }
 
-    @GetMapping("/api/admin/reportes")
-    public Map<String, Object> reports() {
-        return Map.of("ordenesActivas", 18, "ingresoEstimado", 78200, "usuariosActivos", 64);
+    /**
+     * Actualiza datos y puede reemplazar la foto si se envia un nuevo archivo.
+     */
+    @PutMapping(path = "/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PreAuthorize("hasRole('GERENTE')")
+    public WorkshopResponse updateWorkshop(
+            @PathVariable Long id,
+            @Valid @RequestPart("request") WorkshopRequest request,
+            @RequestPart(value = "photo", required = false) MultipartFile photo
+    ) {
+        return workshopFacade.updateWorkshop(id, request, photo);
     }
 }

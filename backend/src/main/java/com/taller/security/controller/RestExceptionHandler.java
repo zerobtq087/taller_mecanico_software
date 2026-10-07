@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -33,14 +34,27 @@ public class RestExceptionHandler {
 
     private String friendlyValidationMessage(String field, String defaultMessage) {
         return switch (field) {
-            case "personalPhone" -> "El telefono personal debe contener 10 digitos.";
+            case "firstName" -> "El nombre solo debe contener letras, acentos, ñ y espacios.";
+            case "lastName" -> "El apellido paterno solo debe contener letras, acentos, ñ y espacios.";
+            case "secondLastName" -> "El apellido materno solo debe contener letras, acentos, ñ y espacios.";
+            case "alternateContactName" -> "El contacto alternativo solo debe contener letras, acentos, ñ y espacios.";
+            case "contactPhone" -> "El telefono de contacto debe contener 10 digitos.";
             case "workPhone" -> "El telefono del trabajo debe contener 10 digitos.";
+            case "phone" -> "El telefono debe contener 10 digitos.";
+            case "curp" -> "La CURP no tiene un formato valido.";
+            case "rfc" -> "El RFC no tiene un formato valido.";
             case "email" -> "El email debe tener un formato valido.";
             case "workEmail" -> "El email del trabajo debe tener un formato valido.";
-            case "postalCode" -> "El codigo postal no tiene un formato valido.";
-            case "photoDataUrl" -> "La foto no debe superar 20 MB.";
+            case "postalCode" -> "El codigo postal debe contener 5 digitos.";
+            case "birthDate" -> "La fecha de nacimiento no puede ser futura.";
+            case "currentWorkshopId", "workshopIds" -> "Selecciona al menos un taller.";
             default -> "Dato invalido: " + defaultMessage;
         };
+    }
+
+    @ExceptionHandler(MaxUploadSizeExceededException.class)
+    public ResponseEntity<Map<String, String>> maxUpload(MaxUploadSizeExceededException exception) {
+        return ResponseEntity.badRequest().body(Map.of("error", "La foto del taller no debe superar 15 MB."));
     }
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
