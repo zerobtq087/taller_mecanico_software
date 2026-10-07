@@ -1,0 +1,451 @@
+{
+  "schemaVersion": 1,
+  "ok": false,
+  "command": "finalize",
+  "status": "skipped",
+  "type": "architecture",
+  "quality": "showcase",
+  "startedAt": "2026-10-04T05:01:22.603Z",
+  "specification": {
+    "path": "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase03-20261003-235900/candidate.json",
+    "sha256": "1fa97d5c95aca5c5865be316bcdcf7e47305a33a6f742a6b607f8e1907cb7b5f",
+    "bytes": 6421
+  },
+  "artifact": {
+    "path": "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase03-20261003-235900/taller-fase03-catalogo-postal.html",
+    "sha256": "3f0698eee5fce695c398b7e75a29723c9434a526dbbc77a9459ae8b05f922d6f",
+    "bytes": 776992
+  },
+  "stages": {
+    "validate": {
+      "status": "pass",
+      "exitCode": 0,
+      "durationMs": null,
+      "execution": "embedded-in-deliver",
+      "command": [
+        "/usr/bin/node",
+        "/home/david/.agents/skills/archify/bin/archify.mjs",
+        "deliver",
+        "architecture",
+        "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase03-20261003-235900/candidate.json",
+        "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase03-20261003-235900/taller-fase03-catalogo-postal.html",
+        "--quality",
+        "showcase",
+        "--json"
+      ],
+      "receipt": {
+        "schemaVersion": 1,
+        "ok": true,
+        "command": "validate",
+        "specification": {
+          "sha256": "1fa97d5c95aca5c5865be316bcdcf7e47305a33a6f742a6b607f8e1907cb7b5f",
+          "bytes": 6421
+        },
+        "validation": {
+          "checksPassed": 9,
+          "checkCount": 9,
+          "compositionProfile": "showcase",
+          "compositionStatus": "pass",
+          "errors": 0,
+          "warnings": 0
+        }
+      }
+    },
+    "deliver": {
+      "status": "pass",
+      "exitCode": 0,
+      "durationMs": 468,
+      "command": [
+        "/usr/bin/node",
+        "/home/david/.agents/skills/archify/bin/archify.mjs",
+        "deliver",
+        "architecture",
+        "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase03-20261003-235900/candidate.json",
+        "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase03-20261003-235900/taller-fase03-catalogo-postal.html",
+        "--quality",
+        "showcase",
+        "--json"
+      ],
+      "receipt": {
+        "schemaVersion": 1,
+        "receiptId": "12a57b9f-690e-46d2-a91c-4baec2daf65d",
+        "ok": true,
+        "command": "deliver",
+        "type": "architecture",
+        "input": "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase03-20261003-235900/candidate.json",
+        "output": "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase03-20261003-235900/taller-fase03-catalogo-postal.html",
+        "specification": {
+          "sha256": "1fa97d5c95aca5c5865be316bcdcf7e47305a33a6f742a6b607f8e1907cb7b5f",
+          "bytes": 6421
+        },
+        "artifact": {
+          "sha256": "3f0698eee5fce695c398b7e75a29723c9434a526dbbc77a9459ae8b05f922d6f",
+          "bytes": 776992
+        },
+        "validation": {
+          "checksPassed": 9,
+          "checkCount": 9,
+          "compositionProfile": "showcase",
+          "compositionStatus": "pass",
+          "errors": 0,
+          "warnings": 0
+        },
+        "update": {
+          "status": "unavailable",
+          "installedVersion": null,
+          "availableVersion": null,
+          "releaseNotes": null,
+          "checkedAt": null,
+          "source": null,
+          "noticeRequired": false,
+          "noticeText": null,
+          "reason": "disabled"
+        }
+      }
+    },
+    "check": {
+      "status": "pass",
+      "exitCode": 0,
+      "durationMs": 197,
+      "command": [
+        "/usr/bin/node",
+        "/home/david/.agents/skills/archify/bin/archify.mjs",
+        "check",
+        "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase03-20261003-235900/taller-fase03-catalogo-postal.html",
+        "--require-provenance"
+      ],
+      "receipt": {
+        "ok": true,
+        "file": "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase03-20261003-235900/taller-fase03-catalogo-postal.html",
+        "artifact": {
+          "sha256": "3f0698eee5fce695c398b7e75a29723c9434a526dbbc77a9459ae8b05f922d6f",
+          "bytes": 776992
+        },
+        "checks": [
+          {
+            "name": "single_svg",
+            "ok": true,
+            "details": [
+              "found 1 <svg> block(s)"
+            ]
+          },
+          {
+            "name": "finite_svg",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "orthogonal_arrows",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "label_route_clearance",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "relationship_crossings",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "relationship_corridors",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "container_border_runs",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "route_rhythm",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "legend_clearance",
+            "ok": true,
+            "details": []
+          }
+        ],
+        "composition": {
+          "schemaVersion": 1,
+          "profile": "showcase",
+          "status": "pass",
+          "summary": {
+            "errors": 0,
+            "warnings": 0
+          },
+          "metrics": {
+            "properCrossings": 0,
+            "resolvedCrossovers": 2,
+            "ambiguousCorridors": 0,
+            "arrowheadCollisions": 0,
+            "containerBorderRuns": 0,
+            "labelRouteClearanceIssues": 0,
+            "labelCanvasOverflowIssues": 0,
+            "minLabelRouteClearance": 5.5,
+            "desktopReadabilityIssues": 0,
+            "viewportHeightIssues": 0,
+            "minProjectedNodeTextPx": 6.078431372549019,
+            "maxBends": 4,
+            "routesOverSuggestedBends": 3,
+            "maxStretch": 1.143,
+            "routesOverSuggestedStretch": 0,
+            "minSegmentPx": 24,
+            "minInteriorSegmentPx": 74,
+            "shortSegmentCount": 0,
+            "shortEndpointSegmentCount": 0,
+            "shortInteriorSegmentCount": 0,
+            "microSegmentCount": 0
+          },
+          "suggestedLimits": {
+            "bendsPerRelationship": 2,
+            "stretch": 1.35,
+            "segmentPx": 16,
+            "microSegmentPx": 8
+          },
+          "routeReview": {
+            "crossings": [
+              {
+                "left": {
+                  "id": "service-to-repository",
+                  "from": "postal-service",
+                  "to": "postal-repository",
+                  "label": "Spring Data JPA",
+                  "collectionIndex": 8,
+                  "artifactIndex": 9
+                },
+                "right": {
+                  "id": "mysql-to-service",
+                  "from": "mysql",
+                  "to": "postal-service",
+                  "label": "estado, municipio, colonias",
+                  "collectionIndex": 10,
+                  "artifactIndex": 11
+                },
+                "point": [
+                  1040,
+                  900
+                ],
+                "sharedNode": "postal-service"
+              },
+              {
+                "left": {
+                  "id": "mysql-to-service",
+                  "from": "mysql",
+                  "to": "postal-service",
+                  "label": "estado, municipio, colonias",
+                  "collectionIndex": 10,
+                  "artifactIndex": 11
+                },
+                "right": {
+                  "id": "customer-to-mysql",
+                  "from": "customer-flow",
+                  "to": "mysql",
+                  "label": "customers",
+                  "collectionIndex": 14,
+                  "artifactIndex": 15
+                },
+                "point": [
+                  906,
+                  1216
+                ],
+                "sharedNode": "mysql"
+              }
+            ],
+            "detours": [
+              {
+                "relationship": {
+                  "id": "api-to-security",
+                  "from": "api-client",
+                  "to": "security",
+                  "label": "Bearer JWT",
+                  "collectionIndex": 3,
+                  "artifactIndex": 4
+                },
+                "bends": 3,
+                "stretch": 1
+              },
+              {
+                "relationship": {
+                  "id": "mysql-to-service",
+                  "from": "mysql",
+                  "to": "postal-service",
+                  "label": "estado, municipio, colonias",
+                  "collectionIndex": 10,
+                  "artifactIndex": 11
+                },
+                "bends": 4,
+                "stretch": 1.143
+              },
+              {
+                "relationship": {
+                  "id": "vue-to-customer",
+                  "from": "vue-view",
+                  "to": "customer-flow",
+                  "label": "registra cliente con direccion resuelta",
+                  "collectionIndex": 13,
+                  "artifactIndex": 14
+                },
+                "bends": 3,
+                "stretch": 1
+              }
+            ]
+          },
+          "leadingSpace": {
+            "measured": true,
+            "emptyTopPx": 76,
+            "emptyTopRatio": 0.054,
+            "occupiedTop": 76,
+            "viewBoxTop": 0,
+            "canvasHeight": 1420,
+            "typicalNodeHeight": 88,
+            "reviewSuggested": false
+          },
+          "desktopReadability": {
+            "budgetBasis": "legacy-930",
+            "readerContract": "declared-wide-v1",
+            "availableDiagramWidth": 930,
+            "actualBudgetPx": 930,
+            "limit": "legacy",
+            "requestedTargetPx": 7.5,
+            "requestedTargetMet": false,
+            "hardFloorPx": 6,
+            "hardFloorMet": true,
+            "minimumOwner": {
+              "kind": "edge",
+              "id": "actor-to-vue",
+              "from": "actor",
+              "to": "vue-view"
+            },
+            "minimumSourceTextPx": 8,
+            "minimumProjectedTextPx": 6.078431372549019,
+            "semanticTextCount": 44
+          },
+          "issues": []
+        },
+        "provenance": "current",
+        "deliveryReceiptId": "12a57b9f-690e-46d2-a91c-4baec2daf65d"
+      }
+    },
+    "browser-check": {
+      "status": "skipped",
+      "exitCode": 2,
+      "durationMs": 33,
+      "command": [
+        "/usr/bin/node",
+        "/home/david/.agents/skills/archify/bin/archify.mjs",
+        "browser-check",
+        "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase03-20261003-235900/taller-fase03-catalogo-postal.html",
+        "--json",
+        "--require-provenance"
+      ],
+      "execution": "in-process",
+      "receipt": {
+        "schemaVersion": 1,
+        "ok": false,
+        "command": "browser-check",
+        "evidenceKind": "automated-browser",
+        "status": "skipped",
+        "visualReview": "not-requested",
+        "provenance": "current",
+        "deliveryReceiptId": "12a57b9f-690e-46d2-a91c-4baec2daf65d",
+        "artifact": {
+          "path": "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase03-20261003-235900/taller-fase03-catalogo-postal.html",
+          "sha256": "3f0698eee5fce695c398b7e75a29723c9434a526dbbc77a9459ae8b05f922d6f",
+          "bytes": 776992
+        },
+        "state": {
+          "detail": "read",
+          "motion": "still"
+        },
+        "chrome": {
+          "status": "unavailable",
+          "executable": null
+        },
+        "diagnostics": [
+          {
+            "code": "viewer/chrome-unavailable",
+            "severity": "warning",
+            "message": "Chrome or Chromium is unavailable. Set ARCHIFY_CHROME to its executable path.",
+            "subject": {
+              "artifact": "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase03-20261003-235900/taller-fase03-catalogo-postal.html"
+            },
+            "evidence": {
+              "executable": null
+            },
+            "supportedFixes": [
+              "set ARCHIFY_CHROME to a Chrome or Chromium executable and rerun browser-check"
+            ]
+          }
+        ],
+        "containment": {
+          "status": "skipped",
+          "policy": "fit-or-reader-declared-readable-vertical-scroll",
+          "viewports": []
+        },
+        "themeStates": {
+          "status": "skipped",
+          "viewports": []
+        },
+        "readability": {
+          "status": "skipped",
+          "minimumProjectedNodeTextPx": 6,
+          "viewports": []
+        },
+        "viewerChrome": {
+          "status": "skipped",
+          "viewports": []
+        },
+        "captures": {
+          "status": "not-requested",
+          "screenshots": [],
+          "contactSheet": null
+        },
+        "sidecars": {
+          "receipt": "taller-fase03-catalogo-postal.browser-check.json",
+          "files": []
+        },
+        "error": "Chrome or Chromium is unavailable. Set ARCHIFY_CHROME to its executable path."
+      }
+    }
+  },
+  "diagnostics": [
+    {
+      "code": "viewer/chrome-unavailable",
+      "severity": "warning",
+      "message": "Chrome or Chromium is unavailable. Set ARCHIFY_CHROME to its executable path.",
+      "subject": {
+        "artifact": "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase03-20261003-235900/taller-fase03-catalogo-postal.html"
+      },
+      "evidence": {
+        "executable": null
+      },
+      "supportedFixes": [
+        "set ARCHIFY_CHROME to a Chrome or Chromium executable and rerun browser-check"
+      ]
+    }
+  ],
+  "evidence": {
+    "receipt": "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase03-20261003-235900/taller-fase03-catalogo-postal.finalize.json",
+    "summaryReceipt": "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase03-20261003-235900/taller-fase03-catalogo-postal.finalize-summary.json",
+    "browserCheckReceipt": "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase03-20261003-235900/taller-fase03-catalogo-postal.browser-check.json"
+  },
+  "visualReview": "not-requested",
+  "failedStage": "browser-check",
+  "finishedAt": "2026-10-04T05:01:23.418Z",
+  "durationMs": 815,
+  "update": {
+    "status": "current",
+    "installedVersion": "3.0.1",
+    "availableVersion": "3.0.1",
+    "releaseNotes": null,
+    "checkedAt": "2026-10-04T05:00:00.793Z",
+    "source": "cache",
+    "noticeRequired": false,
+    "noticeText": null
+  }
+}

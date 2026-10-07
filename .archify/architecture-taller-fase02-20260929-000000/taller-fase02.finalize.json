@@ -1,0 +1,390 @@
+{
+  "schemaVersion": 1,
+  "ok": false,
+  "command": "finalize",
+  "status": "skipped",
+  "type": "architecture",
+  "quality": "showcase",
+  "startedAt": "2026-09-29T05:18:15.279Z",
+  "specification": {
+    "path": "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase02-20260929-000000/candidate.json",
+    "sha256": "5218ed915e17847f4d04a2d165948fd835eb65f21f33b736d831d6292328092a",
+    "bytes": 5313
+  },
+  "artifact": {
+    "path": "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase02-20260929-000000/taller-fase02.html",
+    "sha256": "5ad109b8c2c4aac46f3db02a15897de49d73be3898f9ca7e3a74918f06c23fea",
+    "bytes": 769518
+  },
+  "stages": {
+    "validate": {
+      "status": "pass",
+      "exitCode": 0,
+      "durationMs": null,
+      "execution": "embedded-in-deliver",
+      "command": [
+        "/usr/bin/node",
+        "/home/david/.agents/skills/archify/bin/archify.mjs",
+        "deliver",
+        "architecture",
+        "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase02-20260929-000000/candidate.json",
+        "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase02-20260929-000000/taller-fase02.html",
+        "--quality",
+        "showcase",
+        "--json"
+      ],
+      "receipt": {
+        "schemaVersion": 1,
+        "ok": true,
+        "command": "validate",
+        "specification": {
+          "sha256": "5218ed915e17847f4d04a2d165948fd835eb65f21f33b736d831d6292328092a",
+          "bytes": 5313
+        },
+        "validation": {
+          "checksPassed": 9,
+          "checkCount": 9,
+          "compositionProfile": "showcase",
+          "compositionStatus": "pass",
+          "errors": 0,
+          "warnings": 0
+        }
+      }
+    },
+    "deliver": {
+      "status": "pass",
+      "exitCode": 0,
+      "durationMs": 310,
+      "command": [
+        "/usr/bin/node",
+        "/home/david/.agents/skills/archify/bin/archify.mjs",
+        "deliver",
+        "architecture",
+        "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase02-20260929-000000/candidate.json",
+        "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase02-20260929-000000/taller-fase02.html",
+        "--quality",
+        "showcase",
+        "--json"
+      ],
+      "receipt": {
+        "schemaVersion": 1,
+        "receiptId": "bc49fffe-ad95-4e1e-a9da-f8e0602db1b4",
+        "ok": true,
+        "command": "deliver",
+        "type": "architecture",
+        "input": "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase02-20260929-000000/candidate.json",
+        "output": "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase02-20260929-000000/taller-fase02.html",
+        "specification": {
+          "sha256": "5218ed915e17847f4d04a2d165948fd835eb65f21f33b736d831d6292328092a",
+          "bytes": 5313
+        },
+        "artifact": {
+          "sha256": "5ad109b8c2c4aac46f3db02a15897de49d73be3898f9ca7e3a74918f06c23fea",
+          "bytes": 769518
+        },
+        "validation": {
+          "checksPassed": 9,
+          "checkCount": 9,
+          "compositionProfile": "showcase",
+          "compositionStatus": "pass",
+          "errors": 0,
+          "warnings": 0
+        },
+        "update": {
+          "status": "unavailable",
+          "installedVersion": null,
+          "availableVersion": null,
+          "releaseNotes": null,
+          "checkedAt": null,
+          "source": null,
+          "noticeRequired": false,
+          "noticeText": null,
+          "reason": "disabled"
+        }
+      }
+    },
+    "check": {
+      "status": "pass",
+      "exitCode": 0,
+      "durationMs": 148,
+      "command": [
+        "/usr/bin/node",
+        "/home/david/.agents/skills/archify/bin/archify.mjs",
+        "check",
+        "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase02-20260929-000000/taller-fase02.html",
+        "--require-provenance"
+      ],
+      "receipt": {
+        "ok": true,
+        "file": "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase02-20260929-000000/taller-fase02.html",
+        "artifact": {
+          "sha256": "5ad109b8c2c4aac46f3db02a15897de49d73be3898f9ca7e3a74918f06c23fea",
+          "bytes": 769518
+        },
+        "checks": [
+          {
+            "name": "single_svg",
+            "ok": true,
+            "details": [
+              "found 1 <svg> block(s)"
+            ]
+          },
+          {
+            "name": "finite_svg",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "orthogonal_arrows",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "label_route_clearance",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "relationship_crossings",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "relationship_corridors",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "container_border_runs",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "route_rhythm",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "legend_clearance",
+            "ok": true,
+            "details": []
+          }
+        ],
+        "composition": {
+          "schemaVersion": 1,
+          "profile": "showcase",
+          "status": "pass",
+          "summary": {
+            "errors": 0,
+            "warnings": 0
+          },
+          "metrics": {
+            "properCrossings": 0,
+            "resolvedCrossovers": 0,
+            "ambiguousCorridors": 0,
+            "arrowheadCollisions": 0,
+            "containerBorderRuns": 0,
+            "labelRouteClearanceIssues": 0,
+            "labelCanvasOverflowIssues": 0,
+            "minLabelRouteClearance": 36.5,
+            "desktopReadabilityIssues": 0,
+            "viewportHeightIssues": 0,
+            "minProjectedNodeTextPx": 6.31331592689295,
+            "maxBends": 3,
+            "routesOverSuggestedBends": 2,
+            "maxStretch": 1,
+            "routesOverSuggestedStretch": 0,
+            "minSegmentPx": 24,
+            "minInteriorSegmentPx": 30,
+            "shortSegmentCount": 0,
+            "shortEndpointSegmentCount": 0,
+            "shortInteriorSegmentCount": 0,
+            "microSegmentCount": 0
+          },
+          "suggestedLimits": {
+            "bendsPerRelationship": 2,
+            "stretch": 1.35,
+            "segmentPx": 16,
+            "microSegmentPx": 8
+          },
+          "routeReview": {
+            "crossings": [],
+            "detours": [
+              {
+                "relationship": {
+                  "id": "api-to-security",
+                  "from": "api-client",
+                  "to": "security",
+                  "label": "Bearer JWT + CORS",
+                  "collectionIndex": 3,
+                  "artifactIndex": 4
+                },
+                "bends": 3,
+                "stretch": 1
+              },
+              {
+                "relationship": {
+                  "id": "validation-to-services",
+                  "from": "validation",
+                  "to": "services",
+                  "label": "valida payload",
+                  "collectionIndex": 8,
+                  "artifactIndex": 9
+                },
+                "bends": 3,
+                "stretch": 1
+              }
+            ]
+          },
+          "leadingSpace": {
+            "measured": true,
+            "emptyTopPx": 66,
+            "emptyTopRatio": 0.048,
+            "occupiedTop": 66,
+            "viewBoxTop": 0,
+            "canvasHeight": 1378,
+            "typicalNodeHeight": 84,
+            "reviewSuggested": false
+          },
+          "desktopReadability": {
+            "budgetBasis": "legacy-930",
+            "readerContract": "declared-wide-v1",
+            "availableDiagramWidth": 930,
+            "actualBudgetPx": 930,
+            "limit": "legacy",
+            "requestedTargetPx": 7.5,
+            "requestedTargetMet": false,
+            "hardFloorPx": 6,
+            "hardFloorMet": true,
+            "minimumOwner": {
+              "kind": "node",
+              "id": "services"
+            },
+            "minimumSourceTextPx": 7.8,
+            "minimumProjectedTextPx": 6.31331592689295,
+            "semanticTextCount": 36
+          },
+          "issues": []
+        },
+        "provenance": "current",
+        "deliveryReceiptId": "bc49fffe-ad95-4e1e-a9da-f8e0602db1b4"
+      }
+    },
+    "browser-check": {
+      "status": "skipped",
+      "exitCode": 2,
+      "durationMs": 15,
+      "command": [
+        "/usr/bin/node",
+        "/home/david/.agents/skills/archify/bin/archify.mjs",
+        "browser-check",
+        "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase02-20260929-000000/taller-fase02.html",
+        "--json",
+        "--require-provenance"
+      ],
+      "execution": "in-process",
+      "receipt": {
+        "schemaVersion": 1,
+        "ok": false,
+        "command": "browser-check",
+        "evidenceKind": "automated-browser",
+        "status": "skipped",
+        "visualReview": "not-requested",
+        "provenance": "current",
+        "deliveryReceiptId": "bc49fffe-ad95-4e1e-a9da-f8e0602db1b4",
+        "artifact": {
+          "path": "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase02-20260929-000000/taller-fase02.html",
+          "sha256": "5ad109b8c2c4aac46f3db02a15897de49d73be3898f9ca7e3a74918f06c23fea",
+          "bytes": 769518
+        },
+        "state": {
+          "detail": "read",
+          "motion": "still"
+        },
+        "chrome": {
+          "status": "unavailable",
+          "executable": null
+        },
+        "diagnostics": [
+          {
+            "code": "viewer/chrome-unavailable",
+            "severity": "warning",
+            "message": "Chrome or Chromium is unavailable. Set ARCHIFY_CHROME to its executable path.",
+            "subject": {
+              "artifact": "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase02-20260929-000000/taller-fase02.html"
+            },
+            "evidence": {
+              "executable": null
+            },
+            "supportedFixes": [
+              "set ARCHIFY_CHROME to a Chrome or Chromium executable and rerun browser-check"
+            ]
+          }
+        ],
+        "containment": {
+          "status": "skipped",
+          "policy": "fit-or-reader-declared-readable-vertical-scroll",
+          "viewports": []
+        },
+        "themeStates": {
+          "status": "skipped",
+          "viewports": []
+        },
+        "readability": {
+          "status": "skipped",
+          "minimumProjectedNodeTextPx": 6,
+          "viewports": []
+        },
+        "viewerChrome": {
+          "status": "skipped",
+          "viewports": []
+        },
+        "captures": {
+          "status": "not-requested",
+          "screenshots": [],
+          "contactSheet": null
+        },
+        "sidecars": {
+          "receipt": "taller-fase02.browser-check.json",
+          "files": []
+        },
+        "error": "Chrome or Chromium is unavailable. Set ARCHIFY_CHROME to its executable path."
+      }
+    }
+  },
+  "diagnostics": [
+    {
+      "code": "viewer/chrome-unavailable",
+      "severity": "warning",
+      "message": "Chrome or Chromium is unavailable. Set ARCHIFY_CHROME to its executable path.",
+      "subject": {
+        "artifact": "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase02-20260929-000000/taller-fase02.html"
+      },
+      "evidence": {
+        "executable": null
+      },
+      "supportedFixes": [
+        "set ARCHIFY_CHROME to a Chrome or Chromium executable and rerun browser-check"
+      ]
+    }
+  ],
+  "evidence": {
+    "receipt": "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase02-20260929-000000/taller-fase02.finalize.json",
+    "summaryReceipt": "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase02-20260929-000000/taller-fase02.finalize-summary.json",
+    "browserCheckReceipt": "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase02-20260929-000000/taller-fase02.browser-check.json"
+  },
+  "visualReview": "not-requested",
+  "failedStage": "browser-check",
+  "finishedAt": "2026-09-29T05:18:15.844Z",
+  "durationMs": 565,
+  "update": {
+    "status": "current",
+    "installedVersion": "3.0.1",
+    "availableVersion": "3.0.1",
+    "releaseNotes": null,
+    "checkedAt": "2026-09-29T00:26:57.460Z",
+    "source": "cache",
+    "noticeRequired": false,
+    "noticeText": null
+  }
+}

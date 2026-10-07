@@ -1,0 +1,213 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Taller mecanico - arquitectura fase 02 corregida",
+    "output": ".archify/architecture-taller-fase02-20260928-230835/taller-fase02.html",
+    "quality_profile": "showcase",
+    "repository": {
+      "url": "https://github.com/zerobtq087/taller_mecanico_software.git",
+      "provider": "github",
+      "link_mode": "local-only",
+      "revision": "b09c2e4d7c61958b51ec9a274ff34dc5fe09ad2d"
+    }
+  },
+  "components": [
+    {
+      "id": "actor",
+      "type": "external",
+      "label": "Gerente / recepcionista",
+      "sublabel": "Usuario autenticado autorizado",
+      "pos": [40, 320],
+      "size": [190, 76],
+      "sources": [
+        { "path": "backend/src/main/java/com/taller/security/config/SecurityConfig.java", "line": 51, "end_line": 56, "label": "roles" }
+      ]
+    },
+    {
+      "id": "vue-view",
+      "type": "frontend",
+      "label": "Vista Vue",
+      "sublabel": "Vuetify, SweetAlert2, foto 20 MB",
+      "pos": [320, 320],
+      "size": [210, 86],
+      "sources": [
+        { "path": "frontend/src/App.vue", "line": 128, "end_line": 158, "label": "form cliente" },
+        { "path": "frontend/src/App.vue", "line": 399, "end_line": 435, "label": "validaciones" },
+        { "path": "frontend/src/App.vue", "line": 446, "end_line": 455, "label": "foto" }
+      ]
+    },
+    {
+      "id": "frontend-facade",
+      "type": "frontend",
+      "label": "workshopFacade.js",
+      "sublabel": "auth, users y customers",
+      "pos": [630, 320],
+      "size": [200, 76],
+      "sources": [
+        { "path": "frontend/src/facades/workshopFacade.js", "line": 3, "end_line": 31, "label": "facade vue" }
+      ]
+    },
+    {
+      "id": "api-client",
+      "type": "frontend",
+      "label": "services/api.js",
+      "sublabel": "fetch REST + JWT + failed fetch claro",
+      "pos": [930, 320],
+      "size": [220, 78],
+      "sources": [
+        { "path": "frontend/src/services/api.js", "line": 3, "end_line": 31, "label": "request" },
+        { "path": "frontend/src/services/api.js", "line": 34, "end_line": 55, "label": "endpoints" }
+      ]
+    },
+    {
+      "id": "security",
+      "type": "security",
+      "label": "Spring Security",
+      "sublabel": "JWT, CORS y roles",
+      "pos": [930, 100],
+      "size": [210, 78],
+      "sources": [
+        { "path": "backend/src/main/java/com/taller/security/config/SecurityConfig.java", "line": 44, "end_line": 59, "label": "filtro" },
+        { "path": "backend/src/main/java/com/taller/security/config/SecurityConfig.java", "line": 62, "end_line": 75, "label": "cors" }
+      ]
+    },
+    {
+      "id": "controllers",
+      "type": "backend",
+      "label": "Controllers REST",
+      "sublabel": "auth, usuarios y clientes",
+      "pos": [1250, 320],
+      "size": [230, 84],
+      "sources": [
+        { "path": "backend/src/main/java/com/taller/security/controller/CustomerController.java", "line": 17, "end_line": 44, "label": "clientes" },
+        { "path": "backend/src/main/java/com/taller/security/controller/UserRegistrationController.java", "line": 14, "end_line": 33, "label": "alta usuarios" },
+        { "path": "backend/src/main/java/com/taller/security/controller/UserController.java", "line": 15, "end_line": 32, "label": "admin usuarios" }
+      ]
+    },
+    {
+      "id": "backend-facades",
+      "type": "backend",
+      "label": "Backend facades",
+      "sublabel": "AuthFacade + CustomerFacade",
+      "pos": [1560, 320],
+      "size": [230, 84],
+      "sources": [
+        { "path": "backend/src/main/java/com/taller/security/facade/AuthFacade.java", "line": 20, "end_line": 67, "label": "auth facade" },
+        { "path": "backend/src/main/java/com/taller/security/facade/CustomerFacade.java", "line": 17, "end_line": 29, "label": "customer facade" }
+      ]
+    },
+    {
+      "id": "services",
+      "type": "backend",
+      "label": "Services",
+      "sublabel": "reglas, BCrypt, duplicados y normalizacion",
+      "pos": [1870, 320],
+      "size": [250, 92],
+      "sources": [
+        { "path": "backend/src/main/java/com/taller/security/service/AuthService.java", "line": 76, "end_line": 110, "label": "usuarios" },
+        { "path": "backend/src/main/java/com/taller/security/service/CustomerService.java", "line": 212, "end_line": 243, "label": "clientes" },
+        { "path": "backend/src/main/java/com/taller/security/service/CustomerService.java", "line": 288, "end_line": 310, "label": "normaliza" }
+      ]
+    },
+    {
+      "id": "validation-support",
+      "type": "backend",
+      "label": "Validacion y errores",
+      "sublabel": "10 digitos, 20 MB JSON, errores claros",
+      "pos": [1560, 90],
+      "size": [240, 86],
+      "sources": [
+        { "path": "backend/src/main/java/com/taller/security/dto/CustomerDtos.java", "line": 23, "end_line": 27, "label": "dto cliente" },
+        { "path": "backend/src/main/java/com/taller/security/config/JacksonConfig.java", "line": 8, "end_line": 18, "label": "json 20mb" },
+        { "path": "backend/src/main/java/com/taller/security/controller/RestExceptionHandler.java", "line": 25, "end_line": 31, "label": "mensaje" }
+      ]
+    },
+    {
+      "id": "repositories",
+      "type": "database",
+      "label": "Repositories",
+      "sublabel": "UserRepository + CustomerRepository",
+      "pos": [1870, 560],
+      "size": [240, 86],
+      "sources": [
+        { "path": "backend/src/main/java/com/taller/security/repository/UserRepository.java", "line": 1, "end_line": 12, "label": "usuarios" },
+        { "path": "backend/src/main/java/com/taller/security/repository/CustomerRepository.java", "line": 1, "end_line": 12, "label": "clientes" }
+      ]
+    },
+    {
+      "id": "mysql",
+      "type": "database",
+      "label": "MySQL Docker",
+      "sublabel": "users, roles, customers y workshopId futuro",
+      "pos": [1560, 560],
+      "size": [250, 90],
+      "sources": [
+        { "path": "database/schema.sql", "line": 3, "end_line": 24, "label": "users" },
+        { "path": "database/schema.sql", "line": 26, "end_line": 53, "label": "customers" }
+      ]
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "Frontend Vue",
+      "wraps": ["vue-view", "frontend-facade", "api-client"],
+      "pad": 30
+    },
+    {
+      "kind": "security-group",
+      "label": "API Spring Boot protegida",
+      "wraps": ["security", "controllers", "backend-facades", "services", "validation-support"],
+      "pad": 34
+    },
+    {
+      "kind": "region",
+      "label": "Persistencia MySQL",
+      "wraps": ["repositories", "mysql"],
+      "pad": 30
+    }
+  ],
+  "connections": [
+    { "id": "actor-to-vue", "from": "actor", "to": "vue-view", "label": "usa panel", "variant": "emphasis" },
+    { "id": "vue-to-frontend-facade", "from": "vue-view", "to": "frontend-facade", "label": "acciones UI", "variant": "emphasis" },
+    { "id": "facade-to-api", "from": "frontend-facade", "to": "api-client", "label": "delegacion REST", "variant": "emphasis" },
+    { "id": "api-to-security", "from": "api-client", "to": "security", "label": "Bearer JWT + CORS", "variant": "security", "fromSide": "top", "toSide": "bottom" },
+    { "id": "api-to-controllers", "from": "api-client", "to": "controllers", "label": "HTTP JSON", "variant": "emphasis" },
+    { "id": "security-to-controllers", "from": "security", "to": "controllers", "label": "autoriza roles", "variant": "security", "fromSide": "right", "toSide": "top" },
+    { "id": "controllers-to-facades", "from": "controllers", "to": "backend-facades", "label": "orquesta", "variant": "emphasis" },
+    { "id": "facades-to-services", "from": "backend-facades", "to": "services", "label": "reglas de negocio", "variant": "emphasis" },
+    { "id": "validation-to-services", "from": "validation-support", "to": "services", "label": "valida payload", "variant": "dashed", "fromSide": "bottom", "toSide": "top" },
+    { "id": "services-to-repositories", "from": "services", "to": "repositories", "label": "Spring Data JPA", "variant": "emphasis", "fromSide": "bottom", "toSide": "top" },
+    { "id": "repositories-to-mysql", "from": "repositories", "to": "mysql", "label": "SQL / llaves unicas", "variant": "emphasis" }
+  ],
+  "cards": [
+    {
+      "dot": "violet",
+      "title": "Patron facade",
+      "items": [
+        "Vue consume workshopFacade.js antes del cliente REST",
+        "Controllers delegan a AuthFacade o CustomerFacade",
+        "Services son los unicos que usan repositories"
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Registro de clientes",
+      "items": [
+        "Telefono personal y de trabajo: exactamente 10 digitos",
+        "Email y telefono personal se validan contra duplicados",
+        "Foto aceptada como imagen hasta 20 MB"
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Seguridad",
+      "items": [
+        "JWT en Authorization",
+        "Clientes y usuarios requieren GERENTE o SECRETARIO",
+        "MySQL conserva llaves unicas para impedir doble registro"
+      ]
+    }
+  ]
+}

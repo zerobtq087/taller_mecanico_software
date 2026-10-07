@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "receiptId": "12a57b9f-690e-46d2-a91c-4baec2daf65d",
+  "status": "current",
+  "command": "deliver",
+  "type": "architecture",
+  "input": "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase03-20261003-235900/candidate.json",
+  "output": "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase03-20261003-235900/taller-fase03-catalogo-postal.html",
+  "specification": {
+    "sha256": "1fa97d5c95aca5c5865be316bcdcf7e47305a33a6f742a6b607f8e1907cb7b5f",
+    "bytes": 6421
+  },
+  "artifact": {
+    "sha256": "3f0698eee5fce695c398b7e75a29723c9434a526dbbc77a9459ae8b05f922d6f",
+    "bytes": 776992
+  }
+}

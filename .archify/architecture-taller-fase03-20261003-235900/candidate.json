@@ -1,0 +1,181 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Taller mecanico - catalogo postal local",
+    "output": ".archify/architecture-taller-fase03-20261003-235900/taller-fase03-catalogo-postal.html",
+    "quality_profile": "showcase"
+  },
+  "components": [
+    {
+      "id": "actor",
+      "type": "external",
+      "label": "Gerente / secretario",
+      "sublabel": "Usuario autenticado",
+      "pos": [20, 330],
+      "size": [140, 76]
+    },
+    {
+      "id": "vue-view",
+      "type": "frontend",
+      "label": "Vista Vue",
+      "sublabel": "Registro de cliente",
+      "pos": [205, 330],
+      "size": [145, 88]
+    },
+    {
+      "id": "frontend-facade",
+      "type": "frontend",
+      "label": "workshopFacade.js",
+      "sublabel": "clientes + catalogo postal",
+      "pos": [460, 330],
+      "size": [155, 82]
+    },
+    {
+      "id": "api-client",
+      "type": "frontend",
+      "label": "services/api.js",
+      "sublabel": "fetch REST + JWT",
+      "pos": [730, 330],
+      "size": [145, 82]
+    },
+    {
+      "id": "security",
+      "type": "security",
+      "label": "Spring Security",
+      "sublabel": "JWT requerido para /api/catalogos/**",
+      "pos": [930, 110],
+      "size": [220, 84]
+    },
+    {
+      "id": "postal-controller",
+      "type": "backend",
+      "label": "PostalCatalogController",
+      "sublabel": "GET /api/catalogos/codigos-postales/{cp}",
+      "pos": [930, 330],
+      "size": [220, 92]
+    },
+    {
+      "id": "postal-facade",
+      "type": "backend",
+      "label": "PostalCatalogFacade",
+      "sublabel": "Fachada backend",
+      "pos": [930, 555],
+      "size": [200, 84]
+    },
+    {
+      "id": "postal-service",
+      "type": "backend",
+      "label": "PostalCatalogService",
+      "sublabel": "Valida 5 digitos y arma respuesta",
+      "pos": [930, 780],
+      "size": [220, 92]
+    },
+    {
+      "id": "postal-repository",
+      "type": "database",
+      "label": "PostalSettlementRepository",
+      "sublabel": "Consulta por codigo postal",
+      "pos": [930, 1010],
+      "size": [220, 86]
+    },
+    {
+      "id": "mysql",
+      "type": "database",
+      "label": "MySQL Docker",
+      "sublabel": "postal_settlements + customers",
+      "pos": [930, 1240],
+      "size": [210, 92]
+    },
+    {
+      "id": "seed-sql",
+      "type": "database",
+      "label": "database/sepomex_data.sql",
+      "sublabel": "145,420 asentamientos; 15 MB",
+      "pos": [545, 1240],
+      "size": [220, 92]
+    },
+    {
+      "id": "converter",
+      "type": "backend",
+      "label": "Convertidor SEPOMEX",
+      "sublabel": "convert_sepomex_postgres_to_mysql.py",
+      "pos": [220, 1240],
+      "size": [220, 92]
+    },
+    {
+      "id": "customer-flow",
+      "type": "backend",
+      "label": "Registro de cliente",
+      "sublabel": "CustomerFacade -> Service -> Repository",
+      "pos": [545, 780],
+      "size": [220, 92]
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "Frontend Vue",
+      "wraps": ["vue-view", "frontend-facade", "api-client"],
+      "pad": 30
+    },
+    {
+      "kind": "security-group",
+      "label": "API Spring Boot protegida",
+      "wraps": ["security", "postal-controller", "postal-facade", "postal-service", "customer-flow"],
+      "pad": 34
+    },
+    {
+      "kind": "region",
+      "label": "Catalogo local offline",
+      "wraps": ["converter", "seed-sql", "postal-repository", "mysql"],
+      "pad": 32
+    }
+  ],
+  "connections": [
+    { "id": "actor-to-vue", "from": "actor", "to": "vue-view", "label": "captura", "variant": "emphasis" },
+    { "id": "vue-to-facade", "from": "vue-view", "to": "frontend-facade", "label": "consulta CP", "variant": "emphasis" },
+    { "id": "facade-to-api", "from": "frontend-facade", "to": "api-client", "label": "lookup CP", "variant": "emphasis" },
+    { "id": "api-to-security", "from": "api-client", "to": "security", "label": "Bearer JWT", "variant": "security", "fromSide": "top", "toSide": "left" },
+    { "id": "api-to-postal-controller", "from": "api-client", "to": "postal-controller", "label": "HTTP JSON", "variant": "emphasis" },
+    { "id": "security-to-postal-controller", "from": "security", "to": "postal-controller", "label": "autenticado", "variant": "security", "fromSide": "bottom", "toSide": "top" },
+    { "id": "controller-to-facade", "from": "postal-controller", "to": "postal-facade", "label": "delega", "variant": "emphasis" },
+    { "id": "facade-to-service", "from": "postal-facade", "to": "postal-service", "label": "orquesta", "variant": "emphasis" },
+    { "id": "service-to-repository", "from": "postal-service", "to": "postal-repository", "label": "Spring Data JPA", "variant": "emphasis" },
+    { "id": "repository-to-mysql", "from": "postal-repository", "to": "mysql", "label": "postal_settlements", "variant": "emphasis" },
+    { "id": "mysql-to-service", "from": "mysql", "to": "postal-service", "label": "estado, municipio, colonias", "variant": "dashed", "fromSide": "left", "toSide": "right" },
+    { "id": "seed-to-mysql", "from": "seed-sql", "to": "mysql", "label": "carga inicial Docker", "variant": "emphasis" },
+    { "id": "converter-to-seed", "from": "converter", "to": "seed-sql", "label": "genera SQL", "variant": "dashed" },
+    { "id": "vue-to-customer", "from": "vue-view", "to": "customer-flow", "label": "registra cliente con direccion resuelta", "variant": "dashed", "fromSide": "bottom", "toSide": "left" },
+    { "id": "customer-to-mysql", "from": "customer-flow", "to": "mysql", "label": "customers", "variant": "dashed" }
+  ],
+  "cards": [
+    {
+      "dot": "emerald",
+      "title": "Operacion sin internet",
+      "items": [
+        "La vista no consume APIs externas para direcciones",
+        "El backend resuelve codigos postales desde MySQL local",
+        "Solo se requiere internet si se decide refrescar el catalogo fuente"
+      ]
+    },
+    {
+      "dot": "violet",
+      "title": "Patron facade",
+      "items": [
+        "Vue consume workshopFacade.js",
+        "El facade frontend llama al cliente REST",
+        "El controlador backend delega en PostalCatalogFacade antes del service y repository"
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Datos integrados",
+      "items": [
+        "145,420 asentamientos locales",
+        "SQL versionable aproximado de 15 MB",
+        "Campos: CP, colonia, tipo, municipio, estado, ciudad"
+      ]
+    }
+  ]
+}

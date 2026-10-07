@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "receiptId": "bc49fffe-ad95-4e1e-a9da-f8e0602db1b4",
+  "status": "current",
+  "command": "deliver",
+  "type": "architecture",
+  "input": "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase02-20260929-000000/candidate.json",
+  "output": "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase02-20260929-000000/taller-fase02.html",
+  "specification": {
+    "sha256": "5218ed915e17847f4d04a2d165948fd835eb65f21f33b736d831d6292328092a",
+    "bytes": 5313
+  },
+  "artifact": {
+    "sha256": "5ad109b8c2c4aac46f3db02a15897de49d73be3898f9ca7e3a74918f06c23fea",
+    "bytes": 769518
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 1,
+  "ok": false,
+  "command": "finalize",
+  "status": "fail",
+  "type": "architecture",
+  "quality": "showcase",
+  "specification": {
+    "path": "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase02-20260928-230835/candidate.json",
+    "sha256": "64fe8c6007d6a22c7d9da2b7e5dba7079c320873cbadb7b9083a2221954da682",
+    "bytes": 9051
+  },
+  "artifact": {
+    "path": "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase02-20260928-230835/taller-fase02.html"
+  },
+  "gates": {
+    "validate": "fail",
+    "deliver": "not-run",
+    "check": "not-run",
+    "browser-check": "not-run"
+  },
+  "failedStage": "validate",
+  "diagnostics": [
+    {
+      "code": "repository-evidence/file-missing",
+      "severity": "error",
+      "message": "/components/2/sources/0/path does not identify a file at revision b09c2e4d7c61958b51ec9a274ff34dc5fe09ad2d.",
+      "subject": {
+        "surface": "repository-evidence",
+        "path": "/components/2/sources/0/path",
+        "diagramType": "architecture",
+        "collection": "components",
+        "nodeId": "frontend-facade",
+        "componentId": "frontend-facade"
+      },
+      "evidence": {
+        "sourcePath": "frontend/src/facades/workshopFacade.js",
+        "revision": "b09c2e4d7c61958b51ec9a274ff34dc5fe09ad2d"
+      },
+      "supportedFixes": [
+        "use a file path that exists at the pinned revision"
+      ]
+    }
+  ],
+  "diagnosticSummary": {
+    "total": 1,
+    "shown": 1,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase02-20260928-230835/taller-fase02.finalize.json",
+    "summaryReceipt": "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase02-20260928-230835/taller-fase02.finalize-summary.json"
+  },
+  "update": {
+    "status": "current",
+    "installedVersion": "3.0.1",
+    "availableVersion": "3.0.1",
+    "releaseNotes": null,
+    "checkedAt": "2026-09-29T00:26:57.460Z",
+    "source": "cache",
+    "noticeRequired": false,
+    "noticeText": null
+  },
+  "visualReview": "not-requested",
+  "durationMs": 462,
+  "nextAction": {
+    "action": "edit-in-place",
+    "candidate": "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase02-20260928-230835/candidate.json",
+    "constraint": "Preserve all semantics and user-fixed geometry. Use references/architecture-layout-repair.md to choose a local repair or connected-scene reflow; edit the existing candidate.",
+    "then": "finalize-once"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "schemaVersion": 1,
+  "command": "deliver",
+  "status": "pending",
+  "receiptId": "9b9de80b-56b0-43ca-afb2-ae49d47c645b",
+  "input": "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase02-20260928-230835/candidate.json",
+  "output": "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase02-20260928-230835/taller-fase02.html"
+}

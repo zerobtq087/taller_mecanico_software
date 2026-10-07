@@ -1,0 +1,161 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Taller mecanico - fase 02 registro de clientes",
+    "output": ".archify/architecture-taller-fase02-20260929-000000/taller-fase02.html",
+    "quality_profile": "showcase"
+  },
+  "components": [
+    {
+      "id": "actor",
+      "type": "external",
+      "label": "Gerente / secretario",
+      "sublabel": "Autorizado",
+      "pos": [20, 320],
+      "size": [140, 76]
+    },
+    {
+      "id": "vue-view",
+      "type": "frontend",
+      "label": "Vista Vue",
+      "sublabel": "Formulario cliente",
+      "pos": [230, 320],
+      "size": [150, 88]
+    },
+    {
+      "id": "frontend-facade",
+      "type": "frontend",
+      "label": "workshopFacade.js",
+      "sublabel": "auth/users/clientes",
+      "pos": [460, 320],
+      "size": [150, 78]
+    },
+    {
+      "id": "api-client",
+      "type": "frontend",
+      "label": "services/api.js",
+      "sublabel": "fetch REST + JWT",
+      "pos": [685, 320],
+      "size": [150, 82]
+    },
+    {
+      "id": "security",
+      "type": "security",
+      "label": "Spring Security",
+      "sublabel": "JWT, CORS, roles GERENTE/SECRETARIO",
+      "pos": [860, 100],
+      "size": [200, 84]
+    },
+    {
+      "id": "controllers",
+      "type": "backend",
+      "label": "Controllers REST",
+      "sublabel": "Auth, usuarios, clientes",
+      "pos": [905, 320],
+      "size": [170, 84]
+    },
+    {
+      "id": "backend-facades",
+      "type": "backend",
+      "label": "Backend Facades",
+      "sublabel": "AuthFacade + CustomerFacade",
+      "pos": [860, 540],
+      "size": [200, 84]
+    },
+    {
+      "id": "services",
+      "type": "backend",
+      "label": "Services",
+      "sublabel": "reglas, BCrypt, duplicados, normalizacion",
+      "pos": [860, 760],
+      "size": [200, 92]
+    },
+    {
+      "id": "validation",
+      "type": "backend",
+      "label": "Validacion y errores",
+      "sublabel": "10 digitos, JSON 20 MB, mensajes legibles",
+      "pos": [590, 540],
+      "size": [220, 86]
+    },
+    {
+      "id": "repositories",
+      "type": "database",
+      "label": "Repositories",
+      "sublabel": "UserRepository + CustomerRepository",
+      "pos": [860, 980],
+      "size": [200, 86]
+    },
+    {
+      "id": "mysql",
+      "type": "database",
+      "label": "MySQL Docker",
+      "sublabel": "users, customers, workshopId",
+      "pos": [860, 1200],
+      "size": [200, 90]
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "Frontend Vue",
+      "wraps": ["vue-view", "frontend-facade", "api-client"],
+      "pad": 30
+    },
+    {
+      "kind": "security-group",
+      "label": "API Spring Boot protegida",
+      "wraps": ["security", "controllers", "backend-facades", "services", "validation"],
+      "pad": 34
+    },
+    {
+      "kind": "region",
+      "label": "Persistencia",
+      "wraps": ["repositories", "mysql"],
+      "pad": 30
+    }
+  ],
+  "connections": [
+    { "id": "actor-to-vue", "from": "actor", "to": "vue-view", "label": "usa panel", "variant": "emphasis" },
+    { "id": "vue-to-facade", "from": "vue-view", "to": "frontend-facade", "label": "acciones UI", "variant": "emphasis" },
+    { "id": "facade-to-api", "from": "frontend-facade", "to": "api-client", "label": "delegacion", "variant": "emphasis" },
+    { "id": "api-to-security", "from": "api-client", "to": "security", "label": "Bearer JWT + CORS", "variant": "security", "fromSide": "top", "toSide": "left" },
+    { "id": "api-to-controllers", "from": "api-client", "to": "controllers", "label": "HTTP JSON", "variant": "emphasis" },
+    { "id": "security-to-controllers", "from": "security", "to": "controllers", "label": "autoriza roles", "variant": "security", "fromSide": "bottom", "toSide": "top" },
+    { "id": "controllers-to-facades", "from": "controllers", "to": "backend-facades", "label": "orquesta", "variant": "emphasis" },
+    { "id": "facades-to-services", "from": "backend-facades", "to": "services", "label": "reglas de negocio", "variant": "emphasis" },
+    { "id": "validation-to-services", "from": "validation", "to": "services", "label": "valida payload", "variant": "dashed", "fromSide": "right", "toSide": "top" },
+    { "id": "services-to-repositories", "from": "services", "to": "repositories", "label": "Spring Data JPA", "variant": "emphasis", "fromSide": "bottom", "toSide": "top" },
+    { "id": "repositories-to-mysql", "from": "repositories", "to": "mysql", "label": "SQL + llaves unicas", "variant": "emphasis" }
+  ],
+  "cards": [
+    {
+      "dot": "violet",
+      "title": "Patron facade",
+      "items": [
+        "Vue consume workshopFacade.js antes del cliente REST",
+        "Controllers delegan en AuthFacade o CustomerFacade",
+        "Services concentran reglas y uso de repositories"
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Registro de clientes",
+      "items": [
+        "Telefono personal y de trabajo: 10 digitos",
+        "Email y telefono personal tienen validacion de duplicados",
+        "Foto de cliente: imagen hasta 20 MB"
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Seguridad",
+      "items": [
+        "JWT en Authorization",
+        "Clientes y usuarios requieren GERENTE o SECRETARIO",
+        "MySQL mantiene llaves unicas para evitar doble registro"
+      ]
+    }
+  ]
+}
