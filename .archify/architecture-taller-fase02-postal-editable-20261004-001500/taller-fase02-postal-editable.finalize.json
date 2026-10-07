@@ -5,16 +5,16 @@
   "status": "skipped",
   "type": "architecture",
   "quality": "showcase",
-  "startedAt": "2026-10-05T05:32:58.207Z",
+  "startedAt": "2026-10-07T05:06:49.572Z",
   "specification": {
     "path": "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase02-postal-editable-20261004-001500/candidate.json",
-    "sha256": "c3a54d7ff2e92f23db63062e4549157d860c54cbb21e490238e2f7b99522d8be",
-    "bytes": 6456
+    "sha256": "17ee5c79b09f9c168b61d1ce114ce0e8e0384833682d3f85c412a397e4913850",
+    "bytes": 10208
   },
   "artifact": {
     "path": "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase02-postal-editable-20261004-001500/taller-fase02-postal-editable.html",
-    "sha256": "c4ed1e6f05e77981d5b8f0d53356f4b0cae1c933788d14149d66ca967e6d878b",
-    "bytes": 776973
+    "sha256": "d65110e988f2698d16d260c0c55d894dc0996a38303adae0b9f200bbb77d1cba",
+    "bytes": 785644
   },
   "stages": {
     "validate": {
@@ -40,8 +40,8 @@
         "ok": true,
         "command": "validate",
         "specification": {
-          "sha256": "c3a54d7ff2e92f23db63062e4549157d860c54cbb21e490238e2f7b99522d8be",
-          "bytes": 6456
+          "sha256": "17ee5c79b09f9c168b61d1ce114ce0e8e0384833682d3f85c412a397e4913850",
+          "bytes": 10208
         },
         "validation": {
           "checksPassed": 9,
@@ -56,7 +56,7 @@
     "deliver": {
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 495,
+      "durationMs": 1082,
       "command": [
         "/usr/bin/node",
         "/home/david/.agents/skills/archify/bin/archify.mjs",
@@ -72,19 +72,19 @@
       ],
       "receipt": {
         "schemaVersion": 1,
-        "receiptId": "4b7fc5d0-4a9b-4327-95b4-a89cf292bb0e",
+        "receiptId": "a3ce0683-4403-4f97-a9e0-06320e6e0030",
         "ok": true,
         "command": "deliver",
         "type": "architecture",
         "input": "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase02-postal-editable-20261004-001500/candidate.json",
         "output": "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase02-postal-editable-20261004-001500/taller-fase02-postal-editable.html",
         "specification": {
-          "sha256": "c3a54d7ff2e92f23db63062e4549157d860c54cbb21e490238e2f7b99522d8be",
-          "bytes": 6456
+          "sha256": "17ee5c79b09f9c168b61d1ce114ce0e8e0384833682d3f85c412a397e4913850",
+          "bytes": 10208
         },
         "artifact": {
-          "sha256": "c4ed1e6f05e77981d5b8f0d53356f4b0cae1c933788d14149d66ca967e6d878b",
-          "bytes": 776973
+          "sha256": "d65110e988f2698d16d260c0c55d894dc0996a38303adae0b9f200bbb77d1cba",
+          "bytes": 785644
         },
         "validation": {
           "checksPassed": 9,
@@ -93,6 +93,12 @@
           "compositionStatus": "pass",
           "errors": 0,
           "warnings": 0
+        },
+        "evidence": {
+          "verified": true,
+          "repository": "https://github.com/zerobtq087/taller_mecanico_software",
+          "revision": "01de49a31842d9806a6e47f122a195da23f3817b",
+          "references": 19
         },
         "update": {
           "status": "unavailable",
@@ -110,7 +116,7 @@
     "check": {
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 238,
+      "durationMs": 246,
       "command": [
         "/usr/bin/node",
         "/home/david/.agents/skills/archify/bin/archify.mjs",
@@ -122,8 +128,8 @@
         "ok": true,
         "file": "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase02-postal-editable-20261004-001500/taller-fase02-postal-editable.html",
         "artifact": {
-          "sha256": "c4ed1e6f05e77981d5b8f0d53356f4b0cae1c933788d14149d66ca967e6d878b",
-          "bytes": 776973
+          "sha256": "d65110e988f2698d16d260c0c55d894dc0996a38303adae0b9f200bbb77d1cba",
+          "bytes": 785644
         },
         "checks": [
           {
@@ -184,22 +190,22 @@
           },
           "metrics": {
             "properCrossings": 0,
-            "resolvedCrossovers": 1,
+            "resolvedCrossovers": 3,
             "ambiguousCorridors": 0,
             "arrowheadCollisions": 0,
             "containerBorderRuns": 0,
             "labelRouteClearanceIssues": 0,
             "labelCanvasOverflowIssues": 0,
-            "minLabelRouteClearance": 26.6,
+            "minLabelRouteClearance": 38.3,
             "desktopReadabilityIssues": 0,
             "viewportHeightIssues": 0,
-            "minProjectedNodeTextPx": 6.031015037593986,
+            "minProjectedNodeTextPx": 6.007751937984496,
             "maxBends": 3,
             "routesOverSuggestedBends": 4,
-            "maxStretch": 1.106,
+            "maxStretch": 1.123,
             "routesOverSuggestedStretch": 0,
             "minSegmentPx": 24,
-            "minInteriorSegmentPx": 81,
+            "minInteriorSegmentPx": 30.1,
             "shortSegmentCount": 0,
             "shortEndpointSegmentCount": 0,
             "shortInteriorSegmentCount": 0,
@@ -215,24 +221,68 @@
             "crossings": [
               {
                 "left": {
-                  "id": "facade-to-service",
-                  "from": "postal-facade",
-                  "to": "postal-service",
-                  "label": "orquesta",
-                  "collectionIndex": 7,
-                  "artifactIndex": 8
+                  "id": "security-to-workshops",
+                  "from": "security",
+                  "to": "workshop-controller",
+                  "label": "GERENTE",
+                  "collectionIndex": 8,
+                  "artifactIndex": 9
+                },
+                "right": {
+                  "id": "customer-controller-to-service",
+                  "from": "customer-controller",
+                  "to": "customer-service",
+                  "label": "",
+                  "collectionIndex": 9,
+                  "artifactIndex": 10
+                },
+                "point": [
+                  889,
+                  373
+                ]
+              },
+              {
+                "left": {
+                  "id": "workshop-controller-to-service",
+                  "from": "workshop-controller",
+                  "to": "workshop-service",
+                  "label": "",
+                  "collectionIndex": 10,
+                  "artifactIndex": 11
                 },
                 "right": {
                   "id": "customer-to-mysql",
-                  "from": "customer-flow",
+                  "from": "customer-service",
                   "to": "mysql",
-                  "label": "customers",
+                  "label": "clientes + historial",
                   "collectionIndex": 14,
                   "artifactIndex": 15
                 },
                 "point": [
-                  895,
-                  756
+                  886,
+                  591
+                ]
+              },
+              {
+                "left": {
+                  "id": "postal-controller-to-service",
+                  "from": "postal-controller",
+                  "to": "postal-service",
+                  "label": "",
+                  "collectionIndex": 11,
+                  "artifactIndex": 12
+                },
+                "right": {
+                  "id": "customer-to-mysql",
+                  "from": "customer-service",
+                  "to": "mysql",
+                  "label": "clientes + historial",
+                  "collectionIndex": 14,
+                  "artifactIndex": 15
+                },
+                "point": [
+                  886,
+                  812
                 ]
               }
             ],
@@ -242,7 +292,7 @@
                   "id": "api-to-security",
                   "from": "api-client",
                   "to": "security",
-                  "label": "JWT",
+                  "label": "Authorization: Bearer JWT",
                   "collectionIndex": 3,
                   "artifactIndex": 4
                 },
@@ -251,50 +301,96 @@
               },
               {
                 "relationship": {
-                  "id": "mysql-to-service",
-                  "from": "mysql",
-                  "to": "postal-service",
-                  "label": "estado, municipio, colonias",
-                  "collectionIndex": 10,
-                  "artifactIndex": 11
+                  "id": "security-to-workshops",
+                  "from": "security",
+                  "to": "workshop-controller",
+                  "label": "GERENTE",
+                  "collectionIndex": 8,
+                  "artifactIndex": 9
                 },
                 "bends": 3,
-                "stretch": 1.095
-              },
-              {
-                "relationship": {
-                  "id": "vue-to-customer",
-                  "from": "vue-view",
-                  "to": "customer-flow",
-                  "label": "registra cliente con direccion validada",
-                  "collectionIndex": 13,
-                  "artifactIndex": 14
-                },
-                "bends": 3,
-                "stretch": 1
+                "stretch": 1.098,
+                "directCorridorBlockers": [
+                  {
+                    "id": "customer-controller",
+                    "label": "CustomerController",
+                    "box": [
+                      720,
+                      330,
+                      145,
+                      86
+                    ]
+                  }
+                ]
               },
               {
                 "relationship": {
                   "id": "customer-to-mysql",
-                  "from": "customer-flow",
+                  "from": "customer-service",
                   "to": "mysql",
-                  "label": "customers",
+                  "label": "clientes + historial",
                   "collectionIndex": 14,
                   "artifactIndex": 15
                 },
                 "bends": 3,
-                "stretch": 1.106
+                "stretch": 1.079,
+                "directCorridorBlockers": [
+                  {
+                    "id": "workshop-service",
+                    "label": "Workshop Service",
+                    "box": [
+                      910,
+                      550,
+                      155,
+                      82
+                    ]
+                  },
+                  {
+                    "id": "postal-service",
+                    "label": "Postal Service",
+                    "box": [
+                      910,
+                      770,
+                      155,
+                      82
+                    ]
+                  }
+                ]
+              },
+              {
+                "relationship": {
+                  "id": "workshop-to-mysql",
+                  "from": "workshop-service",
+                  "to": "mysql",
+                  "label": "workshops",
+                  "collectionIndex": 15,
+                  "artifactIndex": 16
+                },
+                "bends": 3,
+                "stretch": 1.123,
+                "directCorridorBlockers": [
+                  {
+                    "id": "postal-service",
+                    "label": "Postal Service",
+                    "box": [
+                      910,
+                      770,
+                      155,
+                      82
+                    ]
+                  }
+                ]
               }
             ]
           },
           "leadingSpace": {
             "measured": true,
-            "emptyTopPx": 76,
-            "emptyTopRatio": 0.054,
-            "occupiedTop": 76,
+            "emptyTopPx": 61,
+            "emptyTopRatio": 0.051,
+            "occupiedTop": 61,
             "viewBoxTop": 0,
-            "canvasHeight": 1420,
-            "typicalNodeHeight": 88,
+            "canvasHeight": 1193,
+            "typicalNodeHeight": 82,
             "reviewSuggested": false
           },
           "desktopReadability": {
@@ -309,22 +405,22 @@
             "hardFloorMet": true,
             "minimumOwner": {
               "kind": "node",
-              "id": "vue-view"
+              "id": "customers-ui"
             },
-            "minimumSourceTextPx": 6.9,
-            "minimumProjectedTextPx": 6.031015037593986,
+            "minimumSourceTextPx": 7.5,
+            "minimumProjectedTextPx": 6.007751937984496,
             "semanticTextCount": 44
           },
           "issues": []
         },
         "provenance": "current",
-        "deliveryReceiptId": "4b7fc5d0-4a9b-4327-95b4-a89cf292bb0e"
+        "deliveryReceiptId": "a3ce0683-4403-4f97-a9e0-06320e6e0030"
       }
     },
     "browser-check": {
       "status": "skipped",
       "exitCode": 2,
-      "durationMs": 33,
+      "durationMs": 18,
       "command": [
         "/usr/bin/node",
         "/home/david/.agents/skills/archify/bin/archify.mjs",
@@ -342,11 +438,11 @@
         "status": "skipped",
         "visualReview": "not-requested",
         "provenance": "current",
-        "deliveryReceiptId": "4b7fc5d0-4a9b-4327-95b4-a89cf292bb0e",
+        "deliveryReceiptId": "a3ce0683-4403-4f97-a9e0-06320e6e0030",
         "artifact": {
           "path": "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase02-postal-editable-20261004-001500/taller-fase02-postal-editable.html",
-          "sha256": "c4ed1e6f05e77981d5b8f0d53356f4b0cae1c933788d14149d66ca967e6d878b",
-          "bytes": 776973
+          "sha256": "d65110e988f2698d16d260c0c55d894dc0996a38303adae0b9f200bbb77d1cba",
+          "bytes": 785644
         },
         "state": {
           "detail": "read",
@@ -426,14 +522,14 @@
   },
   "visualReview": "not-requested",
   "failedStage": "browser-check",
-  "finishedAt": "2026-10-05T05:32:59.101Z",
-  "durationMs": 894,
+  "finishedAt": "2026-10-07T05:06:51.168Z",
+  "durationMs": 1595,
   "update": {
     "status": "current",
     "installedVersion": "3.0.1",
     "availableVersion": "3.0.1",
     "releaseNotes": null,
-    "checkedAt": "2026-10-04T05:00:00.793Z",
+    "checkedAt": "2026-10-07T04:57:35.637Z",
     "source": "cache",
     "noticeRequired": false,
     "noticeText": null

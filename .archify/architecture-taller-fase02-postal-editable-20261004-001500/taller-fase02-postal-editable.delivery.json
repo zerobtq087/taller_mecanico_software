@@ -1,17 +1,17 @@
 {
   "schemaVersion": 1,
-  "receiptId": "4b7fc5d0-4a9b-4327-95b4-a89cf292bb0e",
+  "receiptId": "a3ce0683-4403-4f97-a9e0-06320e6e0030",
   "status": "current",
   "command": "deliver",
   "type": "architecture",
   "input": "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase02-postal-editable-20261004-001500/candidate.json",
   "output": "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase02-postal-editable-20261004-001500/taller-fase02-postal-editable.html",
   "specification": {
-    "sha256": "c3a54d7ff2e92f23db63062e4549157d860c54cbb21e490238e2f7b99522d8be",
-    "bytes": 6456
+    "sha256": "17ee5c79b09f9c168b61d1ce114ce0e8e0384833682d3f85c412a397e4913850",
+    "bytes": 10208
   },
   "artifact": {
-    "sha256": "c4ed1e6f05e77981d5b8f0d53356f4b0cae1c933788d14149d66ca967e6d878b",
-    "bytes": 776973
+    "sha256": "d65110e988f2698d16d260c0c55d894dc0996a38303adae0b9f200bbb77d1cba",
+    "bytes": 785644
   }
 }

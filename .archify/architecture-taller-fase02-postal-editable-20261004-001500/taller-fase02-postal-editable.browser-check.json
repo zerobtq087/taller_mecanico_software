@@ -6,11 +6,11 @@
   "status": "skipped",
   "visualReview": "not-requested",
   "provenance": "current",
-  "deliveryReceiptId": "4b7fc5d0-4a9b-4327-95b4-a89cf292bb0e",
+  "deliveryReceiptId": "a3ce0683-4403-4f97-a9e0-06320e6e0030",
   "artifact": {
     "path": "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase02-postal-editable-20261004-001500/taller-fase02-postal-editable.html",
-    "sha256": "c4ed1e6f05e77981d5b8f0d53356f4b0cae1c933788d14149d66ca967e6d878b",
-    "bytes": 776973
+    "sha256": "d65110e988f2698d16d260c0c55d894dc0996a38303adae0b9f200bbb77d1cba",
+    "bytes": 785644
   },
   "state": {
     "detail": "read",

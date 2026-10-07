@@ -2,179 +2,250 @@
   "schema_version": 1,
   "diagram_type": "architecture",
   "meta": {
-    "title": "Taller mecanico - fase 02 clientes con CP local editable",
+    "title": "Taller mecanico - fase 02 clientes, talleres y SEPOMEX local",
     "output": ".archify/architecture-taller-fase02-postal-editable-20261004-001500/taller-fase02-postal-editable.html",
-    "quality_profile": "showcase"
+    "quality_profile": "showcase",
+    "repository": {
+      "url": "https://github.com/zerobtq087/taller_mecanico_software.git",
+      "provider": "github",
+      "link_mode": "web",
+      "revision": "01de49a31842d9806a6e47f122a195da23f3817b"
+    }
   },
   "components": [
     {
       "id": "actor",
       "type": "external",
-      "label": "Gerente / secretario",
-      "sublabel": "Usuario autenticado",
+      "label": "Usuario",
+      "sublabel": "JWT activo",
       "pos": [20, 330],
-      "size": [140, 76]
+      "size": [120, 70]
     },
     {
-      "id": "vue-view",
+      "id": "customers-ui",
       "type": "frontend",
-      "label": "Vista Vue",
-      "sublabel": "Email -> CP -> direccion editable",
-      "pos": [250, 330],
-      "size": [145, 88]
+      "label": "CustomersModule.vue",
+      "sublabel": "Tabla, form, foto e historial",
+      "pos": [205, 330],
+      "size": [140, 84],
+      "sources": [
+        { "path": "frontend/src/components/CustomersModule.vue", "line": 8, "end_line": 61, "label": "tabla clientes" },
+        { "path": "frontend/src/components/CustomersModule.vue", "line": 67, "end_line": 125, "label": "formulario" },
+        { "path": "frontend/src/components/CustomersModule.vue", "line": 195, "end_line": 215, "label": "cp en tiempo real" }
+      ]
     },
     {
       "id": "frontend-facade",
       "type": "frontend",
       "label": "workshopFacade.js",
-      "sublabel": "clientes + catalogo postal",
-      "pos": [425, 330],
-      "size": [155, 82]
+      "sublabel": "Facade frontend",
+      "pos": [370, 330],
+      "size": [130, 80],
+      "sources": [
+        { "path": "frontend/src/facades/workshopFacade.js", "line": 29, "end_line": 70, "label": "facade frontend" }
+      ]
     },
     {
       "id": "api-client",
       "type": "frontend",
       "label": "services/api.js",
-      "sublabel": "fetch REST + JWT",
-      "pos": [625, 330],
-      "size": [140, 82]
+      "sublabel": "JWT + multipart",
+      "pos": [535, 330],
+      "size": [120, 80],
+      "sources": [
+        { "path": "frontend/src/services/api.js", "label": "cliente REST" }
+      ]
     },
     {
       "id": "security",
       "type": "security",
       "label": "Spring Security",
-      "sublabel": "JWT requerido para /api/catalogos/**",
-      "pos": [800, 110],
-      "size": [190, 84]
+      "sublabel": "Roles y proteccion de rutas",
+      "pos": [720, 95],
+      "size": [145, 80],
+      "sources": [
+        { "path": "backend/src/main/java/com/taller/security/config/SecurityConfig.java", "label": "seguridad" }
+      ]
+    },
+    {
+      "id": "customer-controller",
+      "type": "backend",
+      "label": "CustomerController",
+      "sublabel": "CRUD y paginacion",
+      "pos": [720, 330],
+      "size": [145, 86],
+      "sources": [
+        { "path": "backend/src/main/java/com/taller/security/controller/CustomerController.java", "line": 41, "end_line": 88, "label": "endpoints clientes" }
+      ]
+    },
+    {
+      "id": "workshop-controller",
+      "type": "backend",
+      "label": "WorkshopController",
+      "sublabel": "Solo GERENTE",
+      "pos": [720, 550],
+      "size": [145, 82],
+      "sources": [
+        { "path": "backend/src/main/java/com/taller/security/controller/WorkshopController.java", "line": 30, "end_line": 62, "label": "endpoints talleres" }
+      ]
     },
     {
       "id": "postal-controller",
       "type": "backend",
       "label": "PostalCatalogController",
-      "sublabel": "GET /api/catalogos/codigos-postales/{cp}",
-      "pos": [800, 330],
-      "size": [190, 92]
+      "sublabel": "CP y ubicacion",
+      "pos": [720, 770],
+      "size": [145, 84],
+      "sources": [
+        { "path": "backend/src/main/java/com/taller/security/controller/PostalCatalogController.java", "line": 23, "end_line": 53, "label": "catalogo postal" }
+      ]
     },
     {
-      "id": "postal-facade",
+      "id": "customer-service",
       "type": "backend",
-      "label": "PostalCatalogFacade",
-      "sublabel": "Fachada backend",
-      "pos": [800, 555],
-      "size": [190, 84]
+      "label": "Customer Service",
+      "sublabel": "Sin duplicar e historial",
+      "pos": [910, 330],
+      "size": [155, 86],
+      "sources": [
+        { "path": "backend/src/main/java/com/taller/security/service/CustomerService.java", "line": 48, "end_line": 74, "label": "alta sin duplicar" },
+        { "path": "backend/src/main/java/com/taller/security/service/CustomerService.java", "line": 177, "end_line": 195, "label": "historial taller" },
+        { "path": "backend/src/main/java/com/taller/security/service/CustomerService.java", "line": 220, "end_line": 286, "label": "normalizacion" }
+      ]
+    },
+    {
+      "id": "workshop-service",
+      "type": "backend",
+      "label": "Workshop Service",
+      "sublabel": "RFC unico",
+      "pos": [910, 550],
+      "size": [155, 82],
+      "sources": [
+        { "path": "backend/src/main/java/com/taller/security/service/WorkshopService.java", "label": "servicio talleres" }
+      ]
     },
     {
       "id": "postal-service",
       "type": "backend",
-      "label": "PostalCatalogService",
-      "sublabel": "Valida 5 digitos y arma respuesta",
-      "pos": [800, 780],
-      "size": [190, 92]
+      "label": "Postal Service",
+      "sublabel": "SEPOMEX local",
+      "pos": [910, 770],
+      "size": [155, 82],
+      "sources": [
+        { "path": "backend/src/main/java/com/taller/security/service/PostalCatalogService.java", "label": "servicio postal" }
+      ]
     },
     {
-      "id": "postal-repository",
+      "id": "file-storage",
       "type": "database",
-      "label": "PostalSettlementRepository",
-      "sublabel": "Consulta por codigo postal",
-      "pos": [800, 1010],
-      "size": [190, 86]
+      "label": "Almacenamiento de fotos",
+      "sublabel": "UPLOAD_DIR; max 15 MB",
+      "pos": [910, 95],
+      "size": [155, 80],
+      "sources": [
+        { "path": "backend/src/main/java/com/taller/security/service/FileStorageService.java", "line": 17, "end_line": 70, "label": "validacion fotos" }
+      ]
     },
     {
       "id": "mysql",
       "type": "database",
       "label": "MySQL Docker",
-      "sublabel": "postal_settlements + customers",
-      "pos": [800, 1240],
-      "size": [180, 92]
+      "sublabel": "clientes, talleres y CP",
+      "pos": [910, 900],
+      "size": [155, 88],
+      "sources": [
+        { "path": "database/schema.sql", "line": 28, "end_line": 116, "label": "modelo cliente-taller" },
+        { "path": "database/schema.sql", "line": 118, "end_line": 133, "label": "postal_settlements" },
+        { "path": "database/schema.sql", "line": 135, "end_line": 289, "label": "migracion" }
+      ]
     },
     {
-      "id": "seed-sql",
+      "id": "sepomex-seed",
       "type": "database",
-      "label": "database/sepomex_data.sql",
-      "sublabel": "145,420 asentamientos; 15 MB",
-      "pos": [470, 1240],
-      "size": [200, 92]
-    },
-    {
-      "id": "converter",
-      "type": "backend",
-      "label": "Convertidor SEPOMEX",
-      "sublabel": "convert_sepomex_postgres_to_mysql.py",
-      "pos": [150, 1240],
-      "size": [220, 92]
-    },
-    {
-      "id": "customer-flow",
-      "type": "backend",
-      "label": "Registro de cliente",
-      "sublabel": "CustomerFacade -> Service -> Repository",
-      "pos": [470, 780],
-      "size": [220, 92]
+      "label": "SEPOMEX SQL",
+      "sublabel": "Catalogo postal offline",
+      "pos": [910, 1025],
+      "size": [155, 80],
+      "sources": [
+        { "path": "database/sepomex_data.sql", "label": "datos sepomex" }
+      ]
     }
   ],
   "boundaries": [
     {
       "kind": "region",
-      "label": "Frontend Vue",
-      "wraps": ["vue-view", "frontend-facade", "api-client"],
+      "label": "Frontend Vue 3 + Vuetify",
+      "wraps": ["customers-ui", "frontend-facade", "api-client"],
       "pad": 30
     },
     {
       "kind": "security-group",
       "label": "API Spring Boot protegida",
-      "wraps": ["security", "postal-controller", "postal-facade", "postal-service", "customer-flow"],
+      "wraps": ["security", "customer-controller", "workshop-controller", "postal-controller", "customer-service", "workshop-service", "postal-service"],
       "pad": 34
     },
     {
       "kind": "region",
-      "label": "Catalogo local offline",
-      "wraps": ["converter", "seed-sql", "postal-repository", "mysql"],
+      "label": "Persistencia local",
+      "wraps": ["file-storage", "mysql", "sepomex-seed"],
       "pad": 32
     }
   ],
   "connections": [
-    { "id": "actor-to-vue", "from": "actor", "to": "vue-view", "label": "datos cliente", "variant": "emphasis" },
-    { "id": "vue-to-facade", "from": "vue-view", "to": "frontend-facade", "label": "CP", "variant": "emphasis" },
-    { "id": "facade-to-api", "from": "frontend-facade", "to": "api-client", "label": "REST", "variant": "emphasis" },
-    { "id": "api-to-security", "from": "api-client", "to": "security", "label": "JWT", "variant": "security", "fromSide": "top", "toSide": "left" },
-    { "id": "api-to-postal-controller", "from": "api-client", "to": "postal-controller", "label": "JSON", "variant": "emphasis" },
-    { "id": "security-to-postal-controller", "from": "security", "to": "postal-controller", "label": "autenticado", "variant": "security", "fromSide": "bottom", "toSide": "top" },
-    { "id": "controller-to-facade", "from": "postal-controller", "to": "postal-facade", "label": "delega", "variant": "emphasis" },
-    { "id": "facade-to-service", "from": "postal-facade", "to": "postal-service", "label": "orquesta", "variant": "emphasis" },
-    { "id": "service-to-repository", "from": "postal-service", "to": "postal-repository", "label": "Spring Data JPA", "variant": "emphasis" },
-    { "id": "repository-to-mysql", "from": "postal-repository", "to": "mysql", "label": "postal_settlements", "variant": "emphasis" },
-    { "id": "mysql-to-service", "from": "mysql", "to": "postal-service", "label": "estado, municipio, colonias", "variant": "dashed" },
-    { "id": "seed-to-mysql", "from": "seed-sql", "to": "mysql", "label": "carga inicial Docker", "variant": "emphasis" },
-    { "id": "converter-to-seed", "from": "converter", "to": "seed-sql", "label": "genera SQL", "variant": "dashed" },
-    { "id": "vue-to-customer", "from": "vue-view", "to": "customer-flow", "label": "registra cliente con direccion validada", "variant": "dashed", "fromSide": "bottom", "toSide": "left" },
-    { "id": "customer-to-mysql", "from": "customer-flow", "to": "mysql", "label": "customers", "variant": "dashed" }
+    { "id": "actor-to-ui", "from": "actor", "to": "customers-ui", "label": "captura", "variant": "emphasis" },
+    { "id": "ui-to-facade", "from": "customers-ui", "to": "frontend-facade", "variant": "emphasis" },
+    { "id": "facade-to-api", "from": "frontend-facade", "to": "api-client", "variant": "emphasis" },
+    { "id": "api-to-security", "from": "api-client", "to": "security", "label": "Authorization: Bearer JWT", "variant": "security", "fromSide": "top", "toSide": "left" },
+    { "id": "api-to-customer-controller", "from": "api-client", "to": "customer-controller", "label": "clientes", "variant": "emphasis" },
+    { "id": "api-to-workshop-controller", "from": "api-client", "to": "workshop-controller", "label": "talleres", "variant": "emphasis", "fromSide": "bottom", "toSide": "left" },
+    { "id": "api-to-postal-controller", "from": "api-client", "to": "postal-controller", "label": "catalogo postal", "variant": "emphasis", "fromSide": "bottom", "toSide": "left" },
+    { "id": "security-to-customers", "from": "security", "to": "customer-controller", "label": "roles", "variant": "security" },
+    { "id": "security-to-workshops", "from": "security", "to": "workshop-controller", "label": "GERENTE", "variant": "security" },
+    { "id": "customer-controller-to-service", "from": "customer-controller", "to": "customer-service", "variant": "emphasis" },
+    { "id": "workshop-controller-to-service", "from": "workshop-controller", "to": "workshop-service", "variant": "emphasis" },
+    { "id": "postal-controller-to-service", "from": "postal-controller", "to": "postal-service", "variant": "emphasis" },
+    { "id": "customer-to-storage", "from": "customer-service", "to": "file-storage", "label": "foto cliente", "variant": "dashed" },
+    { "id": "workshop-to-storage", "from": "workshop-service", "to": "file-storage", "label": "foto taller", "variant": "dashed" },
+    { "id": "customer-to-mysql", "from": "customer-service", "to": "mysql", "label": "clientes + historial", "variant": "emphasis" },
+    { "id": "workshop-to-mysql", "from": "workshop-service", "to": "mysql", "label": "workshops", "variant": "emphasis" },
+    { "id": "postal-to-mysql", "from": "postal-service", "to": "mysql", "label": "postal_settlements", "variant": "emphasis" },
+    { "id": "sepomex-to-mysql", "from": "sepomex-seed", "to": "mysql", "label": "carga local", "variant": "dashed" }
   ],
   "cards": [
     {
       "dot": "emerald",
-      "title": "Formulario operativo",
+      "title": "Cliente unico multi-taller",
       "items": [
-        "Despues de email y workEmail se captura codigo postal",
-        "El CP autocompleta colonia, municipio y estado",
-        "Colonia, municipio y estado siguen editables; calle se captura manualmente"
+        "CURP, RFC y email evitan duplicados",
+        "Si el cliente existe, solo se registra la visita al taller actual",
+        "La tabla customer_workshop conserva primera visita, ultima visita y usuario que registro"
       ]
     },
     {
       "dot": "violet",
       "title": "Patron facade",
       "items": [
-        "Vue consume workshopFacade.js",
-        "El facade frontend llama al cliente REST",
-        "El controlador backend delega en PostalCatalogFacade antes del service y repository"
+        "Vue no llama directamente a fetch; usa workshopFacade.js",
+        "Los controladores delegan a facades backend antes de service y repository",
+        "El mismo flujo aplica para clientes, talleres y catalogo postal"
       ]
     },
     {
-      "dot": "rose",
-      "title": "Datos integrados y errores",
+      "dot": "amber",
+      "title": "Operacion offline",
       "items": [
-        "145,420 asentamientos locales",
-        "SQL versionable aproximado de 15 MB con utf8mb4",
-        "401/403 piden iniciar sesion; CP no encontrado solo para codigos inexistentes"
+        "SEPOMEX vive en MySQL local",
+        "El CP autocompleta estado, municipio y colonias",
+        "Los selects encadenados tambien permiten obtener CP desde estado, municipio y colonia"
+      ]
+    },
+    {
+      "dot": "orange",
+      "title": "Archivos y seguridad",
+      "items": [
+        "Fotos multipart se guardan en disco o volumen, no en base64",
+        "Imagenes limitadas a 15 MB",
+        "Suspension global de cliente esta restringida a GERENTE"
       ]
     }
   ]

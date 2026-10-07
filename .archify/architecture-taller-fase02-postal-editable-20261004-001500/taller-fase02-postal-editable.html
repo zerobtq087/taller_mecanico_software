@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="generator" content="archify 3.0.1">
   <meta name="archify-reader-contract" content="declared-wide-v1">
-  <title>Taller mecanico - fase 02 clientes con CP local editable Diagram</title>
+  <title>Taller mecanico - fase 02 clientes, talleres y SEPOMEX local Diagram</title>
   <script>
     // Resolve the theme before first paint so light-preference users don't
     // see a dark flash. The toolbar script below re-applies with UI state.
@@ -2980,7 +2980,7 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
       body { background: #ffffff !important; padding: 0; }
       .container { max-width: none; }
       .toolbar, .diagram-nav, .focus-chip, .archify-toast, .no-print { display: none !important; }
-
+      
       .diagram-container, .card { box-shadow: none; border-color: #e2e8f0; }
       .diagram-container { --archify-nav-reserve: 0px !important; }
       html[data-preset="signal-flow"] .diagram-container,
@@ -3902,24 +3902,24 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
       .route-journey-controls button { min-height: 2.75rem; }
       .route-probe-status { padding: 0.05rem 0.48rem 0.38rem; }
       .route-probe-node { max-width: 7.5rem; }
-
-
-
-
-
-
-
-
-
-
-
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       html[data-embed="true"][data-share-playback="true"] .diagram-container {
         padding-top: 4.25rem;
       }
       html[data-embed="true"][data-share-moment="true"] .diagram-container {
         padding-top: 4.25rem;
       }
-
+      
       .cards {
         grid-template-columns: 1fr;
         margin-top: 1rem;
@@ -3962,7 +3962,7 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
         text-overflow: ellipsis;
         white-space: nowrap;
       }
-
+      
       html[data-present="true"]:not([data-embed="true"]) .diagram-container { padding: 0.5rem 0.5rem 3.75rem; }
       html[data-present="true"]:not([data-embed="true"]) .diagram-container[data-wide-diagram="true"] > svg {
         width: 720px;
@@ -4842,7 +4842,7 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
       .semantic-lens,
       .diagram-guide,
       .overview-map-live { animation: none !important; }
-
+      
       .intent-trace-flow {
         animation: none !important;
         stroke-dasharray: none;
@@ -4978,17 +4978,17 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
            data-preset-badge-blueprint="BLUEPRINT / REV 01"
            data-preset-badge-editorial="EDITORIAL / FIELD NOTE">
         <div class="pulse-dot"></div>
-        <h1>Taller mecanico - fase 02 clientes con CP local editable</h1>
+        <h1>Taller mecanico - fase 02 clientes, talleres y SEPOMEX local</h1>
       </div>
     </div>
 
-
+    <script id="archify-source-evidence-data" type="application/json">{"schemaVersion":1,"verified":true,"repository":{"url":"https://github.com/zerobtq087/taller_mecanico_software","revision":"01de49a31842d9806a6e47f122a195da23f3817b","shortRevision":"01de49a","label":"zerobtq087/taller_mecanico_software","href":"https://github.com/zerobtq087/taller_mecanico_software/tree/01de49a31842d9806a6e47f122a195da23f3817b"},"referenceCount":19,"nodes":{"customers-ui":[{"path":"frontend/src/components/CustomersModule.vue","line":8,"endLine":61,"label":"tabla clientes","href":"https://github.com/zerobtq087/taller_mecanico_software/blob/01de49a31842d9806a6e47f122a195da23f3817b/frontend/src/components/CustomersModule.vue#L8-L61"},{"path":"frontend/src/components/CustomersModule.vue","line":67,"endLine":125,"label":"formulario","href":"https://github.com/zerobtq087/taller_mecanico_software/blob/01de49a31842d9806a6e47f122a195da23f3817b/frontend/src/components/CustomersModule.vue#L67-L125"},{"path":"frontend/src/components/CustomersModule.vue","line":195,"endLine":215,"label":"cp en tiempo real","href":"https://github.com/zerobtq087/taller_mecanico_software/blob/01de49a31842d9806a6e47f122a195da23f3817b/frontend/src/components/CustomersModule.vue#L195-L215"}],"frontend-facade":[{"path":"frontend/src/facades/workshopFacade.js","line":29,"endLine":70,"label":"facade frontend","href":"https://github.com/zerobtq087/taller_mecanico_software/blob/01de49a31842d9806a6e47f122a195da23f3817b/frontend/src/facades/workshopFacade.js#L29-L70"}],"api-client":[{"path":"frontend/src/services/api.js","label":"cliente REST","href":"https://github.com/zerobtq087/taller_mecanico_software/blob/01de49a31842d9806a6e47f122a195da23f3817b/frontend/src/services/api.js"}],"security":[{"path":"backend/src/main/java/com/taller/security/config/SecurityConfig.java","label":"seguridad","href":"https://github.com/zerobtq087/taller_mecanico_software/blob/01de49a31842d9806a6e47f122a195da23f3817b/backend/src/main/java/com/taller/security/config/SecurityConfig.java"}],"customer-controller":[{"path":"backend/src/main/java/com/taller/security/controller/CustomerController.java","line":41,"endLine":88,"label":"endpoints clientes","href":"https://github.com/zerobtq087/taller_mecanico_software/blob/01de49a31842d9806a6e47f122a195da23f3817b/backend/src/main/java/com/taller/security/controller/CustomerController.java#L41-L88"}],"workshop-controller":[{"path":"backend/src/main/java/com/taller/security/controller/WorkshopController.java","line":30,"endLine":62,"label":"endpoints talleres","href":"https://github.com/zerobtq087/taller_mecanico_software/blob/01de49a31842d9806a6e47f122a195da23f3817b/backend/src/main/java/com/taller/security/controller/WorkshopController.java#L30-L62"}],"postal-controller":[{"path":"backend/src/main/java/com/taller/security/controller/PostalCatalogController.java","line":23,"endLine":53,"label":"catalogo postal","href":"https://github.com/zerobtq087/taller_mecanico_software/blob/01de49a31842d9806a6e47f122a195da23f3817b/backend/src/main/java/com/taller/security/controller/PostalCatalogController.java#L23-L53"}],"customer-service":[{"path":"backend/src/main/java/com/taller/security/service/CustomerService.java","line":48,"endLine":74,"label":"alta sin duplicar","href":"https://github.com/zerobtq087/taller_mecanico_software/blob/01de49a31842d9806a6e47f122a195da23f3817b/backend/src/main/java/com/taller/security/service/CustomerService.java#L48-L74"},{"path":"backend/src/main/java/com/taller/security/service/CustomerService.java","line":177,"endLine":195,"label":"historial taller","href":"https://github.com/zerobtq087/taller_mecanico_software/blob/01de49a31842d9806a6e47f122a195da23f3817b/backend/src/main/java/com/taller/security/service/CustomerService.java#L177-L195"},{"path":"backend/src/main/java/com/taller/security/service/CustomerService.java","line":220,"endLine":286,"label":"normalizacion","href":"https://github.com/zerobtq087/taller_mecanico_software/blob/01de49a31842d9806a6e47f122a195da23f3817b/backend/src/main/java/com/taller/security/service/CustomerService.java#L220-L286"}],"workshop-service":[{"path":"backend/src/main/java/com/taller/security/service/WorkshopService.java","label":"servicio talleres","href":"https://github.com/zerobtq087/taller_mecanico_software/blob/01de49a31842d9806a6e47f122a195da23f3817b/backend/src/main/java/com/taller/security/service/WorkshopService.java"}],"postal-service":[{"path":"backend/src/main/java/com/taller/security/service/PostalCatalogService.java","label":"servicio postal","href":"https://github.com/zerobtq087/taller_mecanico_software/blob/01de49a31842d9806a6e47f122a195da23f3817b/backend/src/main/java/com/taller/security/service/PostalCatalogService.java"}],"file-storage":[{"path":"backend/src/main/java/com/taller/security/service/FileStorageService.java","line":17,"endLine":70,"label":"validacion fotos","href":"https://github.com/zerobtq087/taller_mecanico_software/blob/01de49a31842d9806a6e47f122a195da23f3817b/backend/src/main/java/com/taller/security/service/FileStorageService.java#L17-L70"}],"mysql":[{"path":"database/schema.sql","line":28,"endLine":116,"label":"modelo cliente-taller","href":"https://github.com/zerobtq087/taller_mecanico_software/blob/01de49a31842d9806a6e47f122a195da23f3817b/database/schema.sql#L28-L116"},{"path":"database/schema.sql","line":118,"endLine":133,"label":"postal_settlements","href":"https://github.com/zerobtq087/taller_mecanico_software/blob/01de49a31842d9806a6e47f122a195da23f3817b/database/schema.sql#L118-L133"},{"path":"database/schema.sql","line":135,"endLine":289,"label":"migracion","href":"https://github.com/zerobtq087/taller_mecanico_software/blob/01de49a31842d9806a6e47f122a195da23f3817b/database/schema.sql#L135-L289"}],"sepomex-seed":[{"path":"database/sepomex_data.sql","label":"datos sepomex","href":"https://github.com/zerobtq087/taller_mecanico_software/blob/01de49a31842d9806a6e47f122a195da23f3817b/database/sepomex_data.sql"}]}}</script>
     <script id="archify-i18n-data" type="application/json">{"locale":"en","messages":{"viewer.kind.frontend":"Frontend","viewer.kind.backend":"Backend","viewer.kind.database":"Database","viewer.kind.cloud":"Cloud","viewer.kind.security":"Security","viewer.kind.messagebus":"Message bus","viewer.kind.external":"External","viewer.kind.neutral":"Neutral","viewer.kind.node":"Node","viewer.kind.start":"Start","viewer.kind.active":"Active","viewer.kind.waiting":"Waiting","viewer.kind.decision":"Decision","viewer.kind.success":"Success","viewer.kind.failure":"Failure","viewer.toolbar.actions":"Diagram actions","viewer.theme.toggle.title":"Toggle theme (T)","viewer.theme.toggle":"Toggle color theme","viewer.theme.dark":"Dark","viewer.theme.light":"Light","viewer.preset.choose.title":"Choose visual style (S cycles)","viewer.preset.choose":"Choose visual style","viewer.preset.style":"Style","viewer.preset.menu":"Visual style","viewer.preset.identity":"Visual identity","viewer.preset.cycles":"to cycle","viewer.preset.classic":"Classic","viewer.preset.classic.short":"Classic","viewer.preset.classic.hint":"Stable technical default","viewer.preset.flow":"Signal Flow","viewer.preset.flow.short":"Flow","viewer.preset.flow.hint":"Motion-forward presentation","viewer.preset.blueprint":"Blueprint","viewer.preset.blueprint.hint":"Engineering review","viewer.preset.editorial":"Editorial","viewer.preset.editorial.hint":"Publication and launch notes","viewer.preset.badge.signalFlow":"SIGNAL FLOW","viewer.preset.badge.blueprint":"BLUEPRINT / REV 01","viewer.preset.badge.editorial":"EDITORIAL / FIELD NOTE","viewer.preset.badge.editorialPlate":"ARCHIFY / PLATE 04","viewer.preset.current":"Visual style: {style}. Choose visual style","viewer.motion.live":"Live","viewer.motion.still":"Still","viewer.motion.pause":"Pause motion","viewer.motion.resume":"Resume motion","viewer.motion.reduced":"Motion paused by reduced-motion preference","viewer.motion.hidden":"Motion paused while this page is hidden","viewer.motion.yielding":"Pause motion; currently yielding to {owner}","viewer.motion.yielding.title":"Live preview enabled · yielding to {owner}","viewer.owner.route":"Route Probe","viewer.owner.lens":"Semantic Lens","viewer.owner.relationship":"Relationship Preview","viewer.owner.intent":"Intent Trace","viewer.owner.focus":"semantic focus","viewer.owner.legend":"legend preview","viewer.owner.reader":"reader interaction","viewer.present.enter":"Enter presentation stage","viewer.present.enter.title":"Presentation stage (F)","viewer.present.exit":"Exit presentation stage","viewer.present.exit.title":"Exit presentation stage (F or Escape)","viewer.present.present":"Present","viewer.present.exit.label":"Exit","viewer.export.button":"Export","viewer.export.button.title":"Export diagram (E)","viewer.export.diagram":"Export diagram","viewer.export.menu":"Export","viewer.export.subtitle":"Portable, clean outputs","viewer.export.share":"Share","viewer.export.shareCard":"Share Card","viewer.export.routeShareCard":"Route Share Card","viewer.export.reachShareCard":"Reach Share Card","viewer.export.copyDiagram":"Copy diagram","viewer.export.clipboardPng":"PNG to clipboard","viewer.export.raster":"Raster images","viewer.export.image":"Image","viewer.export.lossless":"Lossless image","viewer.export.compact":"Compact image","viewer.export.modern":"Modern image","viewer.export.vectorMotion":"Vector and motion","viewer.export.vectorMotion.heading":"Vector \u0026 motion","viewer.export.editable":"Editable vector","viewer.export.svg.auto":"SVG · Auto","viewer.export.svg.auto.hint":"Matches host theme","viewer.export.svg.light":"SVG · Light","viewer.export.svg.light.hint":"Always light","viewer.export.svg.dark":"SVG · Dark","viewer.export.svg.dark.hint":"Always dark","viewer.export.motion6s":"6s motion","viewer.export.unsupported":"Not supported by this browser","viewer.export.clipboardUnsupported":"Clipboard image write not supported by this browser","viewer.export.clipboardUnsupported.short":"Clipboard image write not supported in this browser.","viewer.export.motionUnavailable":"Motion capture unavailable in this browser","viewer.export.webmUnavailable":"WebM unavailable in this browser","viewer.export.failed":"Export failed: {message}","viewer.export.unknownVariant":"Unknown Share Card variant: {variant}","viewer.export.routeRequired":"Trace a route before exporting a Route Share Card","viewer.export.reachRequired":"Trace authored reach before exporting a Reach Share Card","viewer.export.unknown":"unknown","viewer.export.routeFailed":"Route Share Card export failed: {message}","viewer.export.reachFailed":"Reach Share Card export failed: {message}","viewer.export.copyFailed":"Copy failed: {message}","viewer.export.copiedPng":"Copied PNG to clipboard","viewer.export.downloadedRoute":"Downloaded Route Share Card","viewer.export.downloadedReach":"Downloaded Reach Share Card","viewer.export.downloadedWebm":"Downloaded WebM","viewer.export.recording":"Recording 6 seconds of motion…","viewer.export.card.routeSummary.one":"Path: {source} → {target} · {count} step","viewer.export.card.routeSummary.other":"Path: {source} → {target} · {count} steps","viewer.export.card.reachSummary":"Authored {direction} from {origin} · {nodes} · {links} · max {hops}","viewer.export.card.node.one":"{count} node","viewer.export.card.node.other":"{count} nodes","viewer.export.card.link.one":"{count} link","viewer.export.card.link.other":"{count} links","viewer.export.card.hop.one":"{count} hop","viewer.export.card.hop.other":"{count} hops","viewer.export.card.routeBadge":"ARCHIFY · ROUTE · {hops}","viewer.export.card.reachBadge":"ARCHIFY · {direction} REACH","viewer.export.direction.upstream":"Upstream","viewer.export.direction.downstream":"Downstream","viewer.export.error.canvasUnavailable":"Canvas unavailable for {label}","viewer.export.error.contextUnavailable":"2D canvas context unavailable for {label}","viewer.export.error.toBlobUnavailable":"canvas.toBlob unavailable for {label}","viewer.export.error.toBlobNull":"canvas.toBlob returned no data for {label}","viewer.export.error.variantsCombined":"Share Card variants cannot be combined","viewer.export.error.viewerState":"Share Card export could not remove temporary viewer state","viewer.export.error.routeState":"Route Card export could not preserve the resolved route safely","viewer.export.error.reachState":"Reach Card export could not preserve authored reach safely","viewer.export.error.webmRequirements":"WebM motion export requires a trace animation and browser MediaRecorder support","viewer.export.error.mediaRecorder":"MediaRecorder failed","viewer.export.error.emptyWebm":"MediaRecorder produced an empty WebM","viewer.export.error.webmBackground":"SVG background could not be loaded for WebM export","viewer.guide.title":"Explore this system","viewer.focus.selectedNodes":"{count} selected nodes","viewer.guide.eyebrow":"Diagram guide","viewer.guide.close":"Close diagram guide","viewer.guide.inspecting":"Inspecting compiled semantics","viewer.guide.actions":"Diagram exploration actions","viewer.guide.find":"Find any node","viewer.guide.find.hint":"Search labels, responsibilities, kinds, and stable IDs.","viewer.guide.route":"Trace a route","viewer.guide.route.aria":"Trace a directed route","viewer.guide.route.hint":"Ask how two semantic nodes connect in authored direction.","viewer.guide.map":"See the whole system","viewer.guide.map.hint":"Open Semantic Radar with a live viewport and stable nodes.","viewer.guide.lens":"Compare semantic kinds","viewer.guide.lens.hint":"Count roles, reveal their traffic, and compare direct authored links.","viewer.guide.present":"Enter Presentation Stage","viewer.guide.present.hint":"Give the live diagram the viewport without changing export.","viewer.guide.shortcuts":"Additional keyboard shortcuts","viewer.guide.shortcut.export":"Export","viewer.guide.shortcut.theme":"Theme","viewer.guide.shortcut.style":"Style","viewer.guide.shortcut.reset":"Reset","viewer.guide.shortcut.zoomIn":"Zoom in","viewer.guide.shortcut.zoomOut":"Zoom out","viewer.guide.shortcut.close":"Close","viewer.guide.facts":"{nodes} · {relationships}","viewer.guide.fact.node.one":"{count} semantic node","viewer.guide.fact.node.other":"{count} semantic nodes","viewer.guide.fact.relationship.one":"{count} relationship","viewer.guide.fact.relationship.other":"{count} relationships","viewer.guide.open":"Open diagram guide","viewer.finder.title":"Find a node","viewer.finder.close":"Close node finder","viewer.finder.placeholder":"Search labels or IDs","viewer.finder.search":"Search diagram nodes","viewer.finder.results":"Diagram nodes","viewer.finder.empty":"No matching nodes","viewer.finder.result.focus":"Focus {label}","viewer.finder.result.routeStart":"Choose {label} as route start","viewer.finder.result.routeTarget":"Choose {label} as route destination, {links}","viewer.finder.status.empty":"No matching nodes","viewer.finder.status.count.one":"{count} matching node","viewer.finder.status.count.other":"{count} matching nodes","viewer.finder.noun.nodes":"nodes","viewer.finder.link.one":"{count} link","viewer.finder.link.other":"{count} links","viewer.finder.result.focus.one":"Focus {label}, {count} related connection","viewer.finder.result.focus.other":"Focus {label}, {count} related connections","viewer.finder.status.filtered":"{visible} of {available} {noun}","viewer.finder.status.all":"{available} {noun}","viewer.passport.eyebrow":"Semantic passport","viewer.passport.metadata":"Node metadata","viewer.passport.evidence":"Verified source evidence","viewer.passport.verified":"Verified source","viewer.passport.verificationScope":"Verified against local Git at the pinned revision. Remote access has not been checked.","viewer.passport.reach":"Authored reach","viewer.passport.reach.trace":"Trace authored reachability","viewer.passport.upstream":"Upstream","viewer.passport.downstream":"Downstream","viewer.passport.upstream.trace":"Trace upstream authored reachability","viewer.passport.downstream.trace":"Trace downstream authored reachability","viewer.passport.close":"Close semantic passport","viewer.passport.move":"Move semantic passport. Drag, use arrow keys, or press Home to reset.","viewer.passport.copy":"Copy link","viewer.passport.copy.focus":"Copy link to focused node","viewer.passport.relations":"Relations","viewer.passport.relations.show":"Show connected relationships","viewer.passport.relations.hide":"Hide connected relationships","viewer.passport.relations.list":"Connected relationships","viewer.passport.copyRelation":"Copy relation","viewer.passport.copyNode":"Copy node","viewer.passport.copyPinned":"Copy link to pinned relationship","viewer.passport.copySource":"Copy link to source node","viewer.passport.copy.focused.success":"Focused node link copied","viewer.passport.copy.pinned.success":"Pinned relationship link copied","viewer.passport.copy.focused.failed":"Could not copy focused node link","viewer.passport.copy.pinned.failed":"Could not copy pinned relationship link","viewer.passport.relationship.none":"No connected relationships","viewer.passport.relationship.count.one":"{count} relation","viewer.passport.relationship.count.other":"{count} relations","viewer.passport.relationship.show.one":"Show {count} connected relationship","viewer.passport.relationship.show.other":"Show {count} connected relationships","viewer.passport.relationship.summary":"{out} outgoing · {in} incoming{loops}","viewer.passport.relationship.loops":" · {count} loop","viewer.passport.relationship.explorer":"Direct relationship explorer","viewer.passport.relationship.help":"Use arrow keys to explore relationships. Press Enter or Space to pin details; Escape clears.","viewer.passport.relationship.loopsBack":"loops back","viewer.passport.relationship.connectsTo":"connects to","viewer.passport.relationship.connectsFrom":"connects from","viewer.passport.relationship.pinned":"Pinned relationship · {from} → {to} · {label}","viewer.passport.relationship.inspect":"Inspect relationship {index} of {total}: {from} to {to}, {label}. Press Enter for details.","viewer.passport.relationship.group.out":"Outgoing","viewer.passport.relationship.group.in":"Incoming","viewer.passport.relationship.group.loop":"Self loops","viewer.passport.relationship.row":"{group}: {relationship}, {neighbor}","viewer.passport.relationship.direction.out":"OUT →","viewer.passport.relationship.direction.in":"← IN","viewer.passport.relationship.direction.loop":"LOOP","viewer.passport.sourceCount.one":"{count} verified source reference","viewer.passport.sourceCount.other":"{count} verified source references","viewer.passport.sourceMarker":"SRC","viewer.passport.beacon.one":"{count} verified source; focus this node to inspect","viewer.passport.beacon.other":"{count} verified sources; focus this node to inspect","viewer.passport.repository.open":"Open verified repository revision {revision}","viewer.passport.source.open":"Open verified source {path} at revision {revision}","viewer.passport.source.openLink":"Open ↗","viewer.passport.reach.upstream.one":"Trace {count} upstream authored node","viewer.passport.reach.upstream.other":"Trace {count} upstream authored nodes","viewer.passport.reach.downstream.one":"Trace {count} downstream authored node","viewer.passport.reach.downstream.other":"Trace {count} downstream authored nodes","viewer.passport.reach.noUpstream":"No upstream authored nodes","viewer.passport.reach.noDownstream":"No downstream authored nodes","viewer.passport.reach.status":"{direction} · {nodes} nodes · {links} links · max {hops} hops","viewer.route.eyebrow":"Path","viewer.route.start":"Click where the path starts","viewer.route.start.find":"Find start","viewer.route.start.find.aria":"Find a route start","viewer.route.copy":"Copy link","viewer.route.copy.aria":"Copy link to traced route","viewer.route.clear":"Clear","viewer.route.clear.aria":"Clear route probe","viewer.route.traced":"Path","viewer.route.pickTwo":"Click two nodes on the diagram","viewer.route.pickOne":"Click a node on the diagram","viewer.route.controls":"Route journey controls","viewer.route.previous":"Previous route position","viewer.route.play":"Play route journey","viewer.route.pause":"Pause route journey","viewer.route.replay":"Replay route journey","viewer.route.next":"Next route position","viewer.route.journey":"Journey","viewer.route.pause.label":"Pause","viewer.route.replay.label":"Replay","viewer.route.overview":"Overview","viewer.route.overview.aria":"Show complete route overview","viewer.route.instructions":"Click a start, then an end. Paths follow the arrows.","viewer.route.destination":"Where does the path from {label} end?","viewer.route.destination.find":"Find target","viewer.route.destination.find.aria":"Find a reachable route destination","viewer.route.differentDestination":"Choose a different destination","viewer.route.distinct":"Pick two different nodes.","viewer.route.unreachable":"Cannot reach {label} from here","viewer.route.unreachable.detail":"{target} cannot be reached from {source} along the arrows. Pick a highlighted node.","viewer.route.start.instructions":"Next, pick the end. Only nodes you can reach will light up.","viewer.route.copy.success":"Traced route link copied","viewer.route.copy.failed":"Could not copy traced route link","viewer.route.position":"Route position {index} of {total}: {label}","viewer.route.step":"Step {index} of {total} · {phase} · {label}","viewer.route.motionRequired":"Automatic journey requires Live motion","viewer.route.trigger.clear":"Clear traced route","viewer.route.overview.status":"{nodes} · {hops} · shortest path","viewer.route.overview.node.one":"{count} node","viewer.route.overview.node.other":"{count} nodes","viewer.route.overview.hop.one":"{count} step","viewer.route.overview.hop.other":"{count} steps","viewer.route.phase.playing":"Playing","viewer.route.phase.complete":"Complete","viewer.route.phase.inspecting":"Inspecting","viewer.route.destination.count.one":"{count} reachable node is highlighted. Click it.","viewer.route.destination.count.other":"{count} reachable nodes are highlighted. Click one.","viewer.route.noOutgoing":"No arrows lead out of this node. Clear it and pick another start.","viewer.route.result.title":"{source} to {target}","viewer.route.finder.source.title":"Choose route start","viewer.route.finder.source.placeholder":"Search route sources","viewer.route.finder.source.empty":"No matching route sources","viewer.route.finder.source.results":"Nodes that can start a route","viewer.route.finder.source.noun":"route sources","viewer.route.finder.source.badge":"start","viewer.route.finder.target.title":"Destination from {label}","viewer.route.finder.target.placeholder":"Search reachable destinations","viewer.route.finder.target.empty":"No matching reachable destinations","viewer.route.finder.target.results":"Reachable route destinations","viewer.route.finder.target.noun":"reachable destinations","viewer.route.hop.one":"{count} hop","viewer.route.hop.other":"{count} hops","viewer.lens.eyebrow":"Semantic lens","viewer.lens.title":"Compare system roles","viewer.lens.close":"Close semantic lens","viewer.lens.instruction":"Choose up to two semantic kinds. One reveals its real traffic; two compare only direct authored relationships.","viewer.lens.kinds":"Semantic kinds","viewer.lens.choose":"Choose a kind to inspect its nodes and touching relationships.","viewer.lens.copy":"Copy link to semantic lens","viewer.lens.clear":"Clear semantic lens","viewer.lens.open":"Open semantic lens","viewer.lens.openActive":"Open active semantic lens","viewer.lens.legend":"Semantic legend","viewer.lens.legend.inspect.one":"Inspect {label}, {count} node","viewer.lens.legend.inspect.other":"Inspect {label}, {count} nodes","viewer.lens.kind.count.one":"{label}, {count} node","viewer.lens.kind.count.other":"{label}, {count} nodes","viewer.lens.compare.one":"{first} → {second}: {forward} · {second} → {first}: {reverse} · {count} direct relationship","viewer.lens.compare.other":"{first} → {second}: {forward} · {second} → {first}: {reverse} · {count} direct relationships","viewer.lens.single":"{nodes} · {relationships} · connected peers remain visible","viewer.lens.node.one":"{count} {label} node","viewer.lens.node.other":"{count} {label} nodes","viewer.lens.relationship.one":"{count} touching relationship","viewer.lens.relationship.other":"{count} touching relationships","viewer.radar.title":"Semantic radar","viewer.radar.building":"Building overview","viewer.radar.openFull":"Open full semantic radar","viewer.radar.open":"Open radar","viewer.radar.close":"Close semantic radar","viewer.radar.surface":"Diagram overview. Click a node to focus it, or use arrow keys to pan.","viewer.radar.click":"Click node","viewer.radar.drag":"Drag to pan","viewer.radar.space":"Semantic radar needs more MAP space.","viewer.radar.nodes":"Semantic diagram radar nodes","viewer.radar.focus":"Focus {label} from Semantic Radar","viewer.radar.status":"{count} nodes · {viewport}","viewer.radar.fullMap":"{count} nodes · full map","viewer.radar.compacted":"Radar compacted to avoid covering the Semantic Passport or MAP controls.","viewer.radar.cancelWaiting":"Cancel semantic radar waiting for more MAP space","viewer.radar.needsSpace":"Semantic radar needs more visible MAP space","viewer.radar.viewport.full":"full map","viewer.radar.viewport.width":"{percent}% width","viewer.radar.viewport.scale":"{percent}% viewport","viewer.nav.controls":"Diagram view controls","viewer.nav.route":"Trace a directed route","viewer.nav.route.title":"Trace route (R)","viewer.nav.route.short":"PATH","viewer.nav.radar":"Open semantic radar","viewer.nav.radar.title":"Semantic radar (M)","viewer.nav.radar.short":"MAP","viewer.nav.lens":"Open semantic lens","viewer.nav.lens.title":"Semantic lens (L)","viewer.nav.lens.short":"LENS","viewer.nav.find":"Find a node","viewer.nav.find.title":"Find a node (/)","viewer.outline.title":"Node index","viewer.rail.show":"Notes \u0026 index","viewer.rail.controls":"Side panel","viewer.rail.collapse":"Collapse side panel","viewer.rail.bottom":"Move panel below the diagram","viewer.rail.right":"Move panel beside the diagram","viewer.nav.guide":"Open diagram guide","viewer.nav.guide.title":"Diagram guide (?)","viewer.nav.zoomOut":"Zoom out","viewer.nav.zoomOut.title":"Zoom out (-)","viewer.nav.reset":"Reset diagram view","viewer.nav.reset.title":"Reset view (0)","viewer.nav.read":"READ","viewer.nav.zoomIn":"Zoom in","viewer.nav.zoomIn.title":"Zoom in (+)","viewer.nav.camera":"{hint}. Reset diagram view","viewer.nav.camera.title":"{semantic}{hint} · reset view (0)","viewer.nav.camera.semantic":"Semantic camera active · ","viewer.nav.level.map":"MAP","viewer.nav.level.read":"READ","viewer.nav.level.full":"FULL","viewer.nav.level.auto":"AUTO","viewer.nav.detail.map":"Zoom in to reveal relationship labels and node context","viewer.nav.detail.read":"Zoom in again to reveal tags and annotations","viewer.nav.detail.full":"Full diagram detail","viewer.intent.summary":"{label}. {out} outgoing, {in} incoming{loops}. {total} connections. Press Enter for details.","viewer.intent.loops":", {count} self loop","viewer.common.copied":"Copied","viewer.common.copyFailed":"Copy failed","viewer.common.copyLink":"Copy link","viewer.common.clear":"Clear","viewer.common.close":"Close"}}</script>
     <!-- Main Diagram -->
     <div class="diagram-container" data-detail-level="read"
          data-preset-badge-editorial-plate="ARCHIFY / PLATE 04">
-      <svg viewBox="0 0 1064 1420" role="img" lang="en" aria-labelledby="archify-diagram-title archify-diagram-description" data-preset="classic" data-quality-profile="showcase" data-reader-fit="intrinsic-height" data-reader-min-text="7.5" data-reader-primary-text="14">
-        <title id="archify-diagram-title">Taller mecanico - fase 02 clientes con CP local editable</title>
+      <svg viewBox="0 0 1161 1193" role="img" lang="en" aria-labelledby="archify-diagram-title archify-diagram-description" data-preset="classic" data-quality-profile="showcase" data-reader-fit="intrinsic-height" data-reader-min-text="7.5" data-reader-primary-text="14">
+        <title id="archify-diagram-title">Taller mecanico - fase 02 clientes, talleres y SEPOMEX local</title>
         <desc id="archify-diagram-description">An architecture diagram generated by Archify.</desc>
         <!-- Definitions -->
         <defs>
@@ -5013,332 +5013,352 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
         <rect width="100%" height="100%" fill="url(#grid)" />
 
         <!-- Boundaries (behind everything) -->
-        <rect data-graph-role="structural-frame" data-composition-frame-kind="region" data-composition-frame-id="0" data-composition-frame-label="Frontend Vue" x="220" y="300" width="575" height="138" rx="12" class="c-region" stroke-width="1"/>
+        <rect data-graph-role="structural-frame" data-composition-frame-kind="region" data-composition-frame-id="0" data-composition-frame-label="Frontend Vue 3 + Vuetify" x="175" y="300" width="510" height="134" rx="12" class="c-region" stroke-width="1"/>
 
-        <rect data-graph-role="structural-frame" data-composition-frame-kind="security-group" data-composition-frame-id="1" data-composition-frame-label="API Spring Boot protegida" x="436" y="76" width="588" height="816" rx="8" class="c-security-group" stroke-width="1"/>
+        <rect data-graph-role="structural-frame" data-composition-frame-kind="security-group" data-composition-frame-id="1" data-composition-frame-label="API Spring Boot protegida" x="686" y="61" width="413" height="813" rx="8" class="c-security-group" stroke-width="1"/>
 
-        <rect data-graph-role="structural-frame" data-composition-frame-kind="region" data-composition-frame-id="2" data-composition-frame-label="Catalogo local offline" x="118" y="978" width="904" height="374" rx="12" class="c-region" stroke-width="1"/>
+        <rect data-graph-role="structural-frame" data-composition-frame-kind="region" data-composition-frame-id="2" data-composition-frame-label="Persistencia local" x="878" y="63" width="219" height="1062" rx="12" class="c-region" stroke-width="1"/>
 
         <!-- Connection paths (before components for correct z-order) -->
         <g data-graph-role="automatic-crossover" style="--step:0">
-          <path data-graph-role="automatic-crossover-underlay" d="M 160 368 L 250 368" fill="none" stroke="var(--mask)" stroke-width="5.8" stroke-linecap="round" stroke-linejoin="round" pointer-events="none"/>
-          <path data-edge-from="actor" data-edge-to="vue-view" data-edge-label="datos cliente" data-edge-key="0" data-edge-id="actor-to-vue" data-composition-points="160,368;250,368" data-composition-crossover="halo" data-composition-independent="true" d="M 160 368 L 250 368" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+          <path data-graph-role="automatic-crossover-underlay" d="M 140 365 L 205 365" fill="none" stroke="var(--mask)" stroke-width="5.8" stroke-linecap="round" stroke-linejoin="round" pointer-events="none"/>
+          <path data-edge-from="actor" data-edge-to="customers-ui" data-edge-label="captura" data-edge-key="0" data-edge-id="actor-to-ui" data-composition-points="140,365;205,365" data-composition-crossover="halo" data-composition-independent="true" d="M 140 365 L 205 365" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
         </g>
         <g data-graph-role="automatic-crossover" style="--step:1">
-          <path data-graph-role="automatic-crossover-underlay" d="M 395 374 L 425 374" fill="none" stroke="var(--mask)" stroke-width="5.8" stroke-linecap="round" stroke-linejoin="round" pointer-events="none"/>
-          <path data-edge-from="vue-view" data-edge-to="frontend-facade" data-edge-label="CP" data-edge-key="1" data-edge-id="vue-to-facade" data-composition-points="395,374;425,374" data-composition-crossover="halo" data-composition-independent="true" d="M 395 374 L 425 374" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+          <path data-graph-role="automatic-crossover-underlay" d="M 345 372 L 370 372" fill="none" stroke="var(--mask)" stroke-width="5.8" stroke-linecap="round" stroke-linejoin="round" pointer-events="none"/>
+          <path data-edge-from="customers-ui" data-edge-to="frontend-facade" data-edge-key="1" data-edge-id="ui-to-facade" data-composition-points="345,372;370,372" data-composition-crossover="halo" data-composition-independent="true" d="M 345 372 L 370 372" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
         </g>
         <g data-graph-role="automatic-crossover" style="--step:2">
-          <path data-graph-role="automatic-crossover-underlay" d="M 580 371 L 625 371" fill="none" stroke="var(--mask)" stroke-width="5.8" stroke-linecap="round" stroke-linejoin="round" pointer-events="none"/>
-          <path data-edge-from="frontend-facade" data-edge-to="api-client" data-edge-label="REST" data-edge-key="2" data-edge-id="facade-to-api" data-composition-points="580,371;625,371" data-composition-crossover="halo" data-composition-independent="true" d="M 580 371 L 625 371" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+          <path data-graph-role="automatic-crossover-underlay" d="M 500 370 L 535 370" fill="none" stroke="var(--mask)" stroke-width="5.8" stroke-linecap="round" stroke-linejoin="round" pointer-events="none"/>
+          <path data-edge-from="frontend-facade" data-edge-to="api-client" data-edge-key="2" data-edge-id="facade-to-api" data-composition-points="500,370;535,370" data-composition-crossover="halo" data-composition-independent="true" d="M 500 370 L 535 370" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
         </g>
         <g data-graph-role="automatic-crossover" style="--step:3">
-          <path data-graph-role="automatic-crossover-underlay" d="M 695 330 L 695 314 Q 695 306 703 306 L 768 306 Q 776 306 776 298 L 776 160 Q 776 152 784 152 L 800 152" fill="none" stroke="var(--mask)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round" pointer-events="none"/>
-          <path data-edge-from="api-client" data-edge-to="security" data-edge-label="JWT" data-edge-key="3" data-edge-id="api-to-security" data-composition-points="695,330;695,306;776,306;776,152;800,152" data-composition-crossover="halo" data-composition-independent="true" d="M 695 330 L 695 314 Q 695 306 703 306 L 768 306 Q 776 306 776 298 L 776 160 Q 776 152 784 152 L 800 152" class="a-security" stroke-width="1.5" marker-end="url(#arrowhead-security)"/>
+          <path data-graph-role="automatic-crossover-underlay" d="M 595 330 L 595 314 Q 595 306 603 306 L 688 306 Q 696 306 696 298 L 696 143 Q 696 135 704 135 L 720 135" fill="none" stroke="var(--mask)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round" pointer-events="none"/>
+          <path data-edge-from="api-client" data-edge-to="security" data-edge-label="Authorization: Bearer JWT" data-edge-key="3" data-edge-id="api-to-security" data-composition-points="595,330;595,306;696,306;696,135;720,135" data-composition-crossover="halo" data-composition-independent="true" d="M 595 330 L 595 314 Q 595 306 603 306 L 688 306 Q 696 306 696 298 L 696 143 Q 696 135 704 135 L 720 135" class="a-security" stroke-width="1.5" marker-end="url(#arrowhead-security)"/>
         </g>
         <g data-graph-role="automatic-crossover" style="--step:4">
-          <path data-graph-role="automatic-crossover-underlay" d="M 765 371 L 800 371" fill="none" stroke="var(--mask)" stroke-width="5.8" stroke-linecap="round" stroke-linejoin="round" pointer-events="none"/>
-          <path data-edge-from="api-client" data-edge-to="postal-controller" data-edge-label="JSON" data-edge-key="4" data-edge-id="api-to-postal-controller" data-composition-points="765,371;800,371" data-composition-crossover="halo" data-composition-independent="true" d="M 765 371 L 800 371" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+          <path data-graph-role="automatic-crossover-underlay" d="M 655 370 L 720 370" fill="none" stroke="var(--mask)" stroke-width="5.8" stroke-linecap="round" stroke-linejoin="round" pointer-events="none"/>
+          <path data-edge-from="api-client" data-edge-to="customer-controller" data-edge-label="clientes" data-edge-key="4" data-edge-id="api-to-customer-controller" data-composition-points="655,370;720,370" data-composition-crossover="halo" data-composition-independent="true" d="M 655 370 L 720 370" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
         </g>
         <g data-graph-role="automatic-crossover" style="--step:5">
-          <path data-graph-role="automatic-crossover-underlay" d="M 895 194 L 895 330" fill="none" stroke="var(--mask)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round" pointer-events="none"/>
-          <path data-edge-from="security" data-edge-to="postal-controller" data-edge-label="autenticado" data-edge-key="5" data-edge-id="security-to-postal-controller" data-composition-points="895,194;895,330" data-composition-crossover="halo" data-composition-independent="true" d="M 895 194 L 895 330" class="a-security" stroke-width="1.5" marker-end="url(#arrowhead-security)"/>
+          <path data-graph-role="automatic-crossover-underlay" d="M 604.1 410 L 604.1 583 Q 604.1 591 612.1 591 L 720 591" fill="none" stroke="var(--mask)" stroke-width="5.8" stroke-linecap="round" stroke-linejoin="round" pointer-events="none"/>
+          <path data-edge-from="api-client" data-edge-to="workshop-controller" data-edge-label="talleres" data-edge-key="5" data-edge-id="api-to-workshop-controller" data-composition-points="604.1,410;604.1,591;720,591" data-composition-crossover="halo" data-composition-independent="true" d="M 604.1 410 L 604.1 583 Q 604.1 591 612.1 591 L 720 591" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
         </g>
         <g data-graph-role="automatic-crossover" style="--step:6">
-          <path data-graph-role="automatic-crossover-underlay" d="M 895 422 L 895 555" fill="none" stroke="var(--mask)" stroke-width="5.8" stroke-linecap="round" stroke-linejoin="round" pointer-events="none"/>
-          <path data-edge-from="postal-controller" data-edge-to="postal-facade" data-edge-label="delega" data-edge-key="6" data-edge-id="controller-to-facade" data-composition-points="895,422;895,555" data-composition-crossover="halo" data-composition-independent="true" d="M 895 422 L 895 555" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+          <path data-graph-role="automatic-crossover-underlay" d="M 588 410 L 588 804 Q 588 812 596 812 L 720 812" fill="none" stroke="var(--mask)" stroke-width="5.8" stroke-linecap="round" stroke-linejoin="round" pointer-events="none"/>
+          <path data-edge-from="api-client" data-edge-to="postal-controller" data-edge-label="catalogo postal" data-edge-key="6" data-edge-id="api-to-postal-controller" data-composition-points="588,410;588,812;720,812" data-composition-crossover="halo" data-composition-independent="true" d="M 588 410 L 588 804 Q 588 812 596 812 L 720 812" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
         </g>
         <g data-graph-role="automatic-crossover" style="--step:7">
-          <path data-graph-role="automatic-crossover-underlay" d="M 895 639 L 895 780" fill="none" stroke="var(--mask)" stroke-width="5.8" stroke-linecap="round" stroke-linejoin="round" pointer-events="none"/>
-          <path data-edge-from="postal-facade" data-edge-to="postal-service" data-edge-label="orquesta" data-edge-key="7" data-edge-id="facade-to-service" data-composition-points="895,639;895,780" data-composition-crossover="halo" data-composition-independent="true" d="M 895 639 L 895 780" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+          <path data-graph-role="automatic-crossover-underlay" d="M 785.5 175 L 785.5 330" fill="none" stroke="var(--mask)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round" pointer-events="none"/>
+          <path data-edge-from="security" data-edge-to="customer-controller" data-edge-label="roles" data-edge-key="7" data-edge-id="security-to-customers" data-composition-points="785.5,175;785.5,330" data-composition-crossover="halo" data-composition-independent="true" d="M 785.5 175 L 785.5 330" class="a-security" stroke-width="1.5" marker-end="url(#arrowhead-security)"/>
         </g>
         <g data-graph-role="automatic-crossover" style="--step:8">
-          <path data-graph-role="automatic-crossover-underlay" d="M 903.05 872 L 903.05 1010" fill="none" stroke="var(--mask)" stroke-width="5.8" stroke-linecap="round" stroke-linejoin="round" pointer-events="none"/>
-          <path data-edge-from="postal-service" data-edge-to="postal-repository" data-edge-label="Spring Data JPA" data-edge-key="8" data-edge-id="service-to-repository" data-composition-points="903.05,872;903.05,1010" data-composition-crossover="halo" data-composition-independent="true" d="M 903.05 872 L 903.05 1010" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+          <path data-graph-role="automatic-crossover-underlay" d="M 865 135 L 881 135 Q 889 135 889 143 L 889 518 Q 889 526 881 526 L 800.5 526 Q 792.5 526 792.5 534 L 792.5 550" fill="none" stroke="var(--mask)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round" pointer-events="none"/>
+          <path data-edge-from="security" data-edge-to="workshop-controller" data-edge-label="GERENTE" data-edge-key="8" data-edge-id="security-to-workshops" data-composition-points="865,135;889,135;889,526;792.5,526;792.5,550" data-composition-crossover="halo" data-composition-independent="true" d="M 865 135 L 881 135 Q 889 135 889 143 L 889 518 Q 889 526 881 526 L 800.5 526 Q 792.5 526 792.5 534 L 792.5 550" class="a-security" stroke-width="1.5" marker-end="url(#arrowhead-security)"/>
         </g>
         <g data-graph-role="automatic-crossover" style="--step:9">
-          <path data-graph-role="automatic-crossover-underlay" d="M 905.05 1096 L 905.05 1240" fill="none" stroke="var(--mask)" stroke-width="5.8" stroke-linecap="round" stroke-linejoin="round" pointer-events="none"/>
-          <path data-edge-from="postal-repository" data-edge-to="mysql" data-edge-label="postal_settlements" data-edge-key="9" data-edge-id="repository-to-mysql" data-composition-points="905.05,1096;905.05,1240" data-composition-crossover="halo" data-composition-independent="true" d="M 905.05 1096 L 905.05 1240" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+          <path data-graph-role="automatic-crossover-underlay" d="M 865 373 L 910 373" fill="none" stroke="var(--mask)" stroke-width="5.8" stroke-linecap="round" stroke-linejoin="round" pointer-events="none"/>
+          <path data-edge-from="customer-controller" data-edge-to="customer-service" data-edge-key="9" data-edge-id="customer-controller-to-service" data-composition-points="865,373;910,373" data-composition-crossover="halo" data-composition-independent="true" d="M 865 373 L 910 373" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
         </g>
         <g data-graph-role="automatic-crossover" style="--step:10">
-          <path data-graph-role="automatic-crossover-underlay" d="M 890 1240 L 890 1224 Q 890 1216 882 1216 L 784 1216 Q 776 1216 776 1208 L 776 834 Q 776 826 784 826 L 800 826" fill="none" stroke="var(--mask)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round" pointer-events="none"/>
-          <path data-edge-from="mysql" data-edge-to="postal-service" data-edge-label="estado, municipio, colonias" data-edge-key="10" data-edge-id="mysql-to-service" data-composition-points="890,1240;890,1216;776,1216;776,826;800,826" data-composition-crossover="halo" data-composition-independent="true" d="M 890 1240 L 890 1224 Q 890 1216 882 1216 L 784 1216 Q 776 1216 776 1208 L 776 834 Q 776 826 784 826 L 800 826" class="a-dashed" stroke-width="1.5" marker-end="url(#arrowhead-dashed)"/>
+          <path data-graph-role="automatic-crossover-underlay" d="M 865 591 L 910 591" fill="none" stroke="var(--mask)" stroke-width="5.8" stroke-linecap="round" stroke-linejoin="round" pointer-events="none"/>
+          <path data-edge-from="workshop-controller" data-edge-to="workshop-service" data-edge-key="10" data-edge-id="workshop-controller-to-service" data-composition-points="865,591;910,591" data-composition-crossover="halo" data-composition-independent="true" d="M 865 591 L 910 591" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
         </g>
         <g data-graph-role="automatic-crossover" style="--step:11">
-          <path data-graph-role="automatic-crossover-underlay" d="M 670 1286 L 800 1286" fill="none" stroke="var(--mask)" stroke-width="5.8" stroke-linecap="round" stroke-linejoin="round" pointer-events="none"/>
-          <path data-edge-from="seed-sql" data-edge-to="mysql" data-edge-label="carga inicial Docker" data-edge-key="11" data-edge-id="seed-to-mysql" data-composition-points="670,1286;800,1286" data-composition-crossover="halo" data-composition-independent="true" d="M 670 1286 L 800 1286" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+          <path data-graph-role="automatic-crossover-underlay" d="M 865 812 L 910 812" fill="none" stroke="var(--mask)" stroke-width="5.8" stroke-linecap="round" stroke-linejoin="round" pointer-events="none"/>
+          <path data-edge-from="postal-controller" data-edge-to="postal-service" data-edge-key="11" data-edge-id="postal-controller-to-service" data-composition-points="865,812;910,812" data-composition-crossover="halo" data-composition-independent="true" d="M 865 812 L 910 812" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
         </g>
         <g data-graph-role="automatic-crossover" style="--step:12">
-          <path data-graph-role="automatic-crossover-underlay" d="M 370 1286 L 470 1286" fill="none" stroke="var(--mask)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round" pointer-events="none"/>
-          <path data-edge-from="converter" data-edge-to="seed-sql" data-edge-label="genera SQL" data-edge-key="12" data-edge-id="converter-to-seed" data-composition-points="370,1286;470,1286" data-composition-crossover="halo" data-composition-independent="true" d="M 370 1286 L 470 1286" class="a-dashed" stroke-width="1.5" marker-end="url(#arrowhead-dashed)"/>
+          <path data-graph-role="automatic-crossover-underlay" d="M 980.5 330 L 980.5 175" fill="none" stroke="var(--mask)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round" pointer-events="none"/>
+          <path data-edge-from="customer-service" data-edge-to="file-storage" data-edge-label="foto cliente" data-edge-key="12" data-edge-id="customer-to-storage" data-composition-points="980.5,330;980.5,175" data-composition-crossover="halo" data-composition-independent="true" d="M 980.5 330 L 980.5 175" class="a-dashed" stroke-width="1.5" marker-end="url(#arrowhead-dashed)"/>
         </g>
         <g data-graph-role="automatic-crossover" style="--step:13">
-          <path data-graph-role="automatic-crossover-underlay" d="M 322.5 418 L 322.5 434 Q 322.5 442 330.5 442 L 438 442 Q 446 442 446 450 L 446 818 Q 446 826 454 826 L 470 826" fill="none" stroke="var(--mask)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round" pointer-events="none"/>
-          <path data-edge-from="vue-view" data-edge-to="customer-flow" data-edge-label="registra cliente con direccion validada" data-edge-key="13" data-edge-id="vue-to-customer" data-composition-points="322.5,418;322.5,442;446,442;446,826;470,826" data-composition-crossover="halo" data-composition-independent="true" d="M 322.5 418 L 322.5 434 Q 322.5 442 330.5 442 L 438 442 Q 446 442 446 450 L 446 818 Q 446 826 454 826 L 470 826" class="a-dashed" stroke-width="1.5" marker-end="url(#arrowhead-dashed)"/>
+          <path data-graph-role="automatic-crossover-underlay" d="M 1065 591 L 1081 591 Q 1089 591 1089 583 L 1089 143 Q 1089 135 1081 135 L 1065 135" fill="none" stroke="var(--mask)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round" pointer-events="none"/>
+          <path data-edge-from="workshop-service" data-edge-to="file-storage" data-edge-label="foto taller" data-edge-key="13" data-edge-id="workshop-to-storage" data-composition-points="1065,591;1089,591;1089,135;1065,135" data-composition-crossover="halo" data-composition-independent="true" d="M 1065 591 L 1081 591 Q 1089 591 1089 583 L 1089 143 Q 1089 135 1081 135 L 1065 135" class="a-dashed" stroke-width="1.5" marker-end="url(#arrowhead-dashed)"/>
         </g>
         <g data-graph-role="automatic-crossover" style="--step:14">
-          <path data-graph-role="automatic-crossover-underlay" d="M 580 780 L 580 764 Q 580 756 588 756 L 996 756 Q 1004 756 1004 764 L 1004 1278 Q 1004 1286 996 1286 L 980 1286" fill="none" stroke="var(--mask)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round" pointer-events="none"/>
-          <path data-edge-from="customer-flow" data-edge-to="mysql" data-edge-label="customers" data-edge-key="14" data-edge-id="customer-to-mysql" data-composition-points="580,780;580,756;1004,756;1004,1286;980,1286" data-composition-crossover="halo" data-composition-independent="true" d="M 580 780 L 580 764 Q 580 756 588 756 L 996 756 Q 1004 756 1004 764 L 1004 1278 Q 1004 1286 996 1286 L 980 1286" class="a-dashed" stroke-width="1.5" marker-end="url(#arrowhead-dashed)"/>
+          <path data-graph-role="automatic-crossover-underlay" d="M 987.5 416 L 987.5 539 Q 987.5 547 979.5 547 L 894 547 Q 886 547 886 555 L 886 936 Q 886 944 894 944 L 910 944" fill="none" stroke="var(--mask)" stroke-width="5.8" stroke-linecap="round" stroke-linejoin="round" pointer-events="none"/>
+          <path data-edge-from="customer-service" data-edge-to="mysql" data-edge-label="clientes + historial" data-edge-key="14" data-edge-id="customer-to-mysql" data-composition-points="987.5,416;987.5,547;886,547;886,944;910,944" data-composition-crossover="halo" data-composition-independent="true" d="M 987.5 416 L 987.5 539 Q 987.5 547 979.5 547 L 894 547 Q 886 547 886 555 L 886 936 Q 886 944 894 944 L 910 944" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+        </g>
+        <g data-graph-role="automatic-crossover" style="--step:15">
+          <path data-graph-role="automatic-crossover-underlay" d="M 987.5 632 L 987.5 648 Q 987.5 656 995.5 656 L 1081 656 Q 1089 656 1089 664 L 1089 936 Q 1089 944 1081 944 L 1065 944" fill="none" stroke="var(--mask)" stroke-width="5.8" stroke-linecap="round" stroke-linejoin="round" pointer-events="none"/>
+          <path data-edge-from="workshop-service" data-edge-to="mysql" data-edge-label="workshops" data-edge-key="15" data-edge-id="workshop-to-mysql" data-composition-points="987.5,632;987.5,656;1089,656;1089,944;1065,944" data-composition-crossover="halo" data-composition-independent="true" d="M 987.5 632 L 987.5 648 Q 987.5 656 995.5 656 L 1081 656 Q 1089 656 1089 664 L 1089 936 Q 1089 944 1081 944 L 1065 944" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+        </g>
+        <g data-graph-role="automatic-crossover" style="--step:16">
+          <path data-graph-role="automatic-crossover-underlay" d="M 987.5 852 L 987.5 868 Q 987.5 876 979.5 876 L 965.4 876 Q 957.4 876 957.4 884 L 957.4 900" fill="none" stroke="var(--mask)" stroke-width="5.8" stroke-linecap="round" stroke-linejoin="round" pointer-events="none"/>
+          <path data-edge-from="postal-service" data-edge-to="mysql" data-edge-label="postal_settlements" data-edge-key="16" data-edge-id="postal-to-mysql" data-composition-points="987.5,852;987.5,876;957.4,876;957.4,900" data-composition-crossover="halo" data-composition-independent="true" d="M 987.5 852 L 987.5 868 Q 987.5 876 979.5 876 L 965.4 876 Q 957.4 876 957.4 884 L 957.4 900" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+        </g>
+        <g data-graph-role="automatic-crossover" style="--step:17">
+          <path data-graph-role="automatic-crossover-underlay" d="M 987.5 1025 L 987.5 988" fill="none" stroke="var(--mask)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round" pointer-events="none"/>
+          <path data-edge-from="sepomex-seed" data-edge-to="mysql" data-edge-label="carga local" data-edge-key="17" data-edge-id="sepomex-to-mysql" data-composition-points="987.5,1025;987.5,988" data-composition-crossover="halo" data-composition-independent="true" d="M 987.5 1025 L 987.5 988" class="a-dashed" stroke-width="1.5" marker-end="url(#arrowhead-dashed)"/>
         </g>
 
         <!-- Components -->
-        <g id="node-actor" data-node-id="actor" data-node-label="Gerente / secretario" tabindex="0" role="button" aria-label="Focus Gerente / secretario, Usuario autenticado, Architecture component" aria-pressed="false" data-node-kind="external" data-node-sublabel="Usuario autenticado" data-node-context="Architecture component">
-          <title>Gerente / secretario · Usuario autenticado · Architecture component</title>
-          <rect x="20" y="330" width="140" height="76" rx="6" class="c-mask"/>
-          <rect x="20" y="330" width="140" height="76" rx="6" class="c-external" stroke-width="1.5"/>
+        <g id="node-actor" data-node-id="actor" data-node-label="Usuario" tabindex="0" role="button" aria-label="Focus Usuario, JWT activo, Architecture component" aria-pressed="false" data-node-kind="external" data-node-sublabel="JWT activo" data-node-context="Architecture component">
+          <title>Usuario · JWT activo · Architecture component</title>
+          <rect x="20" y="330" width="120" height="70" rx="6" class="c-mask"/>
+          <rect x="20" y="330" width="120" height="70" rx="6" class="c-external" stroke-width="1.5"/>
           <g aria-hidden="true" data-semantic-sigil="external" class="semantic-sigil s-external" transform="translate(26 336) scale(0.6875)">
             <rect x="2.5" y="5" width="8.5" height="8" rx="1.5"/>
             <path d="M8 2.5h5.5V8M13.5 2.5 7.5 8.5"/>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="90" y="366" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Gerente / secretario</text>
-        <text data-detail="context" x="90" y="382" class="t-muted" font-size="9" text-anchor="middle">Usuario autenticado</text>
+          <text data-node-label="" data-detail-anchor="" x="80" y="363" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Usuario</text>
+        <text data-detail="context" x="80" y="379" class="t-muted" font-size="9" text-anchor="middle">JWT activo</text>
         </g>
 
-        <g id="node-vue-view" data-node-id="vue-view" data-node-label="Vista Vue" tabindex="0" role="button" aria-label="Focus Vista Vue, Email -&gt; CP -&gt; direccion editable, Frontend Vue" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="Email -&gt; CP -&gt; direccion editable" data-node-context="Frontend Vue">
-          <title>Vista Vue · Email -&gt; CP -&gt; direccion editable · Frontend Vue</title>
-          <rect x="250" y="330" width="145" height="88" rx="6" class="c-mask"/>
-          <rect x="250" y="330" width="145" height="88" rx="6" class="c-frontend" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(256 336) scale(0.6875)">
+        <g id="node-customers-ui" data-node-id="customers-ui" data-node-label="CustomersModule.vue" tabindex="0" role="button" aria-label="Focus CustomersModule.vue, Tabla, form, foto e historial, Frontend Vue 3 + Vuetify" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="Tabla, form, foto e historial" data-node-context="Frontend Vue 3 + Vuetify">
+          <title>CustomersModule.vue · Tabla, form, foto e historial · Frontend Vue 3 + Vuetify</title>
+          <rect x="205" y="330" width="140" height="84" rx="6" class="c-mask"/>
+          <rect x="205" y="330" width="140" height="84" rx="6" class="c-frontend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(211 336) scale(0.6875)">
             <rect x="2" y="3" width="12" height="10" rx="2"/>
             <path d="M2 6.5h12"/>
             <circle cx="4.1" cy="4.8" r=".7" class="sigil-fill"/>
             <circle cx="6.3" cy="4.8" r=".7" class="sigil-fill"/>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="322.5" y="372" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Vista Vue</text>
-        <text data-detail="context" x="322.5" y="388" class="t-muted" font-size="6.9" text-anchor="middle">Email -&gt; CP -&gt; direccion editable</text>
+          <text data-node-label="" data-detail-anchor="" x="275" y="370" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">CustomersModule.vue</text>
+        <text data-detail="context" x="275" y="386" class="t-muted" font-size="7.5" text-anchor="middle">Tabla, form, foto e historial</text>
         </g>
 
-        <g id="node-frontend-facade" data-node-id="frontend-facade" data-node-label="workshopFacade.js" tabindex="0" role="button" aria-label="Focus workshopFacade.js, clientes + catalogo postal, Frontend Vue" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="clientes + catalogo postal" data-node-context="Frontend Vue">
-          <title>workshopFacade.js · clientes + catalogo postal · Frontend Vue</title>
-          <rect x="425" y="330" width="155" height="82" rx="6" class="c-mask"/>
-          <rect x="425" y="330" width="155" height="82" rx="6" class="c-frontend" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(431 336) scale(0.6875)">
+        <g id="node-frontend-facade" data-node-id="frontend-facade" data-node-label="workshopFacade.js" tabindex="0" role="button" aria-label="Focus workshopFacade.js, Facade frontend, Frontend Vue 3 + Vuetify" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="Facade frontend" data-node-context="Frontend Vue 3 + Vuetify">
+          <title>workshopFacade.js · Facade frontend · Frontend Vue 3 + Vuetify</title>
+          <rect x="370" y="330" width="130" height="80" rx="6" class="c-mask"/>
+          <rect x="370" y="330" width="130" height="80" rx="6" class="c-frontend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(376 336) scale(0.6875)">
             <rect x="2" y="3" width="12" height="10" rx="2"/>
             <path d="M2 6.5h12"/>
             <circle cx="4.1" cy="4.8" r=".7" class="sigil-fill"/>
             <circle cx="6.3" cy="4.8" r=".7" class="sigil-fill"/>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="502.5" y="369" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">workshopFacade.js</text>
-        <text data-detail="context" x="502.5" y="385" class="t-muted" font-size="9" text-anchor="middle">clientes + catalogo postal</text>
+          <text data-node-label="" data-detail-anchor="" x="435" y="368" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">workshopFacade.js</text>
+        <text data-detail="context" x="435" y="384" class="t-muted" font-size="9" text-anchor="middle">Facade frontend</text>
         </g>
 
-        <g id="node-api-client" data-node-id="api-client" data-node-label="services/api.js" tabindex="0" role="button" aria-label="Focus services/api.js, fetch REST + JWT, Frontend Vue" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="fetch REST + JWT" data-node-context="Frontend Vue">
-          <title>services/api.js · fetch REST + JWT · Frontend Vue</title>
-          <rect x="625" y="330" width="140" height="82" rx="6" class="c-mask"/>
-          <rect x="625" y="330" width="140" height="82" rx="6" class="c-frontend" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(631 336) scale(0.6875)">
+        <g id="node-api-client" data-node-id="api-client" data-node-label="services/api.js" tabindex="0" role="button" aria-label="Focus services/api.js, JWT + multipart, Frontend Vue 3 + Vuetify" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="JWT + multipart" data-node-context="Frontend Vue 3 + Vuetify">
+          <title>services/api.js · JWT + multipart · Frontend Vue 3 + Vuetify</title>
+          <rect x="535" y="330" width="120" height="80" rx="6" class="c-mask"/>
+          <rect x="535" y="330" width="120" height="80" rx="6" class="c-frontend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(541 336) scale(0.6875)">
             <rect x="2" y="3" width="12" height="10" rx="2"/>
             <path d="M2 6.5h12"/>
             <circle cx="4.1" cy="4.8" r=".7" class="sigil-fill"/>
             <circle cx="6.3" cy="4.8" r=".7" class="sigil-fill"/>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="695" y="369" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">services/api.js</text>
-        <text data-detail="context" x="695" y="385" class="t-muted" font-size="9" text-anchor="middle">fetch REST + JWT</text>
+          <text data-node-label="" data-detail-anchor="" x="595" y="368" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">services/api.js</text>
+        <text data-detail="context" x="595" y="384" class="t-muted" font-size="9" text-anchor="middle">JWT + multipart</text>
         </g>
 
-        <g id="node-security" data-node-id="security" data-node-label="Spring Security" tabindex="0" role="button" aria-label="Focus Spring Security, JWT requerido para /api/catalogos/**, API Spring Boot protegida" aria-pressed="false" data-node-kind="security" data-node-sublabel="JWT requerido para /api/catalogos/**" data-node-context="API Spring Boot protegida">
-          <title>Spring Security · JWT requerido para /api/catalogos/** · API Spring Boot protegida</title>
-          <rect x="800" y="110" width="190" height="84" rx="6" class="c-mask"/>
-          <rect x="800" y="110" width="190" height="84" rx="6" class="c-security" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="security" class="semantic-sigil s-security" transform="translate(806 116) scale(0.6875)">
+        <g id="node-security" data-node-id="security" data-node-label="Spring Security" tabindex="0" role="button" aria-label="Focus Spring Security, Roles y proteccion de rutas, API Spring Boot protegida" aria-pressed="false" data-node-kind="security" data-node-sublabel="Roles y proteccion de rutas" data-node-context="API Spring Boot protegida">
+          <title>Spring Security · Roles y proteccion de rutas · API Spring Boot protegida</title>
+          <rect x="720" y="95" width="145" height="80" rx="6" class="c-mask"/>
+          <rect x="720" y="95" width="145" height="80" rx="6" class="c-security" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="security" class="semantic-sigil s-security" transform="translate(726 101) scale(0.6875)">
             <path d="M8 2.2 13 4v3.5c0 3.1-1.8 5.4-5 6.5-3.2-1.1-5-3.4-5-6.5V4Z"/>
             <path d="m5.8 8 1.5 1.5 3-3"/>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="895" y="150" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Spring Security</text>
-        <text data-detail="context" x="895" y="166" class="t-muted" font-size="8.4" text-anchor="middle">JWT requerido para /api/catalogos/**</text>
+          <text data-node-label="" data-detail-anchor="" x="792.5" y="133" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Spring Security</text>
+        <text data-detail="context" x="792.5" y="149" class="t-muted" font-size="8.4" text-anchor="middle">Roles y proteccion de rutas</text>
         </g>
 
-        <g id="node-postal-controller" data-node-id="postal-controller" data-node-label="PostalCatalogController" tabindex="0" role="button" aria-label="Focus PostalCatalogController, GET /api/catalogos/codigos-postales/{cp}, API Spring Boot protegida" aria-pressed="false" data-node-kind="backend" data-node-sublabel="GET /api/catalogos/codigos-postales/{cp}" data-node-context="API Spring Boot protegida">
-          <title>PostalCatalogController · GET /api/catalogos/codigos-postales/{cp} · API Spring Boot protegida</title>
-          <rect x="800" y="330" width="190" height="92" rx="6" class="c-mask"/>
-          <rect x="800" y="330" width="190" height="92" rx="6" class="c-backend" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(806 336) scale(0.6875)">
+        <g id="node-customer-controller" data-node-id="customer-controller" data-node-label="CustomerController" tabindex="0" role="button" aria-label="Focus CustomerController, CRUD y paginacion, API Spring Boot protegida" aria-pressed="false" data-node-kind="backend" data-node-sublabel="CRUD y paginacion" data-node-context="API Spring Boot protegida">
+          <title>CustomerController · CRUD y paginacion · API Spring Boot protegida</title>
+          <rect x="720" y="330" width="145" height="86" rx="6" class="c-mask"/>
+          <rect x="720" y="330" width="145" height="86" rx="6" class="c-backend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(726 336) scale(0.6875)">
             <path d="M6 3 3 8l3 5M10 3l3 5-3 5"/>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="895" y="374" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">PostalCatalogController</text>
-        <text data-detail="context" x="895" y="390" class="t-muted" font-size="7.5" text-anchor="middle">GET /api/catalogos/codigos-postales/{cp}</text>
+          <text data-node-label="" data-detail-anchor="" x="792.5" y="371" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">CustomerController</text>
+        <text data-detail="context" x="792.5" y="387" class="t-muted" font-size="9" text-anchor="middle">CRUD y paginacion</text>
         </g>
 
-        <g id="node-postal-facade" data-node-id="postal-facade" data-node-label="PostalCatalogFacade" tabindex="0" role="button" aria-label="Focus PostalCatalogFacade, Fachada backend, API Spring Boot protegida" aria-pressed="false" data-node-kind="backend" data-node-sublabel="Fachada backend" data-node-context="API Spring Boot protegida">
-          <title>PostalCatalogFacade · Fachada backend · API Spring Boot protegida</title>
-          <rect x="800" y="555" width="190" height="84" rx="6" class="c-mask"/>
-          <rect x="800" y="555" width="190" height="84" rx="6" class="c-backend" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(806 561) scale(0.6875)">
+        <g id="node-workshop-controller" data-node-id="workshop-controller" data-node-label="WorkshopController" tabindex="0" role="button" aria-label="Focus WorkshopController, Solo GERENTE, API Spring Boot protegida" aria-pressed="false" data-node-kind="backend" data-node-sublabel="Solo GERENTE" data-node-context="API Spring Boot protegida">
+          <title>WorkshopController · Solo GERENTE · API Spring Boot protegida</title>
+          <rect x="720" y="550" width="145" height="82" rx="6" class="c-mask"/>
+          <rect x="720" y="550" width="145" height="82" rx="6" class="c-backend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(726 556) scale(0.6875)">
             <path d="M6 3 3 8l3 5M10 3l3 5-3 5"/>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="895" y="595" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">PostalCatalogFacade</text>
-        <text data-detail="context" x="895" y="611" class="t-muted" font-size="9" text-anchor="middle">Fachada backend</text>
+          <text data-node-label="" data-detail-anchor="" x="792.5" y="589" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">WorkshopController</text>
+        <text data-detail="context" x="792.5" y="605" class="t-muted" font-size="9" text-anchor="middle">Solo GERENTE</text>
         </g>
 
-        <g id="node-postal-service" data-node-id="postal-service" data-node-label="PostalCatalogService" tabindex="0" role="button" aria-label="Focus PostalCatalogService, Valida 5 digitos y arma respuesta, API Spring Boot protegida" aria-pressed="false" data-node-kind="backend" data-node-sublabel="Valida 5 digitos y arma respuesta" data-node-context="API Spring Boot protegida">
-          <title>PostalCatalogService · Valida 5 digitos y arma respuesta · API Spring Boot protegida</title>
-          <rect x="800" y="780" width="190" height="92" rx="6" class="c-mask"/>
-          <rect x="800" y="780" width="190" height="92" rx="6" class="c-backend" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(806 786) scale(0.6875)">
+        <g id="node-postal-controller" data-node-id="postal-controller" data-node-label="PostalCatalogController" tabindex="0" role="button" aria-label="Focus PostalCatalogController, CP y ubicacion, API Spring Boot protegida" aria-pressed="false" data-node-kind="backend" data-node-sublabel="CP y ubicacion" data-node-context="API Spring Boot protegida">
+          <title>PostalCatalogController · CP y ubicacion · API Spring Boot protegida</title>
+          <rect x="720" y="770" width="145" height="84" rx="6" class="c-mask"/>
+          <rect x="720" y="770" width="145" height="84" rx="6" class="c-backend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(726 776) scale(0.6875)">
             <path d="M6 3 3 8l3 5M10 3l3 5-3 5"/>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="895" y="824" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">PostalCatalogService</text>
-        <text data-detail="context" x="895" y="840" class="t-muted" font-size="9" text-anchor="middle">Valida 5 digitos y arma respuesta</text>
+          <text data-node-label="" data-detail-anchor="" x="792.5" y="810" class="t-primary" font-size="9.9" font-weight="600" text-anchor="middle">PostalCatalogController</text>
+        <text data-detail="context" x="792.5" y="826" class="t-muted" font-size="9" text-anchor="middle">CP y ubicacion</text>
         </g>
 
-        <g id="node-postal-repository" data-node-id="postal-repository" data-node-label="PostalSettlementRepository" tabindex="0" role="button" aria-label="Focus PostalSettlementRepository, Consulta por codigo postal, Catalogo local offline" aria-pressed="false" data-node-kind="database" data-node-sublabel="Consulta por codigo postal" data-node-context="Catalogo local offline">
-          <title>PostalSettlementRepository · Consulta por codigo postal · Catalogo local offline</title>
-          <rect x="800" y="1010" width="190" height="86" rx="6" class="c-mask"/>
-          <rect x="800" y="1010" width="190" height="86" rx="6" class="c-database" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="database" class="semantic-sigil s-database" transform="translate(806 1016) scale(0.6875)">
+        <g id="node-customer-service" data-node-id="customer-service" data-node-label="Customer Service" tabindex="0" role="button" aria-label="Focus Customer Service, Sin duplicar e historial, API Spring Boot protegida" aria-pressed="false" data-node-kind="backend" data-node-sublabel="Sin duplicar e historial" data-node-context="API Spring Boot protegida">
+          <title>Customer Service · Sin duplicar e historial · API Spring Boot protegida</title>
+          <rect x="910" y="330" width="155" height="86" rx="6" class="c-mask"/>
+          <rect x="910" y="330" width="155" height="86" rx="6" class="c-backend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(916 336) scale(0.6875)">
+            <path d="M6 3 3 8l3 5M10 3l3 5-3 5"/>
+          </g>
+          <text data-node-label="" data-detail-anchor="" x="987.5" y="371" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Customer Service</text>
+        <text data-detail="context" x="987.5" y="387" class="t-muted" font-size="9" text-anchor="middle">Sin duplicar e historial</text>
+        </g>
+
+        <g id="node-workshop-service" data-node-id="workshop-service" data-node-label="Workshop Service" tabindex="0" role="button" aria-label="Focus Workshop Service, RFC unico, API Spring Boot protegida" aria-pressed="false" data-node-kind="backend" data-node-sublabel="RFC unico" data-node-context="API Spring Boot protegida">
+          <title>Workshop Service · RFC unico · API Spring Boot protegida</title>
+          <rect x="910" y="550" width="155" height="82" rx="6" class="c-mask"/>
+          <rect x="910" y="550" width="155" height="82" rx="6" class="c-backend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(916 556) scale(0.6875)">
+            <path d="M6 3 3 8l3 5M10 3l3 5-3 5"/>
+          </g>
+          <text data-node-label="" data-detail-anchor="" x="987.5" y="589" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Workshop Service</text>
+        <text data-detail="context" x="987.5" y="605" class="t-muted" font-size="9" text-anchor="middle">RFC unico</text>
+        </g>
+
+        <g id="node-postal-service" data-node-id="postal-service" data-node-label="Postal Service" tabindex="0" role="button" aria-label="Focus Postal Service, SEPOMEX local, API Spring Boot protegida" aria-pressed="false" data-node-kind="backend" data-node-sublabel="SEPOMEX local" data-node-context="API Spring Boot protegida">
+          <title>Postal Service · SEPOMEX local · API Spring Boot protegida</title>
+          <rect x="910" y="770" width="155" height="82" rx="6" class="c-mask"/>
+          <rect x="910" y="770" width="155" height="82" rx="6" class="c-backend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(916 776) scale(0.6875)">
+            <path d="M6 3 3 8l3 5M10 3l3 5-3 5"/>
+          </g>
+          <text data-node-label="" data-detail-anchor="" x="987.5" y="809" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Postal Service</text>
+        <text data-detail="context" x="987.5" y="825" class="t-muted" font-size="9" text-anchor="middle">SEPOMEX local</text>
+        </g>
+
+        <g id="node-file-storage" data-node-id="file-storage" data-node-label="Almacenamiento de fotos" tabindex="0" role="button" aria-label="Focus Almacenamiento de fotos, UPLOAD_DIR; max 15 MB, Persistencia local" aria-pressed="false" data-node-kind="database" data-node-sublabel="UPLOAD_DIR; max 15 MB" data-node-context="Persistencia local">
+          <title>Almacenamiento de fotos · UPLOAD_DIR; max 15 MB · Persistencia local</title>
+          <rect x="910" y="95" width="155" height="80" rx="6" class="c-mask"/>
+          <rect x="910" y="95" width="155" height="80" rx="6" class="c-database" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="database" class="semantic-sigil s-database" transform="translate(916 101) scale(0.6875)">
             <ellipse cx="8" cy="4" rx="5" ry="2"/>
             <path d="M3 4v8c0 1.1 2.2 2 5 2s5-.9 5-2V4M3 8c0 1.1 2.2 2 5 2s5-.9 5-2"/>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="895" y="1051" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">PostalSettlementRepository</text>
-        <text data-detail="context" x="895" y="1067" class="t-muted" font-size="9" text-anchor="middle">Consulta por codigo postal</text>
+          <text data-node-label="" data-detail-anchor="" x="987.5" y="133" class="t-primary" font-size="10.6" font-weight="600" text-anchor="middle">Almacenamiento de fotos</text>
+        <text data-detail="context" x="987.5" y="149" class="t-muted" font-size="9" text-anchor="middle">UPLOAD_DIR; max 15 MB</text>
         </g>
 
-        <g id="node-mysql" data-node-id="mysql" data-node-label="MySQL Docker" tabindex="0" role="button" aria-label="Focus MySQL Docker, postal_settlements + customers, Catalogo local offline" aria-pressed="false" data-node-kind="database" data-node-sublabel="postal_settlements + customers" data-node-context="Catalogo local offline">
-          <title>MySQL Docker · postal_settlements + customers · Catalogo local offline</title>
-          <rect x="800" y="1240" width="180" height="92" rx="6" class="c-mask"/>
-          <rect x="800" y="1240" width="180" height="92" rx="6" class="c-database" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="database" class="semantic-sigil s-database" transform="translate(806 1246) scale(0.6875)">
+        <g id="node-mysql" data-node-id="mysql" data-node-label="MySQL Docker" tabindex="0" role="button" aria-label="Focus MySQL Docker, clientes, talleres y CP, Persistencia local" aria-pressed="false" data-node-kind="database" data-node-sublabel="clientes, talleres y CP" data-node-context="Persistencia local">
+          <title>MySQL Docker · clientes, talleres y CP · Persistencia local</title>
+          <rect x="910" y="900" width="155" height="88" rx="6" class="c-mask"/>
+          <rect x="910" y="900" width="155" height="88" rx="6" class="c-database" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="database" class="semantic-sigil s-database" transform="translate(916 906) scale(0.6875)">
             <ellipse cx="8" cy="4" rx="5" ry="2"/>
             <path d="M3 4v8c0 1.1 2.2 2 5 2s5-.9 5-2V4M3 8c0 1.1 2.2 2 5 2s5-.9 5-2"/>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="890" y="1284" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">MySQL Docker</text>
-        <text data-detail="context" x="890" y="1300" class="t-muted" font-size="9" text-anchor="middle">postal_settlements + customers</text>
+          <text data-node-label="" data-detail-anchor="" x="987.5" y="942" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">MySQL Docker</text>
+        <text data-detail="context" x="987.5" y="958" class="t-muted" font-size="9" text-anchor="middle">clientes, talleres y CP</text>
         </g>
 
-        <g id="node-seed-sql" data-node-id="seed-sql" data-node-label="database/sepomex_data.sql" tabindex="0" role="button" aria-label="Focus database/sepomex_data.sql, 145,420 asentamientos; 15 MB, Catalogo local offline" aria-pressed="false" data-node-kind="database" data-node-sublabel="145,420 asentamientos; 15 MB" data-node-context="Catalogo local offline">
-          <title>database/sepomex_data.sql · 145,420 asentamientos; 15 MB · Catalogo local offline</title>
-          <rect x="470" y="1240" width="200" height="92" rx="6" class="c-mask"/>
-          <rect x="470" y="1240" width="200" height="92" rx="6" class="c-database" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="database" class="semantic-sigil s-database" transform="translate(476 1246) scale(0.6875)">
+        <g id="node-sepomex-seed" data-node-id="sepomex-seed" data-node-label="SEPOMEX SQL" tabindex="0" role="button" aria-label="Focus SEPOMEX SQL, Catalogo postal offline, Persistencia local" aria-pressed="false" data-node-kind="database" data-node-sublabel="Catalogo postal offline" data-node-context="Persistencia local">
+          <title>SEPOMEX SQL · Catalogo postal offline · Persistencia local</title>
+          <rect x="910" y="1025" width="155" height="80" rx="6" class="c-mask"/>
+          <rect x="910" y="1025" width="155" height="80" rx="6" class="c-database" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="database" class="semantic-sigil s-database" transform="translate(916 1031) scale(0.6875)">
             <ellipse cx="8" cy="4" rx="5" ry="2"/>
             <path d="M3 4v8c0 1.1 2.2 2 5 2s5-.9 5-2V4M3 8c0 1.1 2.2 2 5 2s5-.9 5-2"/>
           </g>
-          <text data-node-label="" data-detail-anchor="" x="570" y="1284" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">database/sepomex_data.sql</text>
-        <text data-detail="context" x="570" y="1300" class="t-muted" font-size="9" text-anchor="middle">145,420 asentamientos; 15 MB</text>
-        </g>
-
-        <g id="node-converter" data-node-id="converter" data-node-label="Convertidor SEPOMEX" tabindex="0" role="button" aria-label="Focus Convertidor SEPOMEX, convert_sepomex_postgres_to_mysql.py, Catalogo local offline" aria-pressed="false" data-node-kind="backend" data-node-sublabel="convert_sepomex_postgres_to_mysql.py" data-node-context="Catalogo local offline">
-          <title>Convertidor SEPOMEX · convert_sepomex_postgres_to_mysql.py · Catalogo local offline</title>
-          <rect x="150" y="1240" width="220" height="92" rx="6" class="c-mask"/>
-          <rect x="150" y="1240" width="220" height="92" rx="6" class="c-backend" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(156 1246) scale(0.6875)">
-            <path d="M6 3 3 8l3 5M10 3l3 5-3 5"/>
-          </g>
-          <text data-node-label="" data-detail-anchor="" x="260" y="1284" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Convertidor SEPOMEX</text>
-        <text data-detail="context" x="260" y="1300" class="t-muted" font-size="9" text-anchor="middle">convert_sepomex_postgres_to_mysql.py</text>
-        </g>
-
-        <g id="node-customer-flow" data-node-id="customer-flow" data-node-label="Registro de cliente" tabindex="0" role="button" aria-label="Focus Registro de cliente, CustomerFacade -&gt; Service -&gt; Repository, API Spring Boot protegida" aria-pressed="false" data-node-kind="backend" data-node-sublabel="CustomerFacade -&gt; Service -&gt; Repository" data-node-context="API Spring Boot protegida">
-          <title>Registro de cliente · CustomerFacade -&gt; Service -&gt; Repository · API Spring Boot protegida</title>
-          <rect x="470" y="780" width="220" height="92" rx="6" class="c-mask"/>
-          <rect x="470" y="780" width="220" height="92" rx="6" class="c-backend" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(476 786) scale(0.6875)">
-            <path d="M6 3 3 8l3 5M10 3l3 5-3 5"/>
-          </g>
-          <text data-node-label="" data-detail-anchor="" x="580" y="824" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Registro de cliente</text>
-        <text data-detail="context" x="580" y="840" class="t-muted" font-size="9" text-anchor="middle">CustomerFacade -&gt; Service -&gt; Repository</text>
+          <text data-node-label="" data-detail-anchor="" x="987.5" y="1063" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">SEPOMEX SQL</text>
+        <text data-detail="context" x="987.5" y="1079" class="t-muted" font-size="9" text-anchor="middle">Catalogo postal offline</text>
         </g>
 
         <!-- Connection labels -->
-        <g data-detail="context" data-edge-from="actor" data-edge-to="vue-view" data-edge-label="datos cliente" data-edge-key="0" data-edge-id="actor-to-vue">
-          <rect x="168.8" y="348" width="72.4" height="14" rx="3" class="c-mask"/>
-          <text x="205" y="358" class="t-edge-emphasis" font-size="8" text-anchor="middle">datos cliente</text>
+        <g data-detail="context" data-edge-from="actor" data-edge-to="customers-ui" data-edge-label="captura" data-edge-key="0" data-edge-id="actor-to-ui">
+          <rect x="150.7" y="345" width="43.6" height="14" rx="3" class="c-mask"/>
+          <text x="172.5" y="355" class="t-edge-emphasis" font-size="8" text-anchor="middle">captura</text>
         </g>
-        <g data-detail="context" data-edge-from="vue-view" data-edge-to="frontend-facade" data-edge-label="CP" data-edge-key="1" data-edge-id="vue-to-facade">
-          <rect x="395" y="354" width="30" height="14" rx="3" class="c-mask"/>
-          <text x="410" y="364" class="t-edge-emphasis" font-size="8" text-anchor="middle">CP</text>
+
+
+        <g data-detail="context" data-edge-from="api-client" data-edge-to="security" data-edge-label="Authorization: Bearer JWT" data-edge-key="3" data-edge-id="api-to-security">
+          <rect x="580.5" y="286" width="130" height="14" rx="3" class="c-mask"/>
+          <text x="645.5" y="296" class="t-edge-security" font-size="8" text-anchor="middle">Authorization: Bearer JWT</text>
         </g>
-        <g data-detail="context" data-edge-from="frontend-facade" data-edge-to="api-client" data-edge-label="REST" data-edge-key="2" data-edge-id="facade-to-api">
-          <rect x="587.5" y="351" width="30" height="14" rx="3" class="c-mask"/>
-          <text x="602.5" y="361" class="t-edge-emphasis" font-size="8" text-anchor="middle">REST</text>
+        <g data-detail="context" data-edge-from="api-client" data-edge-to="customer-controller" data-edge-label="clientes" data-edge-key="4" data-edge-id="api-to-customer-controller">
+          <rect x="663.3" y="350" width="48.4" height="14" rx="3" class="c-mask"/>
+          <text x="687.5" y="360" class="t-edge-emphasis" font-size="8" text-anchor="middle">clientes</text>
         </g>
-        <g data-detail="context" data-edge-from="api-client" data-edge-to="security" data-edge-label="JWT" data-edge-key="3" data-edge-id="api-to-security">
-          <rect x="720.5" y="286" width="30" height="14" rx="3" class="c-mask"/>
-          <text x="735.5" y="296" class="t-edge-security" font-size="8" text-anchor="middle">JWT</text>
+        <g data-detail="context" data-edge-from="api-client" data-edge-to="workshop-controller" data-edge-label="talleres" data-edge-key="5" data-edge-id="api-to-workshop-controller">
+          <rect x="637.8499999999999" y="571" width="48.4" height="14" rx="3" class="c-mask"/>
+          <text x="662.05" y="581" class="t-edge-emphasis" font-size="8" text-anchor="middle">talleres</text>
         </g>
-        <g data-detail="context" data-edge-from="api-client" data-edge-to="postal-controller" data-edge-label="JSON" data-edge-key="4" data-edge-id="api-to-postal-controller">
-          <rect x="767.5" y="351" width="30" height="14" rx="3" class="c-mask"/>
-          <text x="782.5" y="361" class="t-edge-emphasis" font-size="8" text-anchor="middle">JSON</text>
+        <g data-detail="context" data-edge-from="api-client" data-edge-to="postal-controller" data-edge-label="catalogo postal" data-edge-key="6" data-edge-id="api-to-postal-controller">
+          <rect x="613" y="792" width="82" height="14" rx="3" class="c-mask"/>
+          <text x="654" y="802" class="t-edge-emphasis" font-size="8" text-anchor="middle">catalogo postal</text>
         </g>
-        <g data-detail="context" data-edge-from="security" data-edge-to="postal-controller" data-edge-label="autenticado" data-edge-key="5" data-edge-id="security-to-postal-controller">
-          <rect x="826.2" y="255" width="62.8" height="14" rx="3" class="c-mask"/>
-          <text x="857.6" y="265" class="t-edge-security" font-size="8" text-anchor="middle">autenticado</text>
+        <g data-detail="context" data-edge-from="security" data-edge-to="customer-controller" data-edge-label="roles" data-edge-key="7" data-edge-id="security-to-customers">
+          <rect x="745.5" y="245.5" width="34" height="14" rx="3" class="c-mask"/>
+          <text x="762.5" y="255.5" class="t-edge-security" font-size="8" text-anchor="middle">roles</text>
         </g>
-        <g data-detail="context" data-edge-from="postal-controller" data-edge-to="postal-facade" data-edge-label="delega" data-edge-key="6" data-edge-id="controller-to-facade">
-          <rect x="850.2" y="481.5" width="38.8" height="14" rx="3" class="c-mask"/>
-          <text x="869.6" y="491.5" class="t-edge-emphasis" font-size="8" text-anchor="middle">delega</text>
+        <g data-detail="context" data-edge-from="security" data-edge-to="workshop-controller" data-edge-label="GERENTE" data-edge-key="8" data-edge-id="security-to-workshops">
+          <rect x="867.2" y="310.5" width="43.6" height="14" rx="3" class="c-mask"/>
+          <text x="889" y="320.5" class="t-edge-security" font-size="8" text-anchor="middle">GERENTE</text>
         </g>
-        <g data-detail="context" data-edge-from="postal-facade" data-edge-to="postal-service" data-edge-label="orquesta" data-edge-key="7" data-edge-id="facade-to-service">
-          <rect x="840.5999999999999" y="702.5" width="48.4" height="14" rx="3" class="c-mask"/>
-          <text x="864.8" y="712.5" class="t-edge-emphasis" font-size="8" text-anchor="middle">orquesta</text>
+
+
+
+        <g data-detail="context" data-edge-from="customer-service" data-edge-to="file-storage" data-edge-label="foto cliente" data-edge-key="12" data-edge-id="customer-to-storage">
+          <rect x="946.7" y="310" width="67.6" height="14" rx="3" class="c-mask"/>
+          <text x="980.5" y="320" class="t-edge-dashed" font-size="8" text-anchor="middle">foto cliente</text>
         </g>
-        <g data-detail="context" data-edge-from="postal-service" data-edge-to="postal-repository" data-edge-label="Spring Data JPA" data-edge-key="8" data-edge-id="service-to-repository">
-          <rect x="815.05" y="934" width="82" height="14" rx="3" class="c-mask"/>
-          <text x="856.05" y="944" class="t-edge-emphasis" font-size="8" text-anchor="middle">Spring Data JPA</text>
+        <g data-detail="context" data-edge-from="workshop-service" data-edge-to="file-storage" data-edge-label="foto taller" data-edge-key="13" data-edge-id="workshop-to-storage">
+          <rect x="1095" y="356" width="62.8" height="14" rx="3" class="c-mask"/>
+          <text x="1126.4" y="366" class="t-edge-dashed" font-size="8" text-anchor="middle">foto taller</text>
         </g>
-        <g data-detail="context" data-edge-from="postal-repository" data-edge-to="mysql" data-edge-label="postal_settlements" data-edge-key="9" data-edge-id="repository-to-mysql">
-          <rect x="802.6499999999999" y="1161" width="96.39999999999999" height="14" rx="3" class="c-mask"/>
-          <text x="850.8499999999999" y="1171" class="t-edge-emphasis" font-size="8" text-anchor="middle">postal_settlements</text>
+        <g data-detail="context" data-edge-from="customer-service" data-edge-to="mysql" data-edge-label="clientes + historial" data-edge-key="14" data-edge-id="customer-to-mysql">
+          <rect x="774" y="738.5" width="106" height="14" rx="3" class="c-mask"/>
+          <text x="827" y="748.5" class="t-edge-emphasis" font-size="8" text-anchor="middle">clientes + historial</text>
         </g>
-        <g data-detail="context" data-edge-from="mysql" data-edge-to="postal-service" data-edge-label="estado, municipio, colonias" data-edge-key="10" data-edge-id="mysql-to-service">
-          <rect x="630.4000000000001" y="1014" width="139.6" height="14" rx="3" class="c-mask"/>
-          <text x="700.2" y="1024" class="t-edge-dashed" font-size="8" text-anchor="middle">estado, municipio, colonias</text>
+        <g data-detail="context" data-edge-from="workshop-service" data-edge-to="mysql" data-edge-label="workshops" data-edge-key="15" data-edge-id="workshop-to-mysql">
+          <rect x="1011.65" y="636" width="53.199999999999996" height="14" rx="3" class="c-mask"/>
+          <text x="1038.25" y="646" class="t-edge-emphasis" font-size="8" text-anchor="middle">workshops</text>
         </g>
-        <g data-detail="context" data-edge-from="seed-sql" data-edge-to="mysql" data-edge-label="carga inicial Docker" data-edge-key="11" data-edge-id="seed-to-mysql">
-          <rect x="682" y="1266" width="106" height="14" rx="3" class="c-mask"/>
-          <text x="735" y="1276" class="t-edge-emphasis" font-size="8" text-anchor="middle">carga inicial Docker</text>
+        <g data-detail="context" data-edge-from="postal-service" data-edge-to="mysql" data-edge-label="postal_settlements" data-edge-key="16" data-edge-id="postal-to-mysql">
+          <rect x="924.25" y="856" width="96.39999999999999" height="14" rx="3" class="c-mask"/>
+          <text x="972.45" y="866" class="t-edge-emphasis" font-size="8" text-anchor="middle">postal_settlements</text>
         </g>
-        <g data-detail="context" data-edge-from="converter" data-edge-to="seed-sql" data-edge-label="genera SQL" data-edge-key="12" data-edge-id="converter-to-seed">
-          <rect x="391" y="1266" width="58" height="14" rx="3" class="c-mask"/>
-          <text x="420" y="1276" class="t-edge-dashed" font-size="8" text-anchor="middle">genera SQL</text>
-        </g>
-        <g data-detail="context" data-edge-from="vue-view" data-edge-to="customer-flow" data-edge-label="registra cliente con direccion validada" data-edge-key="13" data-edge-id="vue-to-customer">
-          <rect x="285.65" y="422" width="197.2" height="14" rx="3" class="c-mask"/>
-          <text x="384.25" y="432" class="t-edge-dashed" font-size="8" text-anchor="middle">registra cliente con direccion validada</text>
-        </g>
-        <g data-detail="context" data-edge-from="customer-flow" data-edge-to="mysql" data-edge-label="customers" data-edge-key="14" data-edge-id="customer-to-mysql">
-          <rect x="765.4" y="736" width="53.199999999999996" height="14" rx="3" class="c-mask"/>
-          <text x="792" y="746" class="t-edge-dashed" font-size="8" text-anchor="middle">customers</text>
+        <g data-detail="context" data-edge-from="sepomex-seed" data-edge-to="mysql" data-edge-label="carga local" data-edge-key="17" data-edge-id="sepomex-to-mysql">
+          <rect x="956.1" y="1005" width="62.8" height="14" rx="3" class="c-mask"/>
+          <text x="987.5" y="1015" class="t-edge-dashed" font-size="8" text-anchor="middle">carga local</text>
         </g>
 
         <!-- Boundary labels (foreground masks keep routes out of titles) -->
-        <g data-graph-role="structural-frame-label" data-composition-frame-id="0" data-composition-frame-kind="region" data-composition-frame-label="Frontend Vue">
-          <rect data-graph-role="structural-frame-label-mask" x="224" y="310" width="74.8" height="16" rx="3" class="c-mask"/>
-          <text data-boundary-label="" x="228" y="323" class="t-cloud" font-size="9" font-weight="600">Frontend Vue</text>
+        <g data-graph-role="structural-frame-label" data-composition-frame-id="0" data-composition-frame-kind="region" data-composition-frame-label="Frontend Vue 3 + Vuetify">
+          <rect data-graph-role="structural-frame-label-mask" x="179" y="310" width="139.6" height="16" rx="3" class="c-mask"/>
+          <text data-boundary-label="" x="183" y="323" class="t-cloud" font-size="9" font-weight="600">Frontend Vue 3 + Vuetify</text>
         </g>
 
         <g data-graph-role="structural-frame-label" data-composition-frame-id="1" data-composition-frame-kind="security-group" data-composition-frame-label="API Spring Boot protegida">
-          <rect data-graph-role="structural-frame-label-mask" x="440" y="90" width="145" height="16" rx="3" class="c-mask"/>
-          <text data-boundary-label="" x="444" y="103" class="t-security" font-size="9" font-weight="600">API Spring Boot protegida</text>
+          <rect data-graph-role="structural-frame-label-mask" x="690" y="75" width="145" height="16" rx="3" class="c-mask"/>
+          <text data-boundary-label="" x="694" y="88" class="t-security" font-size="9" font-weight="600">API Spring Boot protegida</text>
         </g>
 
-        <g data-graph-role="structural-frame-label" data-composition-frame-id="2" data-composition-frame-kind="region" data-composition-frame-label="Catalogo local offline">
-          <rect data-graph-role="structural-frame-label-mask" x="122" y="990" width="128.8" height="16" rx="3" class="c-mask"/>
-          <text data-boundary-label="" x="126" y="1003" class="t-cloud" font-size="9" font-weight="600">Catalogo local offline</text>
+        <g data-graph-role="structural-frame-label" data-composition-frame-id="2" data-composition-frame-kind="region" data-composition-frame-label="Persistencia local">
+          <rect data-graph-role="structural-frame-label-mask" x="882" y="75" width="107.2" height="16" rx="3" class="c-mask"/>
+          <text data-boundary-label="" x="886" y="88" class="t-cloud" font-size="9" font-weight="600">Persistencia local</text>
         </g>
 
         <!-- Legend -->
         <g data-legend="" data-legend-bridge="">
-          <text x="40" y="1384" class="t-primary" font-size="12" font-weight="650">Legend</text>
-          <g data-legend-semantic-kind="frontend" data-legend-kind="frontend" data-legend-label="Frontend" data-legend-x="40" data-legend-baseline="1404" data-legend-width="83">
-            <rect x="40" y="1395" width="16" height="10" rx="2.5" class="c-frontend" stroke-width="1"/>
-            <text x="62" y="1404" class="t-muted" font-size="10" font-weight="500">Frontend</text>
+          <text x="40" y="1157" class="t-primary" font-size="12" font-weight="650">Legend</text>
+          <g data-legend-semantic-kind="frontend" data-legend-kind="frontend" data-legend-label="Frontend" data-legend-x="40" data-legend-baseline="1177" data-legend-width="83">
+            <rect x="40" y="1168" width="16" height="10" rx="2.5" class="c-frontend" stroke-width="1"/>
+            <text x="62" y="1177" class="t-muted" font-size="10" font-weight="500">Frontend</text>
           </g>
-          <g data-legend-semantic-kind="backend" data-legend-kind="backend" data-legend-label="Backend" data-legend-x="145" data-legend-baseline="1404" data-legend-width="78">
-            <rect x="145" y="1395" width="16" height="10" rx="2.5" class="c-backend" stroke-width="1"/>
-            <text x="167" y="1404" class="t-muted" font-size="10" font-weight="500">Backend</text>
+          <g data-legend-semantic-kind="backend" data-legend-kind="backend" data-legend-label="Backend" data-legend-x="145" data-legend-baseline="1177" data-legend-width="78">
+            <rect x="145" y="1168" width="16" height="10" rx="2.5" class="c-backend" stroke-width="1"/>
+            <text x="167" y="1177" class="t-muted" font-size="10" font-weight="500">Backend</text>
           </g>
-          <g data-legend-semantic-kind="database" data-legend-kind="database" data-legend-label="Database" data-legend-x="245" data-legend-baseline="1404" data-legend-width="83">
-            <rect x="245" y="1395" width="16" height="10" rx="2.5" class="c-database" stroke-width="1"/>
-            <text x="267" y="1404" class="t-muted" font-size="10" font-weight="500">Database</text>
+          <g data-legend-semantic-kind="database" data-legend-kind="database" data-legend-label="Database" data-legend-x="245" data-legend-baseline="1177" data-legend-width="83">
+            <rect x="245" y="1168" width="16" height="10" rx="2.5" class="c-database" stroke-width="1"/>
+            <text x="267" y="1177" class="t-muted" font-size="10" font-weight="500">Database</text>
           </g>
-          <g data-legend-semantic-kind="security" data-legend-kind="security" data-legend-label="Security" data-legend-x="350" data-legend-baseline="1404" data-legend-width="83">
-            <rect x="350" y="1395" width="16" height="10" rx="2.5" class="c-security" stroke-width="1"/>
-            <text x="372" y="1404" class="t-muted" font-size="10" font-weight="500">Security</text>
+          <g data-legend-semantic-kind="security" data-legend-kind="security" data-legend-label="Security" data-legend-x="350" data-legend-baseline="1177" data-legend-width="83">
+            <rect x="350" y="1168" width="16" height="10" rx="2.5" class="c-security" stroke-width="1"/>
+            <text x="372" y="1177" class="t-muted" font-size="10" font-weight="500">Security</text>
           </g>
-          <g data-legend-semantic-kind="external" data-legend-kind="external" data-legend-label="External" data-legend-x="455" data-legend-baseline="1404" data-legend-width="83">
-            <rect x="455" y="1395" width="16" height="10" rx="2.5" class="c-external" stroke-width="1"/>
-            <text x="477" y="1404" class="t-muted" font-size="10" font-weight="500">External</text>
+          <g data-legend-semantic-kind="external" data-legend-kind="external" data-legend-label="External" data-legend-x="455" data-legend-baseline="1177" data-legend-width="83">
+            <rect x="455" y="1168" width="16" height="10" rx="2.5" class="c-external" stroke-width="1"/>
+            <text x="477" y="1177" class="t-muted" font-size="10" font-weight="500">External</text>
           </g>
         </g>
       </svg>
@@ -5520,12 +5540,12 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
       <div class="card">
         <div class="card-header">
           <div class="card-dot emerald"></div>
-          <h3>Formulario operativo</h3>
+          <h3>Cliente unico multi-taller</h3>
         </div>
         <ul>
-          <li>Despues de email y workEmail se captura codigo postal</li>
-          <li>El CP autocompleta colonia, municipio y estado</li>
-          <li>Colonia, municipio y estado siguen editables; calle se captura manualmente</li>
+          <li>CURP, RFC y email evitan duplicados</li>
+          <li>Si el cliente existe, solo se registra la visita al taller actual</li>
+          <li>La tabla customer_workshop conserva primera visita, ultima visita y usuario que registro</li>
         </ul>
       </div>
 
@@ -5535,21 +5555,33 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
           <h3>Patron facade</h3>
         </div>
         <ul>
-          <li>Vue consume workshopFacade.js</li>
-          <li>El facade frontend llama al cliente REST</li>
-          <li>El controlador backend delega en PostalCatalogFacade antes del service y repository</li>
+          <li>Vue no llama directamente a fetch; usa workshopFacade.js</li>
+          <li>Los controladores delegan a facades backend antes de service y repository</li>
+          <li>El mismo flujo aplica para clientes, talleres y catalogo postal</li>
         </ul>
       </div>
 
       <div class="card">
         <div class="card-header">
-          <div class="card-dot rose"></div>
-          <h3>Datos integrados y errores</h3>
+          <div class="card-dot amber"></div>
+          <h3>Operacion offline</h3>
         </div>
         <ul>
-          <li>145,420 asentamientos locales</li>
-          <li>SQL versionable aproximado de 15 MB con utf8mb4</li>
-          <li>401/403 piden iniciar sesion; CP no encontrado solo para codigos inexistentes</li>
+          <li>SEPOMEX vive en MySQL local</li>
+          <li>El CP autocompleta estado, municipio y colonias</li>
+          <li>Los selects encadenados tambien permiten obtener CP desde estado, municipio y colonia</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-dot orange"></div>
+          <h3>Archivos y seguridad</h3>
+        </div>
+        <ul>
+          <li>Fotos multipart se guardan en disco o volumen, no en base64</li>
+          <li>Imagenes limitadas a 15 MB</li>
+          <li>Suspension global de cliente esta restringida a GERENTE</li>
         </ul>
       </div>
     </div>
