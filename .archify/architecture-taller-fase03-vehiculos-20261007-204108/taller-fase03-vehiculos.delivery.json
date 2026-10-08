@@ -1,17 +1,17 @@
 {
   "schemaVersion": 1,
-  "receiptId": "14b8770e-6810-4ccd-8b81-8e8fde53f40d",
+  "receiptId": "75d38a04-f363-4a51-aaa7-044b698ae1f6",
   "status": "current",
   "command": "deliver",
   "type": "architecture",
   "input": "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase03-vehiculos-20261007-204108/candidate.json",
   "output": "/home/david/Documentos/ChatGPT/taller/.archify/architecture-taller-fase03-vehiculos-20261007-204108/taller-fase03-vehiculos.html",
   "specification": {
-    "sha256": "b4895e02e54fb1826763633d6aa080c9c36197ca3c0e7c112e3a35cf106cb2d5",
+    "sha256": "4f3e630bc83d2c141c0559742e914fa603034c6420f938ce63b5d8fbd4b346cc",
     "bytes": 9317
   },
   "artifact": {
-    "sha256": "734b388f721f988d3022c448028a180a56b0e8e577e402fa8625ea41a169d9eb",
+    "sha256": "895ab88983790e9d4d886db103bfaae10a9e677265e37eb18c9195c467e98578",
     "bytes": 780397
   }
 }
