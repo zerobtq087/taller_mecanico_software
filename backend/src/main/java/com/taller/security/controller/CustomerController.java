@@ -91,11 +91,12 @@ public class CustomerController {
     private String resolveSortField(String requested) {
         Set<String> allowed = Set.of(
                 "id", "firstName", "lastName", "secondLastName", "curp", "rfc", "email",
-                "contactPhone", "status", "createdAt", "birthDate", "postalCode", "state", "municipality"
+                "contactPhone", "status.strValor", "createdAt", "birthDate", "postalCode", "state", "municipality"
         );
         Map<String, String> aliases = Map.of(
                 "fullName", "firstName",
-                "age", "birthDate"
+                "age", "birthDate",
+                "status", "status.strValor"
         );
         String field = aliases.getOrDefault(requested, requested);
         return allowed.contains(field) ? field : "id";

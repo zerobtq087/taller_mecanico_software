@@ -86,17 +86,17 @@
       <aside class="sidebar">
         <div class="sidebar-brand">
           <v-icon icon="mdi-car-cog" color="secondary" size="30" />
-          <div>
+          <div class="sidebar-copy">
             <strong>Taller mecanico</strong>
             <span>Operacion segura</span>
           </div>
         </div>
 
         <div class="sidebar-user">
-          <v-avatar color="primary" size="40">
-            <v-icon icon="mdi-account-cog" />
+          <v-avatar class="user-avatar" color="primary" size="42">
+            <span>{{ userInitials }}</span>
           </v-avatar>
-          <div>
+          <div class="sidebar-copy">
             <strong>{{ user.name }}</strong>
             <span>{{ user.email }}</span>
           </div>
@@ -113,19 +113,21 @@
             class="sidebar-link"
             @click="workspaceMode = item.value"
           >
-            {{ item.label }}
+            <span class="sidebar-copy">{{ item.label }}</span>
           </v-btn>
         </nav>
 
-        <div class="roles sidebar-roles">
-          <v-chip v-for="role in user.roles" :key="role" color="secondary" variant="tonal" size="small">
-            {{ role }}
-          </v-chip>
-        </div>
+        <div class="sidebar-footer">
+          <div class="roles sidebar-roles">
+            <v-chip v-for="role in user.roles" :key="role" color="secondary" variant="tonal" size="small">
+              {{ role }}
+            </v-chip>
+          </div>
 
-        <v-btn prepend-icon="mdi-logout" variant="tonal" color="secondary" @click="logout">
-          Cerrar sesion
-        </v-btn>
+          <v-btn prepend-icon="mdi-logout" variant="tonal" color="secondary" class="logout-btn" @click="logout">
+            <span class="sidebar-copy">Cerrar sesion</span>
+          </v-btn>
+        </div>
       </aside>
 
       <section class="dashboard-content">
@@ -226,6 +228,16 @@ const title = computed(() => {
     return navItems.value.find((item) => item.value === workspaceMode.value)?.label || 'Panel operativo'
   }
   return mode.value === 'login' ? 'Inicio de sesion' : 'Recuperar acceso'
+})
+
+const userInitials = computed(() => {
+  const name = user.value?.name || user.value?.email || 'U'
+  return name
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part[0]?.toUpperCase())
+    .join('') || 'U'
 })
 
 async function run(action, fallback) {

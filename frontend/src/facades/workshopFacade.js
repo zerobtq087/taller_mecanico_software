@@ -39,6 +39,32 @@ export const workshopFacade = {
     list(params) {
       return api.listCustomers(params)
     },
+    vehicles(customerId) {
+      return api.listCustomerVehicles(customerId)
+    },
+    createVehicle(customerId, payload) {
+      return api.createCustomerVehicle(customerId, payload)
+    },
+    updateVehicle(customerId, vehicleId, payload) {
+      return api.updateCustomerVehicle(customerId, vehicleId, payload)
+    },
+    cancelVehicle(customerId, vehicleId) {
+      return api.cancelCustomerVehicle(customerId, vehicleId)
+    },
+  },
+  statuses: {
+    list() {
+      return api.listStatuses()
+    },
+    create(payload) {
+      return api.createStatus(payload)
+    },
+    update(id, payload) {
+      return api.updateStatus(id, payload)
+    },
+    cancel(id) {
+      return api.cancelStatus(id)
+    },
   },
   workshops: {
     list() {
@@ -66,6 +92,17 @@ export const workshopFacade = {
     },
     lookupSelection(state, municipality, settlement) {
       return api.lookupPostalSelection(state, municipality, settlement)
+    },
+  },
+  vehicleCatalog: {
+    makes(query) {
+      return api.searchVehicleMakes(query)
+    },
+    models(make, query) {
+      return api.searchVehicleModels(make, query)
+    },
+    versions(make, model, query) {
+      return api.searchVehicleVersions(make, model, query)
     },
   },
 }

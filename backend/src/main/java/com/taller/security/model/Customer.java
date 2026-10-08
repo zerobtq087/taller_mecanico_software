@@ -2,8 +2,6 @@ package com.taller.security.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -77,9 +75,9 @@ public class Customer {
     @Column(length = 260)
     private String photoPath;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 20)
-    private CustomerStatus status = CustomerStatus.ACTIVO;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "status_id", nullable = false)
+    private StatusCatalog status;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "created_by_user_id", nullable = false)
@@ -228,11 +226,11 @@ public class Customer {
         this.photoPath = photoPath;
     }
 
-    public CustomerStatus getStatus() {
+    public StatusCatalog getStatus() {
         return status;
     }
 
-    public void setStatus(CustomerStatus status) {
+    public void setStatus(StatusCatalog status) {
         this.status = status;
     }
 

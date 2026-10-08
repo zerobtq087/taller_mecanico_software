@@ -25,6 +25,22 @@ CREATE TABLE IF NOT EXISTS user_roles (
     ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+CREATE TABLE IF NOT EXISTS status_catalog (
+  id BIGINT NOT NULL AUTO_INCREMENT,
+  str_valor VARCHAR(40) NOT NULL,
+  str_descripcion VARCHAR(180) NOT NULL,
+  PRIMARY KEY (id),
+  UNIQUE KEY uk_status_catalog_str_valor (str_valor)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+INSERT INTO status_catalog (str_valor, str_descripcion)
+VALUES
+  ('ACTIVO', 'activo'),
+  ('SUSPENDIDO', 'suspendido'),
+  ('CANCELADO', 'cancelado'),
+  ('ACTUALIZADO', 'actualizado')
+ON DUPLICATE KEY UPDATE str_descripcion = VALUES(str_descripcion);
+
 CREATE TABLE IF NOT EXISTS workshops (
   id BIGINT NOT NULL AUTO_INCREMENT,
   name VARCHAR(160) NOT NULL,
@@ -78,7 +94,7 @@ CREATE TABLE IF NOT EXISTS customers (
   state VARCHAR(120) NOT NULL,
   postal_code CHAR(5) NOT NULL,
   photo_path VARCHAR(260) NULL,
-  status VARCHAR(20) NOT NULL DEFAULT 'ACTIVO',
+  status_id BIGINT NOT NULL DEFAULT 1,
   created_by_user_id BIGINT NOT NULL,
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (id),
@@ -86,9 +102,12 @@ CREATE TABLE IF NOT EXISTS customers (
   UNIQUE KEY uk_customers_curp (curp),
   UNIQUE KEY uk_customers_rfc (rfc),
   KEY idx_customers_created_by_user_id (created_by_user_id),
-  KEY idx_customers_status (status),
+  KEY idx_customers_status_id (status_id),
   CONSTRAINT fk_customers_created_by_user
     FOREIGN KEY (created_by_user_id) REFERENCES users (id)
+    ON DELETE RESTRICT,
+  CONSTRAINT fk_customers_status
+    FOREIGN KEY (status_id) REFERENCES status_catalog (id)
     ON DELETE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -132,12 +151,75 @@ CREATE TABLE IF NOT EXISTS postal_settlements (
   KEY idx_postal_settlements_full_address (state_name, municipality_name, settlement_name)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+CREATE TABLE IF NOT EXISTS vehicle_makes (
+  id BIGINT NOT NULL AUTO_INCREMENT,
+  make_group VARCHAR(120) NULL,
+  name VARCHAR(120) NOT NULL,
+  PRIMARY KEY (id),
+  UNIQUE KEY uk_vehicle_makes_name (name),
+  KEY idx_vehicle_makes_group (make_group)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS vehicle_models (
+  id BIGINT NOT NULL AUTO_INCREMENT,
+  make_id BIGINT NOT NULL,
+  name VARCHAR(160) NOT NULL,
+  year_start INT NULL,
+  year_end INT NULL,
+  PRIMARY KEY (id),
+  UNIQUE KEY uk_vehicle_models_make_name (make_id, name),
+  KEY idx_vehicle_models_name (name),
+  CONSTRAINT fk_vehicle_models_make
+    FOREIGN KEY (make_id) REFERENCES vehicle_makes (id)
+    ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS vehicle_versions (
+  id BIGINT NOT NULL AUTO_INCREMENT,
+  model_id BIGINT NOT NULL,
+  name VARCHAR(260) NOT NULL,
+  PRIMARY KEY (id),
+  UNIQUE KEY uk_vehicle_versions_model_name (model_id, name),
+  KEY idx_vehicle_versions_name (name),
+  CONSTRAINT fk_vehicle_versions_model
+    FOREIGN KEY (model_id) REFERENCES vehicle_models (id)
+    ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS vehicles (
+  id BIGINT NOT NULL AUTO_INCREMENT,
+  customer_id BIGINT NOT NULL,
+  vin VARCHAR(17) NOT NULL,
+  plate VARCHAR(12) NOT NULL,
+  make VARCHAR(120) NOT NULL,
+  model VARCHAR(160) NOT NULL,
+  model_year INT NOT NULL,
+  version VARCHAR(260) NOT NULL,
+  color VARCHAR(80) NOT NULL,
+  mileage INT NULL,
+  serial_number VARCHAR(80) NOT NULL,
+  status_id BIGINT NOT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  UNIQUE KEY uk_vehicles_vin (vin),
+  UNIQUE KEY uk_vehicles_plate (plate),
+  KEY idx_vehicles_customer (customer_id),
+  KEY idx_vehicles_status (status_id),
+  CONSTRAINT fk_vehicles_customer
+    FOREIGN KEY (customer_id) REFERENCES customers (id)
+    ON DELETE RESTRICT,
+  CONSTRAINT fk_vehicles_status
+    FOREIGN KEY (status_id) REFERENCES status_catalog (id)
+    ON DELETE RESTRICT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 -- Migracion fase 03 para instalaciones con customers.workshop_id y columnas antiguas.
 -- Ejecuta este bloque solo si tu base ya tenia datos antes de esta fase.
+DROP PROCEDURE IF EXISTS migrate_phase03_customers;
 DELIMITER $$
 CREATE PROCEDURE migrate_phase03_customers()
 BEGIN
-  IF EXISTS (
+	  IF EXISTS (
     SELECT 1 FROM information_schema.columns
     WHERE table_schema = DATABASE() AND table_name = 'customers' AND column_name = 'full_name'
   ) THEN
@@ -270,18 +352,37 @@ BEGIN
   ) THEN
     ALTER TABLE customers ADD UNIQUE KEY uk_customers_rfc (rfc);
   END IF;
-  IF NOT EXISTS (
-    SELECT 1 FROM information_schema.statistics
-    WHERE table_schema = DATABASE() AND table_name = 'customers' AND index_name = 'idx_customers_status'
-  ) THEN
-    ALTER TABLE customers ADD KEY idx_customers_status (status);
-  END IF;
-  IF NOT EXISTS (
-    SELECT 1 FROM information_schema.columns
-    WHERE table_schema = DATABASE() AND table_name = 'customers' AND column_name = 'photo_path'
-  ) THEN
-    ALTER TABLE customers ADD COLUMN photo_path VARCHAR(260) NULL;
-  END IF;
+	  IF NOT EXISTS (
+	    SELECT 1 FROM information_schema.columns
+	    WHERE table_schema = DATABASE() AND table_name = 'customers' AND column_name = 'photo_path'
+	  ) THEN
+	    ALTER TABLE customers ADD COLUMN photo_path VARCHAR(260) NULL;
+	  END IF;
+	  IF EXISTS (
+	    SELECT 1 FROM information_schema.columns
+	    WHERE table_schema = DATABASE() AND table_name = 'vehicles' AND column_name = 'version' AND character_maximum_length < 260
+	  ) THEN
+	    ALTER TABLE vehicles MODIFY version VARCHAR(260) NOT NULL;
+	  END IF;
+	  IF NOT EXISTS (
+	    SELECT 1 FROM information_schema.columns
+	    WHERE table_schema = DATABASE() AND table_name = 'customers' AND column_name = 'status_id'
+	  ) THEN
+	    ALTER TABLE customers ADD COLUMN status_id BIGINT NULL;
+	    UPDATE customers c
+	    LEFT JOIN status_catalog s ON s.str_valor = COALESCE(c.status, 'ACTIVO')
+	    SET c.status_id = COALESCE(s.id, (SELECT id FROM status_catalog WHERE str_valor = 'ACTIVO' LIMIT 1));
+	    ALTER TABLE customers MODIFY status_id BIGINT NOT NULL;
+	    ALTER TABLE customers ADD CONSTRAINT fk_customers_status
+	      FOREIGN KEY (status_id) REFERENCES status_catalog (id)
+	      ON DELETE RESTRICT;
+	  END IF;
+	  IF NOT EXISTS (
+	    SELECT 1 FROM information_schema.statistics
+	    WHERE table_schema = DATABASE() AND table_name = 'customers' AND index_name = 'idx_customers_status_id'
+	  ) THEN
+	    ALTER TABLE customers ADD KEY idx_customers_status_id (status_id);
+	  END IF;
 END$$
 DELIMITER ;
 
@@ -290,5 +391,7 @@ DROP PROCEDURE migrate_phase03_customers;
 
 -- Las contrasenas se guardan con BCrypt: hash + salt unico por password.
 -- El catalogo postal se carga de forma local desde database/sepomex_data.sql.
+-- El catalogo de marcas, modelos y versiones se carga desde database/vehicle_catalog/vehicle_catalog_seed.sql.
+-- Fuente local: makes-models.csv y engines.csv de https://github.com/gor3a/vehicle-makes-models, datos bajo ODbL 1.0.
 -- Las fotos de talleres se guardan en disco/volumen mediante UPLOAD_DIR.
 -- El contenedor crea la base de datos y el usuario de aplicacion desde .env.

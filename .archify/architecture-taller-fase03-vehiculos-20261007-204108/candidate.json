@@ -1,0 +1,293 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Taller mecanico - fase 03 vehiculos y estatus",
+    "output": ".archify/architecture-taller-fase03-vehiculos-20261007-204108/taller-fase03-vehiculos.html",
+    "quality_profile": "showcase",
+    "repository": {
+      "url": "https://github.com/zerobtq087/taller_mecanico_software.git",
+      "provider": "github",
+      "link_mode": "web",
+      "revision": "7f185ba8146f2ab30a8c041f38bfaaeedb35e49f"
+    }
+  },
+  "components": [
+    {
+      "id": "roles",
+      "type": "external",
+      "label": "Usuarios autorizados",
+      "sublabel": "GERENTE y SECRETARIO",
+      "pos": [40, 300],
+      "size": [150, 68],
+      "sources": [
+        { "path": "frontend/src/components/CustomersModule.vue", "line": 3, "end_line": 10, "label": "toolbar clientes" }
+      ]
+    },
+    {
+      "id": "customers_ui",
+      "type": "frontend",
+      "label": "Clientes UI",
+      "sublabel": "tabla, modales y contador",
+      "pos": [280, 300],
+      "size": [170, 76],
+      "tag": "Vue + Vuetify",
+      "sources": [
+        { "path": "frontend/src/components/CustomersModule.vue", "line": 13, "end_line": 79, "label": "tabla clientes" },
+        { "path": "frontend/src/components/CustomersModule.vue", "line": 164, "end_line": 240, "label": "modal vehiculos" }
+      ]
+    },
+    {
+      "id": "facade",
+      "type": "frontend",
+      "label": "workshopFacade",
+      "sublabel": "puente vista -> API",
+      "pos": [560, 300],
+      "size": [160, 68],
+      "sources": [
+        { "path": "frontend/src/facades/workshopFacade.js", "line": 29, "end_line": 54, "label": "clientes vehiculos" },
+        { "path": "frontend/src/facades/workshopFacade.js", "line": 97, "end_line": 106, "label": "catalogo vehicular" }
+      ]
+    },
+    {
+      "id": "api_client",
+      "type": "frontend",
+      "label": "api.js",
+      "sublabel": "fetch con JWT",
+      "pos": [835, 300],
+      "size": [150, 68],
+      "sources": [
+        { "path": "frontend/src/services/api.js", "line": 1, "end_line": 32, "label": "request JWT" },
+        { "path": "frontend/src/services/api.js", "line": 57, "end_line": 100, "label": "endpoints vehiculos" }
+      ]
+    },
+    {
+      "id": "vehicle_controller",
+      "type": "backend",
+      "label": "VehicleController",
+      "sublabel": "CRUD por cliente",
+      "pos": [1130, 220],
+      "size": [170, 76],
+      "tag": "/api/secretaria/clientes/{id}/vehiculos",
+      "sources": [
+        { "path": "backend/src/main/java/com/taller/security/controller/VehicleController.java", "line": 19, "end_line": 51, "label": "REST vehiculos" }
+      ]
+    },
+    {
+      "id": "catalog_controller",
+      "type": "backend",
+      "label": "VehicleCatalogController",
+      "sublabel": "marcas, modelos y versiones",
+      "pos": [1130, 380],
+      "size": [180, 76],
+      "tag": "/api/catalogos/vehiculos",
+      "sources": [
+        { "path": "backend/src/main/java/com/taller/security/controller/VehicleCatalogController.java", "line": 13, "end_line": 39, "label": "REST catalogos" }
+      ]
+    },
+    {
+      "id": "status_controller",
+      "type": "security",
+      "label": "StatusCatalogController",
+      "sublabel": "solo GERENTE",
+      "pos": [1130, 60],
+      "size": [180, 76],
+      "tag": "/api/admin/estatus",
+      "sources": [
+        { "path": "backend/src/main/java/com/taller/security/controller/StatusCatalogController.java", "line": 20, "end_line": 49, "label": "REST estatus" }
+      ]
+    },
+    {
+      "id": "vehicle_service",
+      "type": "backend",
+      "label": "VehicleService",
+      "sublabel": "cliente activo, duplicados y cancelacion",
+      "pos": [1365, 220],
+      "size": [190, 82],
+      "sources": [
+        { "path": "backend/src/main/java/com/taller/security/service/VehicleService.java", "line": 37, "end_line": 82, "label": "reglas vehiculo" },
+        { "path": "backend/src/main/java/com/taller/security/service/VehicleService.java", "line": 84, "end_line": 102, "label": "normalizacion" }
+      ]
+    },
+    {
+      "id": "catalog_service",
+      "type": "backend",
+      "label": "VehicleCatalogService",
+      "sublabel": "busqueda limitada y local",
+      "pos": [1365, 380],
+      "size": [190, 76],
+      "sources": [
+        { "path": "backend/src/main/java/com/taller/security/service/VehicleCatalogService.java", "line": 29, "end_line": 63, "label": "busquedas catalogo" }
+      ]
+    },
+    {
+      "id": "customer_service",
+      "type": "backend",
+      "label": "CustomerService",
+      "sublabel": "paginacion, historial y vehicleCount",
+      "pos": [1365, 60],
+      "size": [190, 82],
+      "sources": [
+        { "path": "backend/src/main/java/com/taller/security/service/CustomerService.java", "line": 83, "end_line": 90, "label": "listado paginado" },
+        { "path": "backend/src/main/java/com/taller/security/service/CustomerService.java", "line": 130, "end_line": 168, "label": "vehicleCount" }
+      ]
+    },
+    {
+      "id": "mysql",
+      "type": "database",
+      "label": "MySQL Docker",
+      "sublabel": "clientes, estatus y vehiculos",
+      "pos": [1365, 570],
+      "size": [190, 86],
+      "tag": "mysql-server:3306",
+      "sources": [
+        { "path": "database/schema.sql", "line": 28, "end_line": 42, "label": "status_catalog" },
+        { "path": "database/schema.sql", "line": 78, "end_line": 135, "label": "customers" },
+        { "path": "database/schema.sql", "line": 189, "end_line": 214, "label": "vehicles" }
+      ]
+    },
+    {
+      "id": "vehicle_catalog",
+      "type": "database",
+      "label": "Catalogo vehicular",
+      "sublabel": "makes, models, versions",
+      "pos": [1130, 570],
+      "size": [190, 82],
+      "sources": [
+        { "path": "database/schema.sql", "line": 154, "end_line": 187, "label": "tablas catalogo" },
+        { "path": "database/vehicle_catalog/vehicle_catalog_seed.sql", "line": 1, "end_line": 8, "label": "seed local" }
+      ]
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "Frontend Vue 3 + Vuetify",
+      "wraps": ["customers_ui", "facade", "api_client"],
+      "pad": 24
+    },
+    {
+      "kind": "region",
+      "label": "Backend Spring Boot 3 REST",
+      "wraps": ["vehicle_controller", "catalog_controller", "status_controller", "vehicle_service", "catalog_service", "customer_service"],
+      "pad": 26
+    },
+    {
+      "kind": "security-group",
+      "label": "Persistencia local Docker",
+      "wraps": ["mysql", "vehicle_catalog"],
+      "pad": 28
+    }
+  ],
+  "connections": [
+    {
+      "id": "roles-use-ui",
+      "from": "roles",
+      "to": "customers_ui",
+      "label": "operan clientes",
+      "variant": "emphasis"
+    },
+    {
+      "id": "ui-to-facade",
+      "from": "customers_ui",
+      "to": "facade",
+      "label": "acciones UI"
+    },
+    {
+      "id": "facade-to-api",
+      "from": "facade",
+      "to": "api_client",
+      "label": "metodos facade"
+    },
+    {
+      "id": "api-to-vehicle-controller",
+      "from": "api_client",
+      "to": "vehicle_controller",
+      "label": "JWT + REST vehiculos",
+      "variant": "security"
+    },
+    {
+      "id": "api-to-catalog-controller",
+      "from": "api_client",
+      "to": "catalog_controller",
+      "label": "autocompletado"
+    },
+    {
+      "id": "api-to-status-controller",
+      "from": "api_client",
+      "to": "status_controller",
+      "label": "CRUD estatus",
+      "variant": "security"
+    },
+    {
+      "id": "vehicle-controller-service",
+      "from": "vehicle_controller",
+      "to": "vehicle_service",
+      "label": "guardar"
+    },
+    {
+      "id": "catalog-controller-service",
+      "from": "catalog_controller",
+      "to": "catalog_service",
+      "label": "buscar"
+    },
+    {
+      "id": "status-affects-customer-service",
+      "from": "status_controller",
+      "to": "customer_service",
+      "label": "estatus",
+      "variant": "dashed",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "vehicle-service-db",
+      "from": "vehicle_service",
+      "to": "mysql",
+      "label": "vehicles + status",
+      "variant": "emphasis"
+    },
+    {
+      "id": "customer-service-db",
+      "from": "customer_service",
+      "to": "mysql",
+      "label": "clientes + vehicleCount",
+      "variant": "emphasis",
+      "fromSide": "right",
+      "toSide": "top"
+    },
+    {
+      "id": "catalog-service-db",
+      "from": "catalog_service",
+      "to": "vehicle_catalog",
+      "label": "catalogo local",
+      "variant": "emphasis"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "violet",
+      "title": "Patron aplicado",
+      "items": [
+        "Vue consume el Facade; el Facade llama api.js; Spring Boot separa controller, service y repository.",
+        "El modulo de clientes conserva paginacion backend y muestra vehicleCount."
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Reglas clave",
+      "items": [
+        "Solo clientes ACTIVO reciben vehiculos nuevos.",
+        "VIN y placas no se duplican; cancelar cambia estatus a CANCELADO."
+      ]
+    },
+    {
+      "dot": "cyan",
+      "title": "Catalogo local",
+      "items": [
+        "Marcas, modelos y versiones se consultan desde MySQL.",
+        "El sistema no depende de internet para autocompletar vehiculos."
+      ]
+    }
+  ]
+}

@@ -66,6 +66,39 @@ export const api = {
   suspendCustomer(id) {
     return request(`/secretaria/clientes/${id}/suspender`, { method: 'PATCH' })
   },
+  listCustomerVehicles(customerId) {
+    return request(`/secretaria/clientes/${customerId}/vehiculos`)
+  },
+  createCustomerVehicle(customerId, payload) {
+    return request(`/secretaria/clientes/${customerId}/vehiculos`, { method: 'POST', body: JSON.stringify(payload) })
+  },
+  updateCustomerVehicle(customerId, vehicleId, payload) {
+    return request(`/secretaria/clientes/${customerId}/vehiculos/${vehicleId}`, { method: 'PUT', body: JSON.stringify(payload) })
+  },
+  cancelCustomerVehicle(customerId, vehicleId) {
+    return request(`/secretaria/clientes/${customerId}/vehiculos/${vehicleId}`, { method: 'DELETE' })
+  },
+  listStatuses() {
+    return request('/admin/estatus')
+  },
+  createStatus(payload) {
+    return request('/admin/estatus', { method: 'POST', body: JSON.stringify(payload) })
+  },
+  updateStatus(id, payload) {
+    return request(`/admin/estatus/${id}`, { method: 'PUT', body: JSON.stringify(payload) })
+  },
+  cancelStatus(id) {
+    return request(`/admin/estatus/${id}`, { method: 'DELETE' })
+  },
+  searchVehicleMakes(q = '') {
+    return request(`/catalogos/vehiculos/marcas${toQuery({ q })}`)
+  },
+  searchVehicleModels(make, q = '') {
+    return request(`/catalogos/vehiculos/modelos${toQuery({ make, q })}`)
+  },
+  searchVehicleVersions(make, model, q = '') {
+    return request(`/catalogos/vehiculos/versiones${toQuery({ make, model, q })}`)
+  },
   listWorkshops() {
     return request('/talleres')
   },

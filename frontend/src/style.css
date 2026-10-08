@@ -44,28 +44,42 @@ body {
 .app-dashboard {
   min-height: 100vh;
   display: grid;
-  grid-template-columns: 280px minmax(0, 1fr);
+  grid-template-columns: 86px minmax(0, 1fr);
   background:
     radial-gradient(circle at 8% 8%, rgba(124, 58, 237, 0.2), transparent 28%),
     radial-gradient(circle at 92% 12%, rgba(45, 212, 191, 0.15), transparent 30%),
     radial-gradient(circle at 90% 90%, rgba(56, 189, 248, 0.11), transparent 24%),
     linear-gradient(135deg, #050509 0%, #0d0b14 52%, #06110d 100%);
+  transition: grid-template-columns 180ms ease;
+}
+
+.app-dashboard:has(.sidebar:hover) {
+  grid-template-columns: 280px minmax(0, 1fr);
 }
 
 .sidebar {
   position: sticky;
   top: 0;
   height: 100vh;
+  width: 86px;
   display: flex;
   flex-direction: column;
   gap: 18px;
-  padding: 22px;
+  padding: 22px 14px;
   border-right: 1px solid rgba(45, 212, 191, 0.18);
   background:
     linear-gradient(180deg, rgba(18, 17, 30, 0.96), rgba(7, 10, 14, 0.96)),
     radial-gradient(circle at top, rgba(124, 58, 237, 0.2), transparent 36%);
   backdrop-filter: blur(18px);
   box-shadow: 12px 0 40px rgba(0, 0, 0, 0.22);
+  overflow: hidden;
+  z-index: 20;
+  transition: width 180ms ease, padding 180ms ease;
+}
+
+.sidebar:hover {
+  width: 280px;
+  padding-inline: 22px;
 }
 
 .sidebar::before {
@@ -80,6 +94,20 @@ body {
   display: flex;
   align-items: center;
   gap: 12px;
+  min-width: 0;
+}
+
+.sidebar-copy {
+  opacity: 0;
+  max-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  transition: opacity 140ms ease, max-width 180ms ease;
+}
+
+.sidebar:hover .sidebar-copy {
+  opacity: 1;
+  max-width: 190px;
 }
 
 .sidebar-brand strong,
@@ -90,6 +118,8 @@ body {
 }
 
 .sidebar-brand {
+  min-height: 56px;
+  justify-content: center;
   padding: 10px;
   border: 1px solid rgba(45, 212, 191, 0.16);
   border-radius: 8px;
@@ -97,10 +127,24 @@ body {
 }
 
 .sidebar-user {
+  min-height: 64px;
+  justify-content: center;
   padding: 12px;
   border: 1px solid rgba(124, 58, 237, 0.18);
   border-radius: 8px;
   background: rgba(124, 58, 237, 0.08);
+}
+
+.sidebar:hover .sidebar-brand,
+.sidebar:hover .sidebar-user {
+  justify-content: flex-start;
+}
+
+.user-avatar {
+  flex: 0 0 auto;
+  background: linear-gradient(135deg, var(--purple), var(--teal)) !important;
+  color: #fff;
+  font-weight: 900;
 }
 
 .sidebar-brand span,
@@ -121,10 +165,14 @@ body {
 }
 
 .sidebar-link {
-  justify-content: flex-start;
+  justify-content: center;
   min-height: 42px;
   color: #d7d2e8;
   border: 1px solid transparent;
+}
+
+.sidebar:hover .sidebar-link {
+  justify-content: flex-start;
 }
 
 .sidebar-link:hover {
@@ -132,19 +180,40 @@ body {
   background: rgba(45, 212, 191, 0.07);
 }
 
-.sidebar-roles {
+.sidebar-footer {
   margin-top: auto;
+  display: grid;
+  gap: 12px;
+}
+
+.sidebar-roles {
+  justify-content: center;
+  min-height: 32px;
   margin-bottom: 0;
+}
+
+.sidebar:not(:hover) .sidebar-roles {
+  display: none;
+}
+
+.logout-btn {
+  width: 100%;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.sidebar:hover .logout-btn {
+  justify-content: flex-start;
 }
 
 .dashboard-content {
   min-width: 0;
-  padding: 28px;
+  padding: 24px;
 }
 
 .content-topbar,
 .content-card {
-  width: min(100%, 1160px);
+  width: min(100%, 1500px);
   margin-inline: auto;
 }
 
@@ -166,7 +235,7 @@ body {
 
 .content-card {
   min-height: calc(100vh - 116px);
-  padding: 22px;
+  padding: 20px;
   border: 1px solid rgba(124, 58, 237, 0.22);
   border-radius: 8px;
   background:
@@ -412,7 +481,8 @@ h2 {
 }
 
 .data-table {
-  width: min(100%, 1040px);
+  width: 100%;
+  max-width: none;
   margin-inline: auto;
   border: 1px solid rgba(45, 212, 191, 0.16);
   border-radius: 8px;
@@ -421,28 +491,57 @@ h2 {
   box-shadow: 0 18px 46px rgba(0, 0, 0, 0.22);
 }
 
+.data-table .v-table__wrapper {
+  overflow-x: hidden;
+  scrollbar-color: rgba(45, 212, 191, 0.55) rgba(17, 20, 30, 0.8);
+  scrollbar-width: thin;
+}
+
 .data-table thead,
 .v-data-table thead {
   background: rgba(124, 58, 237, 0.12);
 }
 
 .customers-table {
-  width: min(100%, 1120px);
+  max-width: 100%;
 }
 
 .customers-table :is(th, td) {
   vertical-align: middle;
 }
 
+.customers-table table {
+  min-width: 100%;
+  table-layout: fixed;
+}
+
 .customers-table .v-data-table__td {
-  padding-block: 10px !important;
+  padding-block: 8px !important;
+  padding-inline: 10px !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.customers-table .v-data-table__th {
+  padding-inline: 10px !important;
+  white-space: nowrap;
+}
+
+.customers-table :is(th, td):last-child {
+  padding-right: 16px !important;
+  text-align: right;
 }
 
 .customer-name-cell {
   display: flex;
   align-items: center;
   gap: 10px;
-  min-width: 220px;
+  min-width: 0;
+}
+
+.customer-name-cell > div {
+  min-width: 0;
 }
 
 .customer-name-cell strong {
@@ -450,11 +549,14 @@ h2 {
   color: #f9f5ff;
   font-size: 0.92rem;
   line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .customer-name-cell span {
   display: block;
-  max-width: 230px;
+  max-width: 190px;
   color: var(--muted);
   font-size: 0.78rem;
   line-height: 1.3;
@@ -467,8 +569,29 @@ h2 {
   display: flex;
   align-items: center;
   gap: 8px;
-  min-width: 128px;
+  min-width: 0;
   white-space: nowrap;
+}
+
+.vehicle-count-btn,
+.actions-btn {
+  min-width: 0;
+  white-space: nowrap;
+}
+
+.vehicle-count-btn {
+  padding-inline: 8px !important;
+}
+
+@media (max-width: 900px) {
+  .data-table .v-table__wrapper {
+    overflow-x: auto;
+  }
+
+  .customers-table table {
+    min-width: 900px;
+    table-layout: auto;
+  }
 }
 
 .muted-count {
@@ -586,9 +709,30 @@ h2 {
     grid-template-columns: 1fr;
   }
 
+  .app-dashboard:has(.sidebar:hover) {
+    grid-template-columns: 1fr;
+  }
+
   .sidebar {
     position: static;
     height: auto;
+    width: auto;
+    padding: 18px;
+  }
+
+  .sidebar-copy {
+    opacity: 1;
+    max-width: 220px;
+  }
+
+  .sidebar-brand,
+  .sidebar-user,
+  .sidebar-link {
+    justify-content: flex-start;
+  }
+
+  .sidebar:not(:hover) .sidebar-roles {
+    display: flex;
   }
 
   .sidebar-nav {

@@ -5,13 +5,14 @@ import com.taller.security.dto.CustomerDtos.CustomerResponse;
 import com.taller.security.dto.CustomerDtos.CustomerUpdateRequest;
 import com.taller.security.dto.CustomerDtos.WorkshopVisitResponse;
 import com.taller.security.model.Customer;
-import com.taller.security.model.CustomerStatus;
+import com.taller.security.model.StatusCatalog;
 import com.taller.security.model.CustomerWorkshop;
 import com.taller.security.model.User;
 import com.taller.security.model.Workshop;
 import com.taller.security.repository.CustomerRepository;
 import com.taller.security.repository.CustomerWorkshopRepository;
 import com.taller.security.repository.UserRepository;
+import com.taller.security.repository.VehicleRepository;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.Period;
@@ -30,19 +31,25 @@ public class CustomerService {
     private final UserRepository userRepository;
     private final WorkshopService workshopService;
     private final FileStorageService fileStorageService;
+    private final StatusCatalogService statusCatalogService;
+    private final VehicleRepository vehicleRepository;
 
     public CustomerService(
             CustomerRepository customerRepository,
             CustomerWorkshopRepository customerWorkshopRepository,
             UserRepository userRepository,
             WorkshopService workshopService,
-            FileStorageService fileStorageService
+            FileStorageService fileStorageService,
+            StatusCatalogService statusCatalogService,
+            VehicleRepository vehicleRepository
     ) {
         this.customerRepository = customerRepository;
         this.customerWorkshopRepository = customerWorkshopRepository;
         this.userRepository = userRepository;
         this.workshopService = workshopService;
         this.fileStorageService = fileStorageService;
+        this.statusCatalogService = statusCatalogService;
+        this.vehicleRepository = vehicleRepository;
     }
 
     /**
@@ -62,7 +69,7 @@ public class CustomerService {
 
         if (!existingCustomer) {
             customer.setCreatedBy(createdBy);
-            customer.setStatus(CustomerStatus.ACTIVO);
+            customer.setStatus(statusCatalogService.getRequired(StatusCatalogService.ACTIVO));
             customer.setPhotoPath(photoPath);
         } else if (customer.getPhotoPath() == null || customer.getPhotoPath().isBlank()) {
             customer.setPhotoPath(photoPath);
@@ -113,7 +120,10 @@ public class CustomerService {
     public CustomerResponse suspendCustomer(Long id) {
         Customer customer = customerRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Cliente no encontrado"));
-        customer.setStatus(CustomerStatus.SUSPENDIDO);
+        if (StatusCatalogService.SUSPENDIDO.equals(customer.getStatus().getStrValor())) {
+            throw new IllegalArgumentException("El cliente ya se encuentra suspendido");
+        }
+        customer.setStatus(statusCatalogService.getRequired(StatusCatalogService.SUSPENDIDO));
         return toResponse(customer, false);
     }
 
@@ -126,6 +136,7 @@ public class CustomerService {
                 .stream()
                 .map(this::toVisitResponse)
                 .toList();
+        StatusCatalog status = customer.getStatus();
         return new CustomerResponse(
                 customer.getId(),
                 customer.getFirstName(),
@@ -147,7 +158,9 @@ public class CustomerService {
                 customer.getState(),
                 customer.getPostalCode(),
                 customer.getPhotoPath(),
-                customer.getStatus(),
+                status.getId(),
+                status.getStrValor(),
+                vehicleRepository.countByCustomerId(customer.getId()),
                 visits,
                 customer.getCreatedBy().getId(),
                 customer.getCreatedAt(),

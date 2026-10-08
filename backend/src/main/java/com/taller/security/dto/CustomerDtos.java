@@ -1,6 +1,5 @@
 package com.taller.security.dto;
 
-import com.taller.security.model.CustomerStatus;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
@@ -92,7 +91,9 @@ public final class CustomerDtos {
             String state,
             String postalCode,
             String photoPath,
-            CustomerStatus status,
+            Long statusId,
+            String status,
+            long vehicleCount,
             List<WorkshopVisitResponse> workshops,
             Long createdByUserId,
             Instant createdAt,
