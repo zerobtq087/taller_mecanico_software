@@ -36,6 +36,9 @@ export const workshopFacade = {
     suspend(id) {
       return api.suspendCustomer(id)
     },
+    enable(id) {
+      return api.enableCustomer(id)
+    },
     list(params) {
       return api.listCustomers(params)
     },

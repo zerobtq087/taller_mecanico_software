@@ -128,6 +128,20 @@ public class CustomerService {
     }
 
     /**
+     * Reactiva un cliente suspendido para que pueda operar nuevamente en todos sus talleres.
+     */
+    @Transactional
+    public CustomerResponse enableCustomer(Long id) {
+        Customer customer = customerRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Cliente no encontrado"));
+        if (StatusCatalogService.ACTIVO.equals(customer.getStatus().getStrValor())) {
+            throw new IllegalArgumentException("El cliente ya se encuentra activo");
+        }
+        customer.setStatus(statusCatalogService.getRequired(StatusCatalogService.ACTIVO));
+        return toResponse(customer, false);
+    }
+
+    /**
      * Convierte la entidad JPA en DTO de salida incluyendo historial por taller.
      */
     public CustomerResponse toResponse(Customer customer, boolean existingCustomer) {

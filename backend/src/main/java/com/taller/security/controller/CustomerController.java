@@ -88,6 +88,15 @@ public class CustomerController {
         return customerFacade.suspendCustomer(id);
     }
 
+    /**
+     * Habilita nuevamente un cliente suspendido; solo GERENTE puede ejecutar esta accion.
+     */
+    @PatchMapping("/{id}/habilitar")
+    @PreAuthorize("hasRole('GERENTE')")
+    public CustomerResponse enableCustomer(@PathVariable Long id) {
+        return customerFacade.enableCustomer(id);
+    }
+
     private String resolveSortField(String requested) {
         Set<String> allowed = Set.of(
                 "id", "firstName", "lastName", "secondLastName", "curp", "rfc", "email",

@@ -616,6 +616,10 @@ h2 {
   color: #fbbf24;
 }
 
+.success-action {
+  color: #22c55e;
+}
+
 .chip-row,
 .inline-actions,
 .dialog-actions {

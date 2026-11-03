@@ -66,6 +66,9 @@ export const api = {
   suspendCustomer(id) {
     return request(`/secretaria/clientes/${id}/suspender`, { method: 'PATCH' })
   },
+  enableCustomer(id) {
+    return request(`/secretaria/clientes/${id}/habilitar`, { method: 'PATCH' })
+  },
   listCustomerVehicles(customerId) {
     return request(`/secretaria/clientes/${customerId}/vehiculos`)
   },

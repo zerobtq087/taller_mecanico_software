@@ -73,6 +73,13 @@
               class="warning-action"
               @click="suspendCustomer(item)"
             />
+            <v-list-item
+              v-if="canSuspend && item.status === 'SUSPENDIDO'"
+              prepend-icon="mdi-account-check"
+              title="Habilitar"
+              class="success-action"
+              @click="enableCustomer(item)"
+            />
           </v-list>
         </v-menu>
       </template>
@@ -600,21 +607,61 @@ async function saveCustomer() {
 }
 
 async function suspendCustomer(customer) {
-  if (customer.status === 'SUSPENDIDO') {
-    await Swal.fire('Cliente ya suspendido', 'El cliente ya se encuentra suspendido.', 'info')
-    return
+  try {
+    if (customer.status === 'SUSPENDIDO') {
+      await Swal.fire('Cliente ya suspendido', 'El cliente ya se encuentra suspendido.', 'info')
+      return
+    }
+    const result = await Swal.fire({
+      title: 'Suspender cliente',
+      text: `Se aplicara en todos los talleres para ${customer.fullName}.`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Suspender',
+      cancelButtonText: 'Cancelar',
+    })
+    if (!result.isConfirmed) return
+    const updated = await workshopFacade.customers.suspend(customer.id)
+    replaceCustomerInTable(updated)
+    await Swal.fire('Cliente suspendido', 'El cliente quedo suspendido correctamente.', 'success')
+    await loadCustomers()
+  } catch (error) {
+    await Swal.fire('No se pudo suspender', error.message, 'warning')
   }
-  const result = await Swal.fire({
-    title: 'Suspender cliente',
-    text: `Se aplicara en todos los talleres para ${customer.fullName}.`,
-    icon: 'warning',
-    showCancelButton: true,
-    confirmButtonText: 'Suspender',
-    cancelButtonText: 'Cancelar',
-  })
-  if (!result.isConfirmed) return
-  await workshopFacade.customers.suspend(customer.id)
-  await loadCustomers()
+}
+
+async function enableCustomer(customer) {
+  try {
+    if (customer.status === 'ACTIVO') {
+      await Swal.fire('Cliente ya activo', 'El cliente ya se encuentra habilitado.', 'info')
+      return
+    }
+    const result = await Swal.fire({
+      title: 'Habilitar cliente',
+      text: `El cliente ${customer.fullName} podra operar nuevamente en todos sus talleres.`,
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Habilitar',
+      cancelButtonText: 'Cancelar',
+    })
+    if (!result.isConfirmed) return
+    const updated = await workshopFacade.customers.enable(customer.id)
+    replaceCustomerInTable(updated)
+    await Swal.fire('Cliente habilitado', 'El cliente quedo activo nuevamente.', 'success')
+    await loadCustomers()
+  } catch (error) {
+    await Swal.fire('No se pudo habilitar', error.message, 'warning')
+  }
+}
+
+function replaceCustomerInTable(updatedCustomer) {
+  const index = customers.value.findIndex((customer) => customer.id === updatedCustomer.id)
+  if (index >= 0) {
+    customers.value.splice(index, 1, updatedCustomer)
+  }
+  if (selectedCustomer.value?.id === updatedCustomer.id) {
+    selectedCustomer.value = updatedCustomer
+  }
 }
 
 async function searchVehicleMakes(query = '') {

@@ -44,4 +44,11 @@ public class CustomerFacade {
     public CustomerResponse suspendCustomer(Long id) {
         return customerService.suspendCustomer(id);
     }
+
+    /**
+     * Reactiva el cliente suspendido manteniendo el mismo flujo Facade usado por suspension.
+     */
+    public CustomerResponse enableCustomer(Long id) {
+        return customerService.enableCustomer(id);
+    }
 }
